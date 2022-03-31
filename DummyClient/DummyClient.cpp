@@ -68,7 +68,12 @@ int main()
 	}
 
 	Protocol::C_CHAT chatPkt;
-	chatPkt.set_msg(u8"Hello World !");
+	chatPkt.set_name(u8"플레이어의 이름은 FroK! ! ! !");
+	chatPkt.set_level(1);
+	chatPkt.set_maxhp(100);
+	chatPkt.set_attack(10);
+	chatPkt.set_dropexp(10);
+	chatPkt.set_nextexp(30);
 	auto sendBuffer = ServerPacketHandler::MakeSendBuffer(chatPkt);
 
 	while (true)
