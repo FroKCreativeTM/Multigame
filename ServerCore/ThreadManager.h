@@ -3,27 +3,29 @@
 #include <thread>
 #include <functional>
 
-/*------------------
-	ThreadManager
--------------------*/
-
-class ThreadManager
+namespace FrokEngine
 {
-public:
-	ThreadManager();
-	~ThreadManager();
+	/*------------------
+		ThreadManager
+	-------------------*/
 
-	void	Launch(function<void(void)> callback);
-	void	Join();
+	class ThreadManager
+	{
+	public:
+		ThreadManager();
+		~ThreadManager();
 
-	static void InitTLS();
-	static void DestroyTLS();
+		void	Launch(function<void(void)> callback);
+		void	Join();
 
-	static void DoGlobalQueueWork();
-	static void DistributeReservedJobs();
+		static void InitTLS();
+		static void DestroyTLS();
 
-private:
-	Mutex			_lock;
-	vector<thread>	_threads;
-};
+		static void DoGlobalQueueWork();
+		static void DistributeReservedJobs();
 
+	private:
+		Mutex			_lock;
+		vector<thread>	_threads;
+	};
+}

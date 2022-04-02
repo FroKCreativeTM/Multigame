@@ -4,16 +4,19 @@
 	GlobalQueue
 -----------------*/
 
-class GlobalQueue
+namespace FrokEngine
 {
-public:
-	GlobalQueue();
-	~GlobalQueue();
+	class GlobalQueue
+	{
+	public:
+		GlobalQueue();
+		~GlobalQueue();
 
-	void					Push(JobQueueRef jobQueue);
-	JobQueueRef				Pop();
+		void					Push(JobQueueRef jobQueue);
+		JobQueueRef				Pop();
 
-private:
-	LockQueue<JobQueueRef> _jobQueues;
-};
+	private:
+		LockQueue<JobQueueRef> _jobQueues;
+	};
 
+}

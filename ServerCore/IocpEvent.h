@@ -1,84 +1,87 @@
 #pragma once
 
-class Session;
-
-enum class EventType : uint8
+namespace FrokEngine
 {
-	Connect,
-	Disconnect,
-	Accept,
-	//PreRecv,
-	Recv,
-	Send
-};
+	class Session;
 
-/*--------------
-	IocpEvent
----------------*/
+	enum class EventType : uint8
+	{
+		Connect,
+		Disconnect,
+		Accept,
+		//PreRecv,
+		Recv,
+		Send
+	};
 
-class IocpEvent : public OVERLAPPED
-{
-public:
-	IocpEvent(EventType type);
+	/*--------------
+		IocpEvent
+	---------------*/
 
-	void			Init();
+	class IocpEvent : public OVERLAPPED
+	{
+	public:
+		IocpEvent(EventType type);
 
-public:
-	EventType		eventType;
-	IocpObjectRef	owner;
-};
+		void			Init();
 
-/*----------------
-	ConnectEvent
------------------*/
+	public:
+		EventType		eventType;
+		IocpObjectRef	owner;
+	};
 
-class ConnectEvent : public IocpEvent
-{
-public:
-	ConnectEvent() : IocpEvent(EventType::Connect) { }
-};
+	/*----------------
+		ConnectEvent
+	-----------------*/
 
-/*--------------------
-	DisconnectEvent
-----------------------*/
+	class ConnectEvent : public IocpEvent
+	{
+	public:
+		ConnectEvent() : IocpEvent(EventType::Connect) { }
+	};
 
-class DisconnectEvent : public IocpEvent
-{
-public:
-	DisconnectEvent() : IocpEvent(EventType::Disconnect) { }
-};
+	/*--------------------
+		DisconnectEvent
+	----------------------*/
 
-/*----------------
-	AcceptEvent
------------------*/
+	class DisconnectEvent : public IocpEvent
+	{
+	public:
+		DisconnectEvent() : IocpEvent(EventType::Disconnect) { }
+	};
 
-class AcceptEvent : public IocpEvent
-{
-public:
-	AcceptEvent() : IocpEvent(EventType::Accept) { }
+	/*----------------
+		AcceptEvent
+	-----------------*/
 
-public:
-	SessionRef	session = nullptr;
-};
+	class AcceptEvent : public IocpEvent
+	{
+	public:
+		AcceptEvent() : IocpEvent(EventType::Accept) { }
 
-/*----------------
-	RecvEvent
------------------*/
+	public:
+		SessionRef	session = nullptr;
+	};
 
-class RecvEvent : public IocpEvent
-{
-public:
-	RecvEvent() : IocpEvent(EventType::Recv) { }
-};
+	/*----------------
+		RecvEvent
+	-----------------*/
 
-/*----------------
-	SendEvent
------------------*/
+	class RecvEvent : public IocpEvent
+	{
+	public:
+		RecvEvent() : IocpEvent(EventType::Recv) { }
+	};
 
-class SendEvent : public IocpEvent
-{
-public:
-	SendEvent() : IocpEvent(EventType::Send) { }
-	 
-	Vector<SendBufferRef> sendBuffers;
-};
+	/*----------------
+		SendEvent
+	-----------------*/
+
+	class SendEvent : public IocpEvent
+	{
+	public:
+		SendEvent() : IocpEvent(EventType::Send) { }
+
+		Vector<SendBufferRef> sendBuffers;
+	};
+}

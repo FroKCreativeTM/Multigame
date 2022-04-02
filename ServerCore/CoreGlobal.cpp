@@ -8,36 +8,39 @@
 #include "GlobalQueue.h"
 #include "JobTimer.h"
 
-ThreadManager*		GThreadManager = nullptr;
-Memory*				GMemory = nullptr;
-SendBufferManager*	GSendBufferManager = nullptr;
-GlobalQueue*		GGlobalQueue = nullptr;
-JobTimer*			GJobTimer = nullptr;
-
-DeadLockProfiler*	GDeadLockProfiler = nullptr;
-
-class CoreGlobal
+namespace FrokEngine
 {
-public:
-	CoreGlobal()
-	{
-		GThreadManager = new ThreadManager();
-		GMemory = new Memory();
-		GSendBufferManager = new SendBufferManager();
-		GGlobalQueue = new GlobalQueue();
-		GJobTimer = new JobTimer();
-		GDeadLockProfiler = new DeadLockProfiler();
-		SocketUtils::Init();
-	}
+	ThreadManager* GThreadManager = nullptr;
+	Memory* GMemory = nullptr;
+	SendBufferManager* GSendBufferManager = nullptr;
+	GlobalQueue* GGlobalQueue = nullptr;
+	JobTimer* GJobTimer = nullptr;
 
-	~CoreGlobal()
+	DeadLockProfiler* GDeadLockProfiler = nullptr;
+
+	class CoreGlobal
 	{
-		delete GThreadManager;
-		delete GMemory;
-		delete GSendBufferManager;
-		delete GGlobalQueue;
-		delete GJobTimer;
-		delete GDeadLockProfiler;
-		SocketUtils::Clear();
-	}
-} GCoreGlobal;
+	public:
+		CoreGlobal()
+		{
+			GThreadManager = new ThreadManager();
+			GMemory = new Memory();
+			GSendBufferManager = new SendBufferManager();
+			GGlobalQueue = new GlobalQueue();
+			GJobTimer = new JobTimer();
+			GDeadLockProfiler = new DeadLockProfiler();
+			SocketUtils::Init();
+		}
+
+		~CoreGlobal()
+		{
+			delete GThreadManager;
+			delete GMemory;
+			delete GSendBufferManager;
+			delete GGlobalQueue;
+			delete GJobTimer;
+			delete GDeadLockProfiler;
+			SocketUtils::Clear();
+		}
+	} GCoreGlobal;
+}

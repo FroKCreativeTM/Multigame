@@ -1,34 +1,36 @@
 #pragma once
 #include <functional>
 
-/*---------
-	Job
-----------*/
-
-using CallbackType = std::function<void()>;
-
-class Job
+namespace FrokEngine
 {
-public:
-	Job(CallbackType&& callback) : _callback(std::move(callback))
-	{
-	}
+	using CallbackType = std::function<void()>;
 
-	template<typename T, typename Ret, typename... Args>
-	Job(shared_ptr<T> owner, Ret(T::* memFunc)(Args...), Args&&... args)
+	/*---------
+		Job
+	----------*/
+	class Job
 	{
-		_callback = [owner, memFunc, args...]()
+	public:
+		Job(CallbackType&& callback) : _callback(std::move(callback))
 		{
-			(owner.get()->*memFunc)(args...);
-		};
-	}
+		}
 
-	void Execute()
-	{
-		_callback();
-	}
+		template<typename T, typename Ret, typename... Args>
+		Job(shared_ptr<T> owner, Ret(T::* memFunc)(Args...), Args&&... args)
+		{
+			_callback = [owner, memFunc, args...]()
+			{
+				(owner.get()->*memFunc)(args...);
+			};
+		}
 
-private:
-	CallbackType _callback;
-};
+		void Execute()
+		{
+			_callback();
+		}
+
+	private:
+		CallbackType _callback;
+	};
+}
 

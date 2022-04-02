@@ -11,3 +11,5 @@
 #endif
 
 #include "CorePch.h"
+
+using namespace FrokEngine;

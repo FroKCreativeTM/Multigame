@@ -4,73 +4,77 @@
 #include "CoreGlobal.h"
 #include "GlobalQueue.h"
 
-/*------------------
-	ThreadManager
--------------------*/
-
-ThreadManager::ThreadManager()
+namespace FrokEngine
 {
-	// Main Thread
-	InitTLS();
-}
+	/*------------------
+		ThreadManager
+	-------------------*/
 
-ThreadManager::~ThreadManager()
-{
-	Join();
-}
+	ThreadManager::ThreadManager()
+	{
+		// Main Thread
+		InitTLS();
+	}
 
-void ThreadManager::Launch(function<void(void)> callback)
-{
-	LockGuard guard(_lock);
+	ThreadManager::~ThreadManager()
+	{
+		Join();
+	}
 
-	_threads.push_back(thread([=]()
+	void ThreadManager::Launch(function<void(void)> callback)
+	{
+		LockGuard guard(_lock);
+
+		_threads.push_back(thread([=]()
+			{
+				InitTLS();
+				callback();
+				DestroyTLS();
+			}));
+	}
+
+	void ThreadManager::Join()
+	{
+		for (thread& t : _threads)
 		{
-			InitTLS();
-			callback();
-			DestroyTLS();
-		}));
-}
-
-void ThreadManager::Join()
-{
-	for (thread& t : _threads)
-	{
-		if (t.joinable())
-			t.join();
+			if (t.joinable())
+				t.join();
+		}
+		_threads.clear();
 	}
-	_threads.clear();
-}
 
-void ThreadManager::InitTLS()
-{
-	static Atomic<uint32> SThreadId = 1;
-	LThreadId = SThreadId.fetch_add(1);
-}
-
-void ThreadManager::DestroyTLS()
-{
-
-}
-
-void ThreadManager::DoGlobalQueueWork()
-{
-	while (true)
+	void ThreadManager::InitTLS()
 	{
-		uint64 now = ::GetTickCount64();
-		if (now > LEndTickCount)
-			break;
-
-		JobQueueRef jobQueue = GGlobalQueue->Pop();
-		if (jobQueue == nullptr)
-			break;
-
-		jobQueue->Execute();
+		static Atomic<uint32> SThreadId = 1;
+		LThreadId = SThreadId.fetch_add(1);
 	}
-}
 
-void ThreadManager::DistributeReservedJobs()
-{
-	const uint64 now = ::GetTickCount64();
+	void ThreadManager::DestroyTLS()
+	{
 
-	GJobTimer->Distribute(now);
+	}
+
+	void ThreadManager::DoGlobalQueueWork()
+	{
+		while (true)
+		{
+			uint64 now = ::GetTickCount64();
+			if (now > LEndTickCount)
+				break;
+
+			JobQueueRef jobQueue = GGlobalQueue->Pop();
+			if (jobQueue == nullptr)
+				break;
+
+			jobQueue->Execute();
+		}
+	}
+
+	void ThreadManager::DistributeReservedJobs()
+	{
+		const uint64 now = ::GetTickCount64();
+
+		GJobTimer->Distribute(now);
+	}
+
 }
