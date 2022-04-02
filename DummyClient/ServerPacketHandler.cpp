@@ -39,11 +39,6 @@ bool Handle_S_ENTER_GAME(PacketSessionRef& session, Protocol::S_ENTER_GAME& pkt)
 
 bool Handle_S_CHAT(PacketSessionRef& session, Protocol::S_CHAT& pkt)
 {
-	std::cout << "name : " << pkt.name() << endl;
-	std::cout << "level : " << pkt.level() << endl;
-	std::cout << "maxhp : " << pkt.maxhp() << endl;
-	std::cout << "attack : " << pkt.attack() << endl;
-	std::cout << "dropexp : " << pkt.dropexp() << endl;
-	std::cout << "nextexp : " << pkt.nextexp() << endl;
+	std::cout << pkt.msg() << endl;
 	return true;
 }

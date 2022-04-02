@@ -730,70 +730,20 @@ class C_CHAT final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kNameFieldNumber = 1,
-    kLevelFieldNumber = 2,
-    kMaxHPFieldNumber = 3,
-    kAttackFieldNumber = 4,
-    kDropExpFieldNumber = 5,
-    kNextExpFieldNumber = 6,
+    kMsgFieldNumber = 1,
   };
-  // string name = 1;
-  void clear_name();
-  const std::string& name() const;
+  // string msg = 1;
+  void clear_msg();
+  const std::string& msg() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_name(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_name();
-  PROTOBUF_FUTURE_MUST_USE_RESULT std::string* release_name();
-  void set_allocated_name(std::string* name);
+  void set_msg(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_msg();
+  PROTOBUF_FUTURE_MUST_USE_RESULT std::string* release_msg();
+  void set_allocated_msg(std::string* msg);
   private:
-  const std::string& _internal_name() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_name(const std::string& value);
-  std::string* _internal_mutable_name();
-  public:
-
-  // int32 level = 2;
-  void clear_level();
-  ::PROTOBUF_NAMESPACE_ID::int32 level() const;
-  void set_level(::PROTOBUF_NAMESPACE_ID::int32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_level() const;
-  void _internal_set_level(::PROTOBUF_NAMESPACE_ID::int32 value);
-  public:
-
-  // int32 maxHP = 3;
-  void clear_maxhp();
-  ::PROTOBUF_NAMESPACE_ID::int32 maxhp() const;
-  void set_maxhp(::PROTOBUF_NAMESPACE_ID::int32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_maxhp() const;
-  void _internal_set_maxhp(::PROTOBUF_NAMESPACE_ID::int32 value);
-  public:
-
-  // int32 attack = 4;
-  void clear_attack();
-  ::PROTOBUF_NAMESPACE_ID::int32 attack() const;
-  void set_attack(::PROTOBUF_NAMESPACE_ID::int32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_attack() const;
-  void _internal_set_attack(::PROTOBUF_NAMESPACE_ID::int32 value);
-  public:
-
-  // int32 dropExp = 5;
-  void clear_dropexp();
-  ::PROTOBUF_NAMESPACE_ID::int32 dropexp() const;
-  void set_dropexp(::PROTOBUF_NAMESPACE_ID::int32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_dropexp() const;
-  void _internal_set_dropexp(::PROTOBUF_NAMESPACE_ID::int32 value);
-  public:
-
-  // int32 nextExp = 6;
-  void clear_nextexp();
-  ::PROTOBUF_NAMESPACE_ID::int32 nextexp() const;
-  void set_nextexp(::PROTOBUF_NAMESPACE_ID::int32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_nextexp() const;
-  void _internal_set_nextexp(::PROTOBUF_NAMESPACE_ID::int32 value);
+  const std::string& _internal_msg() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_msg(const std::string& value);
+  std::string* _internal_mutable_msg();
   public:
 
   // @@protoc_insertion_point(class_scope:Protocol.C_CHAT)
@@ -803,12 +753,7 @@ class C_CHAT final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
-  ::PROTOBUF_NAMESPACE_ID::int32 level_;
-  ::PROTOBUF_NAMESPACE_ID::int32 maxhp_;
-  ::PROTOBUF_NAMESPACE_ID::int32 attack_;
-  ::PROTOBUF_NAMESPACE_ID::int32 dropexp_;
-  ::PROTOBUF_NAMESPACE_ID::int32 nextexp_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr msg_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Protocol_2eproto;
 };
@@ -922,26 +867,21 @@ class S_CHAT final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kNameFieldNumber = 2,
+    kMsgFieldNumber = 2,
     kPlayerIdFieldNumber = 1,
-    kLevelFieldNumber = 3,
-    kMaxHPFieldNumber = 4,
-    kAttackFieldNumber = 5,
-    kDropExpFieldNumber = 6,
-    kNextExpFieldNumber = 7,
   };
-  // string name = 2;
-  void clear_name();
-  const std::string& name() const;
+  // string msg = 2;
+  void clear_msg();
+  const std::string& msg() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_name(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_name();
-  PROTOBUF_FUTURE_MUST_USE_RESULT std::string* release_name();
-  void set_allocated_name(std::string* name);
+  void set_msg(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_msg();
+  PROTOBUF_FUTURE_MUST_USE_RESULT std::string* release_msg();
+  void set_allocated_msg(std::string* msg);
   private:
-  const std::string& _internal_name() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_name(const std::string& value);
-  std::string* _internal_mutable_name();
+  const std::string& _internal_msg() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_msg(const std::string& value);
+  std::string* _internal_mutable_msg();
   public:
 
   // uint64 playerId = 1;
@@ -953,51 +893,6 @@ class S_CHAT final :
   void _internal_set_playerid(::PROTOBUF_NAMESPACE_ID::uint64 value);
   public:
 
-  // int32 level = 3;
-  void clear_level();
-  ::PROTOBUF_NAMESPACE_ID::int32 level() const;
-  void set_level(::PROTOBUF_NAMESPACE_ID::int32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_level() const;
-  void _internal_set_level(::PROTOBUF_NAMESPACE_ID::int32 value);
-  public:
-
-  // int32 maxHP = 4;
-  void clear_maxhp();
-  ::PROTOBUF_NAMESPACE_ID::int32 maxhp() const;
-  void set_maxhp(::PROTOBUF_NAMESPACE_ID::int32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_maxhp() const;
-  void _internal_set_maxhp(::PROTOBUF_NAMESPACE_ID::int32 value);
-  public:
-
-  // int32 attack = 5;
-  void clear_attack();
-  ::PROTOBUF_NAMESPACE_ID::int32 attack() const;
-  void set_attack(::PROTOBUF_NAMESPACE_ID::int32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_attack() const;
-  void _internal_set_attack(::PROTOBUF_NAMESPACE_ID::int32 value);
-  public:
-
-  // int32 dropExp = 6;
-  void clear_dropexp();
-  ::PROTOBUF_NAMESPACE_ID::int32 dropexp() const;
-  void set_dropexp(::PROTOBUF_NAMESPACE_ID::int32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_dropexp() const;
-  void _internal_set_dropexp(::PROTOBUF_NAMESPACE_ID::int32 value);
-  public:
-
-  // int32 nextExp = 7;
-  void clear_nextexp();
-  ::PROTOBUF_NAMESPACE_ID::int32 nextexp() const;
-  void set_nextexp(::PROTOBUF_NAMESPACE_ID::int32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_nextexp() const;
-  void _internal_set_nextexp(::PROTOBUF_NAMESPACE_ID::int32 value);
-  public:
-
   // @@protoc_insertion_point(class_scope:Protocol.S_CHAT)
  private:
   class _Internal;
@@ -1005,13 +900,8 @@ class S_CHAT final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr msg_;
   ::PROTOBUF_NAMESPACE_ID::uint64 playerid_;
-  ::PROTOBUF_NAMESPACE_ID::int32 level_;
-  ::PROTOBUF_NAMESPACE_ID::int32 maxhp_;
-  ::PROTOBUF_NAMESPACE_ID::int32 attack_;
-  ::PROTOBUF_NAMESPACE_ID::int32 dropexp_;
-  ::PROTOBUF_NAMESPACE_ID::int32 nextexp_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Protocol_2eproto;
 };
@@ -1138,149 +1028,49 @@ inline void S_ENTER_GAME::set_success(bool value) {
 
 // C_CHAT
 
-// string name = 1;
-inline void C_CHAT::clear_name() {
-  name_.ClearToEmpty();
+// string msg = 1;
+inline void C_CHAT::clear_msg() {
+  msg_.ClearToEmpty();
 }
-inline const std::string& C_CHAT::name() const {
-  // @@protoc_insertion_point(field_get:Protocol.C_CHAT.name)
-  return _internal_name();
+inline const std::string& C_CHAT::msg() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_CHAT.msg)
+  return _internal_msg();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void C_CHAT::set_name(ArgT0&& arg0, ArgT... args) {
+void C_CHAT::set_msg(ArgT0&& arg0, ArgT... args) {
  
- name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:Protocol.C_CHAT.name)
+ msg_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.C_CHAT.msg)
 }
-inline std::string* C_CHAT::mutable_name() {
-  // @@protoc_insertion_point(field_mutable:Protocol.C_CHAT.name)
-  return _internal_mutable_name();
+inline std::string* C_CHAT::mutable_msg() {
+  // @@protoc_insertion_point(field_mutable:Protocol.C_CHAT.msg)
+  return _internal_mutable_msg();
 }
-inline const std::string& C_CHAT::_internal_name() const {
-  return name_.Get();
+inline const std::string& C_CHAT::_internal_msg() const {
+  return msg_.Get();
 }
-inline void C_CHAT::_internal_set_name(const std::string& value) {
+inline void C_CHAT::_internal_set_msg(const std::string& value) {
   
-  name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
+  msg_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
-inline std::string* C_CHAT::_internal_mutable_name() {
+inline std::string* C_CHAT::_internal_mutable_msg() {
   
-  return name_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
+  return msg_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
-inline std::string* C_CHAT::release_name() {
-  // @@protoc_insertion_point(field_release:Protocol.C_CHAT.name)
-  return name_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+inline std::string* C_CHAT::release_msg() {
+  // @@protoc_insertion_point(field_release:Protocol.C_CHAT.msg)
+  return msg_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
-inline void C_CHAT::set_allocated_name(std::string* name) {
-  if (name != nullptr) {
+inline void C_CHAT::set_allocated_msg(std::string* msg) {
+  if (msg != nullptr) {
     
   } else {
     
   }
-  name_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), name,
+  msg_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), msg,
       GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set_allocated:Protocol.C_CHAT.name)
-}
-
-// int32 level = 2;
-inline void C_CHAT::clear_level() {
-  level_ = 0;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 C_CHAT::_internal_level() const {
-  return level_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 C_CHAT::level() const {
-  // @@protoc_insertion_point(field_get:Protocol.C_CHAT.level)
-  return _internal_level();
-}
-inline void C_CHAT::_internal_set_level(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  
-  level_ = value;
-}
-inline void C_CHAT::set_level(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _internal_set_level(value);
-  // @@protoc_insertion_point(field_set:Protocol.C_CHAT.level)
-}
-
-// int32 maxHP = 3;
-inline void C_CHAT::clear_maxhp() {
-  maxhp_ = 0;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 C_CHAT::_internal_maxhp() const {
-  return maxhp_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 C_CHAT::maxhp() const {
-  // @@protoc_insertion_point(field_get:Protocol.C_CHAT.maxHP)
-  return _internal_maxhp();
-}
-inline void C_CHAT::_internal_set_maxhp(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  
-  maxhp_ = value;
-}
-inline void C_CHAT::set_maxhp(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _internal_set_maxhp(value);
-  // @@protoc_insertion_point(field_set:Protocol.C_CHAT.maxHP)
-}
-
-// int32 attack = 4;
-inline void C_CHAT::clear_attack() {
-  attack_ = 0;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 C_CHAT::_internal_attack() const {
-  return attack_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 C_CHAT::attack() const {
-  // @@protoc_insertion_point(field_get:Protocol.C_CHAT.attack)
-  return _internal_attack();
-}
-inline void C_CHAT::_internal_set_attack(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  
-  attack_ = value;
-}
-inline void C_CHAT::set_attack(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _internal_set_attack(value);
-  // @@protoc_insertion_point(field_set:Protocol.C_CHAT.attack)
-}
-
-// int32 dropExp = 5;
-inline void C_CHAT::clear_dropexp() {
-  dropexp_ = 0;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 C_CHAT::_internal_dropexp() const {
-  return dropexp_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 C_CHAT::dropexp() const {
-  // @@protoc_insertion_point(field_get:Protocol.C_CHAT.dropExp)
-  return _internal_dropexp();
-}
-inline void C_CHAT::_internal_set_dropexp(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  
-  dropexp_ = value;
-}
-inline void C_CHAT::set_dropexp(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _internal_set_dropexp(value);
-  // @@protoc_insertion_point(field_set:Protocol.C_CHAT.dropExp)
-}
-
-// int32 nextExp = 6;
-inline void C_CHAT::clear_nextexp() {
-  nextexp_ = 0;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 C_CHAT::_internal_nextexp() const {
-  return nextexp_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 C_CHAT::nextexp() const {
-  // @@protoc_insertion_point(field_get:Protocol.C_CHAT.nextExp)
-  return _internal_nextexp();
-}
-inline void C_CHAT::_internal_set_nextexp(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  
-  nextexp_ = value;
-}
-inline void C_CHAT::set_nextexp(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _internal_set_nextexp(value);
-  // @@protoc_insertion_point(field_set:Protocol.C_CHAT.nextExp)
+  // @@protoc_insertion_point(field_set_allocated:Protocol.C_CHAT.msg)
 }
 
 // -------------------------------------------------------------------
@@ -1307,149 +1097,49 @@ inline void S_CHAT::set_playerid(::PROTOBUF_NAMESPACE_ID::uint64 value) {
   // @@protoc_insertion_point(field_set:Protocol.S_CHAT.playerId)
 }
 
-// string name = 2;
-inline void S_CHAT::clear_name() {
-  name_.ClearToEmpty();
+// string msg = 2;
+inline void S_CHAT::clear_msg() {
+  msg_.ClearToEmpty();
 }
-inline const std::string& S_CHAT::name() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_CHAT.name)
-  return _internal_name();
+inline const std::string& S_CHAT::msg() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_CHAT.msg)
+  return _internal_msg();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void S_CHAT::set_name(ArgT0&& arg0, ArgT... args) {
+void S_CHAT::set_msg(ArgT0&& arg0, ArgT... args) {
  
- name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:Protocol.S_CHAT.name)
+ msg_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.S_CHAT.msg)
 }
-inline std::string* S_CHAT::mutable_name() {
-  // @@protoc_insertion_point(field_mutable:Protocol.S_CHAT.name)
-  return _internal_mutable_name();
+inline std::string* S_CHAT::mutable_msg() {
+  // @@protoc_insertion_point(field_mutable:Protocol.S_CHAT.msg)
+  return _internal_mutable_msg();
 }
-inline const std::string& S_CHAT::_internal_name() const {
-  return name_.Get();
+inline const std::string& S_CHAT::_internal_msg() const {
+  return msg_.Get();
 }
-inline void S_CHAT::_internal_set_name(const std::string& value) {
+inline void S_CHAT::_internal_set_msg(const std::string& value) {
   
-  name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
+  msg_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
-inline std::string* S_CHAT::_internal_mutable_name() {
+inline std::string* S_CHAT::_internal_mutable_msg() {
   
-  return name_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
+  return msg_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
-inline std::string* S_CHAT::release_name() {
-  // @@protoc_insertion_point(field_release:Protocol.S_CHAT.name)
-  return name_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+inline std::string* S_CHAT::release_msg() {
+  // @@protoc_insertion_point(field_release:Protocol.S_CHAT.msg)
+  return msg_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
-inline void S_CHAT::set_allocated_name(std::string* name) {
-  if (name != nullptr) {
+inline void S_CHAT::set_allocated_msg(std::string* msg) {
+  if (msg != nullptr) {
     
   } else {
     
   }
-  name_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), name,
+  msg_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), msg,
       GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set_allocated:Protocol.S_CHAT.name)
-}
-
-// int32 level = 3;
-inline void S_CHAT::clear_level() {
-  level_ = 0;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 S_CHAT::_internal_level() const {
-  return level_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 S_CHAT::level() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_CHAT.level)
-  return _internal_level();
-}
-inline void S_CHAT::_internal_set_level(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  
-  level_ = value;
-}
-inline void S_CHAT::set_level(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _internal_set_level(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_CHAT.level)
-}
-
-// int32 maxHP = 4;
-inline void S_CHAT::clear_maxhp() {
-  maxhp_ = 0;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 S_CHAT::_internal_maxhp() const {
-  return maxhp_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 S_CHAT::maxhp() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_CHAT.maxHP)
-  return _internal_maxhp();
-}
-inline void S_CHAT::_internal_set_maxhp(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  
-  maxhp_ = value;
-}
-inline void S_CHAT::set_maxhp(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _internal_set_maxhp(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_CHAT.maxHP)
-}
-
-// int32 attack = 5;
-inline void S_CHAT::clear_attack() {
-  attack_ = 0;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 S_CHAT::_internal_attack() const {
-  return attack_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 S_CHAT::attack() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_CHAT.attack)
-  return _internal_attack();
-}
-inline void S_CHAT::_internal_set_attack(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  
-  attack_ = value;
-}
-inline void S_CHAT::set_attack(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _internal_set_attack(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_CHAT.attack)
-}
-
-// int32 dropExp = 6;
-inline void S_CHAT::clear_dropexp() {
-  dropexp_ = 0;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 S_CHAT::_internal_dropexp() const {
-  return dropexp_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 S_CHAT::dropexp() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_CHAT.dropExp)
-  return _internal_dropexp();
-}
-inline void S_CHAT::_internal_set_dropexp(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  
-  dropexp_ = value;
-}
-inline void S_CHAT::set_dropexp(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _internal_set_dropexp(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_CHAT.dropExp)
-}
-
-// int32 nextExp = 7;
-inline void S_CHAT::clear_nextexp() {
-  nextexp_ = 0;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 S_CHAT::_internal_nextexp() const {
-  return nextexp_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 S_CHAT::nextexp() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_CHAT.nextExp)
-  return _internal_nextexp();
-}
-inline void S_CHAT::_internal_set_nextexp(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  
-  nextexp_ = value;
-}
-inline void S_CHAT::set_nextexp(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _internal_set_nextexp(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_CHAT.nextExp)
+  // @@protoc_insertion_point(field_set_allocated:Protocol.S_CHAT.msg)
 }
 
 #ifdef __GNUC__

@@ -27,22 +27,11 @@ message S_ENTER_GAME
 
 message C_CHAT
 {
-	string name = 1;
-	int32 level = 2;
-	int32 maxHP = 3;
-	int32 attack = 4;
-	int32 dropExp = 5;
-	int32 nextExp = 6;
+	string msg = 1;
 }
 
 message S_CHAT
 {
 	uint64 playerId = 1;
-	string name = 2;
-	int32 level = 3;
-	int32 maxHP = 4;
-	int32 attack = 5;
-	int32 dropExp = 6;
-	int32 nextExp = 7;
-
+	string msg = 2;
 }
