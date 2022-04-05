@@ -19,8 +19,6 @@ public:
 		Protocol::C_ENTERGAME pkt;
 		auto sendBuffer = ServerPacketHandler::MakeSendBuffer(pkt);
 
-		cout << "이놈이니?" << endl;
-
 		Send(sendBuffer);
 	}
 
