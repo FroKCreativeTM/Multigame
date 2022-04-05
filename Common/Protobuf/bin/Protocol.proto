@@ -4,34 +4,47 @@ package Protocol;
 import "Enum.proto";
 import "Struct.proto";
 
-message C_LOGIN
-{
-
+message S_ENTERGAME {
+  // 게임 시작 하면서 레벨 정보를 가져온다.
+  LevelInfo player = 1;
 }
 
-message S_LOGIN
-{
-	bool success = 1;
-	repeated Player players = 2; // 아이디 발급 전
+message S_LEAVEGAME {
+  
 }
 
-message C_ENTER_GAME
-{
-	uint64 playerIndex = 1;
+message S_SPAWN {
+  repeated ObjectInfo objects = 1;
 }
 
-message S_ENTER_GAME
-{
-	bool success = 1;
+message S_DESPAWN {
+  repeated int32 objectIds = 1;
 }
 
-message C_CHAT
-{
-	string msg = 1;
+message C_MOVE {
+  PositionInfo posInfo = 1;
 }
 
-message S_CHAT
-{
-	uint64 playerId = 1;
-	string msg = 2;
+message S_MOVE {
+  int32 objectId = 1;
+  PositionInfo posInfo = 2;
+}
+
+message C_SKILL {
+  SkillInfo info = 1;
+}
+
+message S_SKILL {
+  int32 objectId = 1;
+  SkillInfo info = 2;
+}
+
+message S_CHANGEHP {
+  int32 objectId = 1;
+  int32 hp = 2;
+}
+
+message S_DIE {
+  int32 objectId = 1;
+  int32 attackerId = 2;
 }

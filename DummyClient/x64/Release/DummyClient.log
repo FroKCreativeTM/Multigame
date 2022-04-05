@@ -172,19 +172,9 @@
   ServerPacketHandler.cpp
   Enum.pb.cc
   Protocol.pb.cc
-D:\GameProject\CPP_Project\Multigame\DummyClient\Protocol.pb.cc(1052,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Protocol.pb.cc(1059,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Protocol.pb.cc(1066,68): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Protocol.pb.cc(1073,69): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Protocol.pb.cc(1080,69): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Protocol.pb.cc(1395,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Protocol.pb.cc(1402,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Protocol.pb.cc(1409,68): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Protocol.pb.cc(1416,69): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Protocol.pb.cc(1423,69): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Struct.pb.cc
   코드를 생성하고 있습니다.
-  0 of 2267 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  0 of 2228 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.

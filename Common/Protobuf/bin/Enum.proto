@@ -1,10 +1,42 @@
 syntax = "proto3";
 package Protocol;
 
-enum PlayerType
-{
-	PLAYER_TYPE_NONE = 0;
-	PLAYER_TYPE_KNIGHT = 1;
-	PLAYER_TYPE_MAGE = 2;
-	PLAYER_TYPE_ARCHER = 3;
+enum MsgId {
+  S_Enter_Game = 0;
+  S_Leave_Game = 1;
+  S_Spawn = 2;
+  S_Despawn = 3;
+  C_Move = 4;
+  S_Move = 5;
+  C_Skill = 6;
+  S_Skill = 7;
+  S_Change_HP = 8;
+  S_Die = 9;
+}
+
+enum CreatureState {
+  IDLE = 0;
+  MOVING = 1;
+  SKILL = 2;
+  DEAD = 3;
+}
+
+enum MoveDir {
+  UP = 0;
+  DOWN = 1;
+  LEFT = 2;
+  RIGHT = 3;
+}
+
+enum GameObjectType {
+  NONE = 0;
+  PLAYER = 1;
+  MONSTER = 2;
+  PROJECTILE = 3;
+}
+
+enum SkillType {
+  SKILL_NONE = 0;
+  SKILL_AUTO = 1;
+  SKILL_PROJECTILE = 2;
 }

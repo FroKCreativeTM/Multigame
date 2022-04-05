@@ -22,3 +22,8 @@ using namespace std;
 #include "SendBuffer.h"
 #include "Session.h"
 #include "JobQueue.h"
+
+// MySQL
+#include <mysql/jdbc.h>
+
+#pragma comment(lib, "mysqlcppconn.lib")

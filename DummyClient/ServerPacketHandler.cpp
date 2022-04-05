@@ -12,7 +12,7 @@ bool Handle_INVALID(PacketSessionRef& session, BYTE* buffer, int32 len)
 	return false;
 }
 
-bool Handle_S_LOGIN(PacketSessionRef& session, Protocol::S_LOGIN& pkt)
+bool Handle_S_ENTERGAME(PacketSessionRef& session, Protocol::S_ENTERGAME& pkt)
 {
 	if (pkt.success() == false)
 		return true;
@@ -23,7 +23,7 @@ bool Handle_S_LOGIN(PacketSessionRef& session, Protocol::S_LOGIN& pkt)
 	}
 
 	// 입장 UI 버튼 눌러서 게임 입장
-	Protocol::C_ENTER_GAME enterGamePkt;
+	Protocol::S_ENTERGAME enterGamePkt;
 	enterGamePkt.set_playerindex(0); // 첫번째 캐릭터로 입장
 	auto sendBuffer = ServerPacketHandler::MakeSendBuffer(enterGamePkt);
 	session->Send(sendBuffer);
@@ -31,14 +31,40 @@ bool Handle_S_LOGIN(PacketSessionRef& session, Protocol::S_LOGIN& pkt)
 	return true;
 }
 
-bool Handle_S_ENTER_GAME(PacketSessionRef& session, Protocol::S_ENTER_GAME& pkt)
+bool Handle_S_LEAVEGAME(PacketSessionRef& session, Protocol::S_LEAVEGAME& pkt)
 {
-	// TODO
+	return false;
+}
+
+bool Handle_S_SPAWN(PacketSessionRef& session, Protocol::S_SPAWN& pkt)
+{
+	return false;
+}
+
+bool Handle_S_DESPAWN(PacketSessionRef& session, Protocol::S_DESPAWN& pkt)
+{
+	return false;
+}
+
+bool Handle_S_MOVE(PacketSessionRef& session, Protocol::S_MOVE& pkt)
+{
+	std::cout << "pos x : " << pkt.posinfo().posx() << 
+		"\ty : " << pkt.posinfo().posx() << 
+		"\tstate : " << pkt.posinfo().state() << endl;
 	return true;
 }
 
-bool Handle_S_CHAT(PacketSessionRef& session, Protocol::S_CHAT& pkt)
+bool Handle_S_SKILL(PacketSessionRef& session, Protocol::S_SKILL& pkt)
 {
-	std::cout << pkt.msg() << endl;
-	return true;
+	return false;
+}
+
+bool Handle_S_CHANGEHP(PacketSessionRef& session, Protocol::S_CHANGEHP& pkt)
+{
+	return false;
+}
+
+bool Handle_S_DIE(PacketSessionRef& session, Protocol::S_DIE& pkt)
+{
+	return false;
 }
