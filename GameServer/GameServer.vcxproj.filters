@@ -13,9 +13,6 @@
     <Filter Include="GameContents">
       <UniqueIdentifier>{87ecb0c8-a463-4f2f-8da3-49a7bcdfb77a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DB">
-      <UniqueIdentifier>{7540fd57-c92a-4df0-9150-f9fb94f99b22}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameServer.cpp">
@@ -48,9 +45,6 @@
     <ClCompile Include="Room.cpp">
       <Filter>GameContents</Filter>
     </ClCompile>
-    <ClCompile Include="DBConnector.cpp">
-      <Filter>DB</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -79,9 +73,6 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>GameContents</Filter>
-    </ClInclude>
-    <ClInclude Include="DBConnector.h">
-      <Filter>DB</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

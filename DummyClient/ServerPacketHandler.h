@@ -7,15 +7,21 @@ extern PacketHandlerFunc GPacketHandler[UINT16_MAX];
 enum : uint16
 {
 	PKT_S_ENTERGAME = 1000,
-	PKT_S_LEAVEGAME = 1001,
-	PKT_S_SPAWN = 1002,
-	PKT_S_DESPAWN = 1003,
-	PKT_C_MOVE = 1004,
-	PKT_S_MOVE = 1005,
-	PKT_C_SKILL = 1006,
-	PKT_S_SKILL = 1007,
-	PKT_S_CHANGEHP = 1008,
-	PKT_S_DIE = 1009,
+	PKT_C_ENTERGAME = 1001,
+	PKT_S_LEAVEGAME = 1002,
+	PKT_C_LEAVEGAME = 1003,
+	PKT_S_SPAWN = 1004,
+	PKT_C_SPAWN = 1005,
+	PKT_S_DESPAWN = 1006,
+	PKT_C_DESPAWN = 1007,
+	PKT_S_MOVE = 1008,
+	PKT_C_MOVE = 1009,
+	PKT_S_SKILL = 1010,
+	PKT_C_SKILL = 1011,
+	PKT_S_CHANGEHP = 1012,
+	PKT_C_CHANGEHP = 1013,
+	PKT_S_DIE = 1014,
+	PKT_C_DIE = 1015,
 };
 
 // Custom Handlers
@@ -51,8 +57,14 @@ public:
 		PacketHeader* header = reinterpret_cast<PacketHeader*>(buffer);
 		return GPacketHandler[header->id](session, buffer, len);
 	}
+	static SendBufferRef MakeSendBuffer(Protocol::C_ENTERGAME& pkt) { return MakeSendBuffer(pkt, PKT_C_ENTERGAME); }
+	static SendBufferRef MakeSendBuffer(Protocol::C_LEAVEGAME& pkt) { return MakeSendBuffer(pkt, PKT_C_LEAVEGAME); }
+	static SendBufferRef MakeSendBuffer(Protocol::C_SPAWN& pkt) { return MakeSendBuffer(pkt, PKT_C_SPAWN); }
+	static SendBufferRef MakeSendBuffer(Protocol::C_DESPAWN& pkt) { return MakeSendBuffer(pkt, PKT_C_DESPAWN); }
 	static SendBufferRef MakeSendBuffer(Protocol::C_MOVE& pkt) { return MakeSendBuffer(pkt, PKT_C_MOVE); }
 	static SendBufferRef MakeSendBuffer(Protocol::C_SKILL& pkt) { return MakeSendBuffer(pkt, PKT_C_SKILL); }
+	static SendBufferRef MakeSendBuffer(Protocol::C_CHANGEHP& pkt) { return MakeSendBuffer(pkt, PKT_C_CHANGEHP); }
+	static SendBufferRef MakeSendBuffer(Protocol::C_DIE& pkt) { return MakeSendBuffer(pkt, PKT_C_DIE); }
 
 private:
 	template<typename PacketType, typename ProcessFunc>

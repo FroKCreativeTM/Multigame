@@ -6,7 +6,6 @@
 #include "ServerPacketHandler.h"
 char sendData[] = "Hello World";
 
-
 class ServerSession : public PacketSession
 {
 public:
@@ -17,14 +16,11 @@ public:
 
 	virtual void OnConnected() override
 	{
-		Protocol::S_ENTERGAME pkt;
-		auto playerLevelInfo = pkt.player();
-		
-		{
-			dbConn->GetLevelInfo();
-		}
-
+		Protocol::C_ENTERGAME pkt;
 		auto sendBuffer = ServerPacketHandler::MakeSendBuffer(pkt);
+
+		cout << "이놈이니?" << endl;
+
 		Send(sendBuffer);
 	}
 
@@ -73,25 +69,12 @@ int main()
 			});
 	}
 
-	Protocol::C_Move chatPkt;
-	auto pos = chatPkt.posinfo();
-	pos.set_posx(10);
-	pos.set_posy(20);
-	pos.set_state(Protocol::CreatureState::IDLE);
-	auto sendBuffer = ServerPacketHandler::MakeSendBuffer(chatPkt);
-
 	while (true)
 	{
+		Protocol::C_ENTERGAME chatPkt;
+		auto sendBuffer = ServerPacketHandler::MakeSendBuffer(chatPkt);
 		service->Broadcast(sendBuffer);
-		this_thread::sleep_for(1s);
-	}
-
-
-	dbConn = new DBConnector();
-	if (!dbConn->Connect("tcp://127.0.0.1:3306", "root", "keAarwrm76*", "gamedb"))
-	{
-		cout << "DB connection failed" << endl;
-		return 0;
+		this_thread::sleep_for(10s);
 	}
 
 	GThreadManager->Join();

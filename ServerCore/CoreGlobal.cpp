@@ -7,6 +7,7 @@
 #include "SendBuffer.h"
 #include "GlobalQueue.h"
 #include "JobTimer.h"
+#include "DBConnector.h"
 
 namespace FrokEngine
 {
@@ -15,6 +16,7 @@ namespace FrokEngine
 	SendBufferManager* GSendBufferManager = nullptr;
 	GlobalQueue* GGlobalQueue = nullptr;
 	JobTimer* GJobTimer = nullptr;
+	DBConnector* GDBConnector = nullptr;
 
 	DeadLockProfiler* GDeadLockProfiler = nullptr;
 
@@ -28,6 +30,10 @@ namespace FrokEngine
 			GSendBufferManager = new SendBufferManager();
 			GGlobalQueue = new GlobalQueue();
 			GJobTimer = new JobTimer();
+			GDBConnector = new DBConnector();
+
+			GDBConnector->Connect("tcp://127.0.0.1:3306", "root", "keAarwrm76*", "gamedb");
+
 			GDeadLockProfiler = new DeadLockProfiler();
 			SocketUtils::Init();
 		}
@@ -40,6 +46,7 @@ namespace FrokEngine
 			delete GGlobalQueue;
 			delete GJobTimer;
 			delete GDeadLockProfiler;
+			delete GDBConnector;
 			SocketUtils::Clear();
 		}
 	} GCoreGlobal;

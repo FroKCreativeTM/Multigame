@@ -25,21 +25,23 @@ static constexpr ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema* schemas = n
 static constexpr ::PROTOBUF_NAMESPACE_ID::Message* const* file_default_instances = nullptr;
 
 const char descriptor_table_protodef_Enum_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\nEnum.proto\022\010Protocol*\225\001\n\005MsgId\022\020\n\014S_En"
-  "ter_Game\020\000\022\020\n\014S_Leave_Game\020\001\022\013\n\007S_Spawn\020"
-  "\002\022\r\n\tS_Despawn\020\003\022\n\n\006C_Move\020\004\022\n\n\006S_Move\020\005"
-  "\022\013\n\007C_Skill\020\006\022\013\n\007S_Skill\020\007\022\017\n\013S_Change_H"
-  "P\020\010\022\t\n\005S_Die\020\t*:\n\rCreatureState\022\010\n\004IDLE\020"
-  "\000\022\n\n\006MOVING\020\001\022\t\n\005SKILL\020\002\022\010\n\004DEAD\020\003*0\n\007Mo"
-  "veDir\022\006\n\002UP\020\000\022\010\n\004DOWN\020\001\022\010\n\004LEFT\020\002\022\t\n\005RIG"
-  "HT\020\003*C\n\016GameObjectType\022\010\n\004NONE\020\000\022\n\n\006PLAY"
-  "ER\020\001\022\013\n\007MONSTER\020\002\022\016\n\nPROJECTILE\020\003*A\n\tSki"
-  "llType\022\016\n\nSKILL_NONE\020\000\022\016\n\nSKILL_AUTO\020\001\022\024"
-  "\n\020SKILL_PROJECTILE\020\002b\006proto3"
+  "\n\nEnum.proto\022\010Protocol*\361\001\n\005MsgId\022\020\n\014S_En"
+  "ter_Game\020\000\022\020\n\014C_Enter_Game\020\001\022\020\n\014S_Leave_"
+  "Game\020\002\022\020\n\014C_Leave_Game\020\003\022\013\n\007S_Spawn\020\004\022\013\n"
+  "\007C_Spawn\020\005\022\r\n\tS_Despawn\020\006\022\r\n\tC_Despawn\020\007"
+  "\022\n\n\006S_Move\020\010\022\n\n\006C_Move\020\t\022\013\n\007S_Skill\020\n\022\013\n"
+  "\007C_Skill\020\013\022\017\n\013S_Change_HP\020\014\022\017\n\013C_Change_"
+  "HP\020\r\022\t\n\005S_Die\020\016\022\t\n\005C_Die\020\017*:\n\rCreatureSt"
+  "ate\022\010\n\004IDLE\020\000\022\n\n\006MOVING\020\001\022\t\n\005SKILL\020\002\022\010\n\004"
+  "DEAD\020\003*0\n\007MoveDir\022\006\n\002UP\020\000\022\010\n\004DOWN\020\001\022\010\n\004L"
+  "EFT\020\002\022\t\n\005RIGHT\020\003*C\n\016GameObjectType\022\010\n\004NO"
+  "NE\020\000\022\n\n\006PLAYER\020\001\022\013\n\007MONSTER\020\002\022\016\n\nPROJECT"
+  "ILE\020\003*A\n\tSkillType\022\016\n\nSKILL_NONE\020\000\022\016\n\nSK"
+  "ILL_AUTO\020\001\022\024\n\020SKILL_PROJECTILE\020\002b\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_Enum_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Enum_2eproto = {
-  false, false, 428, descriptor_table_protodef_Enum_2eproto, "Enum.proto", 
+  false, false, 520, descriptor_table_protodef_Enum_2eproto, "Enum.proto", 
   &descriptor_table_Enum_2eproto_once, nullptr, 0, 0,
   schemas, file_default_instances, TableStruct_Enum_2eproto::offsets,
   nullptr, file_level_enum_descriptors_Enum_2eproto, file_level_service_descriptors_Enum_2eproto,
@@ -67,6 +69,12 @@ bool MsgId_IsValid(int value) {
     case 7:
     case 8:
     case 9:
+    case 10:
+    case 11:
+    case 12:
+    case 13:
+    case 14:
+    case 15:
       return true;
     default:
       return false;

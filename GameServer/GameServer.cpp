@@ -12,10 +12,6 @@
 #include "Room.h"
 #include "Player.h"
 
-#include "DBConnector.h""
-
-DBConnector* dbConn = new DBConnector;
-
 enum
 {
 	WORKER_TICK = 64

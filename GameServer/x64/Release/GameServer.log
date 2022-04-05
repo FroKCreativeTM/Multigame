@@ -8,21 +8,33 @@
   enum : uint16
   {
   	PKT_S_ENTERGAME = 1000,
-  	PKT_S_LEAVEGAME = 1001,
-  	PKT_S_SPAWN = 1002,
-  	PKT_S_DESPAWN = 1003,
-  	PKT_C_MOVE = 1004,
-  	PKT_S_MOVE = 1005,
-  	PKT_C_SKILL = 1006,
-  	PKT_S_SKILL = 1007,
-  	PKT_S_CHANGEHP = 1008,
-  	PKT_S_DIE = 1009,
+  	PKT_C_ENTERGAME = 1001,
+  	PKT_S_LEAVEGAME = 1002,
+  	PKT_C_LEAVEGAME = 1003,
+  	PKT_S_SPAWN = 1004,
+  	PKT_C_SPAWN = 1005,
+  	PKT_S_DESPAWN = 1006,
+  	PKT_C_DESPAWN = 1007,
+  	PKT_S_MOVE = 1008,
+  	PKT_C_MOVE = 1009,
+  	PKT_S_SKILL = 1010,
+  	PKT_C_SKILL = 1011,
+  	PKT_S_CHANGEHP = 1012,
+  	PKT_C_CHANGEHP = 1013,
+  	PKT_S_DIE = 1014,
+  	PKT_C_DIE = 1015,
   };
   
   // Custom Handlers
   bool Handle_INVALID(PacketSessionRef& session, BYTE* buffer, int32 len);
+  bool Handle_C_ENTERGAME(PacketSessionRef& session, Protocol::C_ENTERGAME& pkt);
+  bool Handle_C_LEAVEGAME(PacketSessionRef& session, Protocol::C_LEAVEGAME& pkt);
+  bool Handle_C_SPAWN(PacketSessionRef& session, Protocol::C_SPAWN& pkt);
+  bool Handle_C_DESPAWN(PacketSessionRef& session, Protocol::C_DESPAWN& pkt);
   bool Handle_C_MOVE(PacketSessionRef& session, Protocol::C_MOVE& pkt);
   bool Handle_C_SKILL(PacketSessionRef& session, Protocol::C_SKILL& pkt);
+  bool Handle_C_CHANGEHP(PacketSessionRef& session, Protocol::C_CHANGEHP& pkt);
+  bool Handle_C_DIE(PacketSessionRef& session, Protocol::C_DIE& pkt);
   
   class ClientPacketHandler
   {
@@ -31,8 +43,14 @@
   	{
   		for (int32 i = 0; i < UINT16_MAX; i++)
   			GPacketHandler[i] = Handle_INVALID;
+  		GPacketHandler[PKT_C_ENTERGAME] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_ENTERGAME>(Handle_C_ENTERGAME, session, buffer, len); };
+  		GPacketHandler[PKT_C_LEAVEGAME] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_LEAVEGAME>(Handle_C_LEAVEGAME, session, buffer, len); };
+  		GPacketHandler[PKT_C_SPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_SPAWN>(Handle_C_SPAWN, session, buffer, len); };
+  		GPacketHandler[PKT_C_DESPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_DESPAWN>(Handle_C_DESPAWN, session, buffer, len); };
   		GPacketHandler[PKT_C_MOVE] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_MOVE>(Handle_C_MOVE, session, buffer, len); };
   		GPacketHandler[PKT_C_SKILL] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_SKILL>(Handle_C_SKILL, session, buffer, len); };
+  		GPacketHandler[PKT_C_CHANGEHP] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_CHANGEHP>(Handle_C_CHANGEHP, session, buffer, len); };
+  		GPacketHandler[PKT_C_DIE] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_DIE>(Handle_C_DIE, session, buffer, len); };
   	}
   
   	static bool HandlePacket(PacketSessionRef& session, BYTE* buffer, int32 len)
@@ -85,15 +103,21 @@
   enum : uint16
   {
   	PKT_S_ENTERGAME = 1000,
-  	PKT_S_LEAVEGAME = 1001,
-  	PKT_S_SPAWN = 1002,
-  	PKT_S_DESPAWN = 1003,
-  	PKT_C_MOVE = 1004,
-  	PKT_S_MOVE = 1005,
-  	PKT_C_SKILL = 1006,
-  	PKT_S_SKILL = 1007,
-  	PKT_S_CHANGEHP = 1008,
-  	PKT_S_DIE = 1009,
+  	PKT_C_ENTERGAME = 1001,
+  	PKT_S_LEAVEGAME = 1002,
+  	PKT_C_LEAVEGAME = 1003,
+  	PKT_S_SPAWN = 1004,
+  	PKT_C_SPAWN = 1005,
+  	PKT_S_DESPAWN = 1006,
+  	PKT_C_DESPAWN = 1007,
+  	PKT_S_MOVE = 1008,
+  	PKT_C_MOVE = 1009,
+  	PKT_S_SKILL = 1010,
+  	PKT_C_SKILL = 1011,
+  	PKT_S_CHANGEHP = 1012,
+  	PKT_C_CHANGEHP = 1013,
+  	PKT_S_DIE = 1014,
+  	PKT_C_DIE = 1015,
   };
   
   // Custom Handlers
@@ -129,8 +153,14 @@
   		PacketHeader* header = reinterpret_cast<PacketHeader*>(buffer);
   		return GPacketHandler[header->id](session, buffer, len);
   	}
+  	static SendBufferRef MakeSendBuffer(Protocol::C_ENTERGAME& pkt) { return MakeSendBuffer(pkt, PKT_C_ENTERGAME); }
+  	static SendBufferRef MakeSendBuffer(Protocol::C_LEAVEGAME& pkt) { return MakeSendBuffer(pkt, PKT_C_LEAVEGAME); }
+  	static SendBufferRef MakeSendBuffer(Protocol::C_SPAWN& pkt) { return MakeSendBuffer(pkt, PKT_C_SPAWN); }
+  	static SendBufferRef MakeSendBuffer(Protocol::C_DESPAWN& pkt) { return MakeSendBuffer(pkt, PKT_C_DESPAWN); }
   	static SendBufferRef MakeSendBuffer(Protocol::C_MOVE& pkt) { return MakeSendBuffer(pkt, PKT_C_MOVE); }
   	static SendBufferRef MakeSendBuffer(Protocol::C_SKILL& pkt) { return MakeSendBuffer(pkt, PKT_C_SKILL); }
+  	static SendBufferRef MakeSendBuffer(Protocol::C_CHANGEHP& pkt) { return MakeSendBuffer(pkt, PKT_C_CHANGEHP); }
+  	static SendBufferRef MakeSendBuffer(Protocol::C_DIE& pkt) { return MakeSendBuffer(pkt, PKT_C_DIE); }
   
   private:
   	template<typename PacketType, typename ProcessFunc>
@@ -189,319 +219,39 @@
   1개 파일이 복사되었습니다.
   계속하려면 아무 키나 누르십시오 . . . 
   pch.cpp
-  DBConnector.cpp
+  Enum.pb.cc
+  Protocol.pb.cc
+D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(1616,82): warning C4244: '인수': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(1997,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(2452,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(2890,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(2897,64): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(3273,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(3280,72): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Struct.pb.cc
+D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(297,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(591,66): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(598,66): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(832,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(839,64): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(846,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(853,68): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(1124,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(1131,64): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(1138,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(1145,68): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(1430,69): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  ClientPacketHandler.cpp
+D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(47,32): warning C4244: '인수': 'int32_t'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(48,32): warning C4244: '인수': 'int32_t'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   GameServer.cpp
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(23,57): error C2039: 'C_MOVE': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(23,63): error C2061: 구문 오류: 식별자 'C_MOVE'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(24,58): error C2039: 'C_SKILL': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(24,65): error C2061: 구문 오류: 식별자 'C_SKILL'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42,48): error C2039: 'S_ENTERGAME': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42,59): error C2061: 구문 오류: 식별자 'S_ENTERGAME'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(43,48): error C2039: 'S_LEAVEGAME': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(43,59): error C2061: 구문 오류: 식별자 'S_LEAVEGAME'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(43,66): error C2535: 'FrokEngine::SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(44,48): error C2039: 'S_SPAWN': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(44,55): error C2061: 구문 오류: 식별자 'S_SPAWN'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(44,62): error C2535: 'FrokEngine::SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(45,48): error C2039: 'S_DESPAWN': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(45,57): error C2061: 구문 오류: 식별자 'S_DESPAWN'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(45,64): error C2535: 'FrokEngine::SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(46,48): error C2039: 'S_MOVE': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(46,54): error C2061: 구문 오류: 식별자 'S_MOVE'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(46,61): error C2535: 'FrokEngine::SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(47,48): error C2039: 'S_SKILL': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(47,55): error C2061: 구문 오류: 식별자 'S_SKILL'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(47,62): error C2535: 'FrokEngine::SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(48,48): error C2039: 'S_CHANGEHP': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(48,58): error C2061: 구문 오류: 식별자 'S_CHANGEHP'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(48,65): error C2535: 'FrokEngine::SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(49,48): error C2039: 'S_DIE': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(49,53): error C2061: 구문 오류: 식별자 'S_DIE'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(49,60): error C2535: 'FrokEngine::SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(33,119): error C2039: 'C_MOVE': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(33,1): error C2065: 'C_MOVE': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(33,96): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(33,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(53): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(33,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_602895c1dbb987b7ace18d3f475b4a92>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\functional(1119,15): message : 'std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\functional(1094,15): message : 또는       'std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)>::operator =(std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &&) noexcept'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\functional(1078,15): message : 또는       'std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)>::operator =(const std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &)'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(33,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_602895c1dbb987b7ace18d3f475b4a92>)'을(를) 일치시키는 동안
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(34,120): error C2039: 'C_SKILL': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(34,1): error C2065: 'C_SKILL': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(34,97): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(34,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(53): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(34,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_5cbaa21699ccd95864bc39c7f1dc50f8>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\functional(1119,15): message : 'std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\functional(1094,15): message : 또는       'std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)>::operator =(std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &&) noexcept'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\functional(1078,15): message : 또는       'std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)>::operator =(const std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &)'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(34,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_5cbaa21699ccd95864bc39c7f1dc50f8>)'을(를) 일치시키는 동안
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42,90): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(43,90): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(44,86): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(45,88): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(46,85): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(47,86): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(48,89): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(49,84): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Player.h(9,12): error C2039: 'PlayerType': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\Player.h(9,23): error C3646: 'type': 알 수 없는 재정의 지정자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Player.h(9,28): error C2059: 구문 오류: '='
-D:\GameProject\CPP_Project\Multigame\GameServer\Player.h(9,40): error C2039: 'PLAYER_TYPE_NONE': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\Player.h(9,56): error C2238: ';' 앞에 예기치 않은 토큰이 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\GameServer.cpp(15,10): warning C4067: 전처리기 지시문 다음에 예기치 않은 토큰이 있습니다. 줄 바꿈 문자가 필요합니다.
   GameSession.cpp
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(23,57): error C2039: 'C_MOVE': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(23,63): error C2061: 구문 오류: 식별자 'C_MOVE'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(24,58): error C2039: 'C_SKILL': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(24,65): error C2061: 구문 오류: 식별자 'C_SKILL'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42,48): error C2039: 'S_ENTERGAME': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42,59): error C2061: 구문 오류: 식별자 'S_ENTERGAME'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(43,48): error C2039: 'S_LEAVEGAME': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(43,59): error C2061: 구문 오류: 식별자 'S_LEAVEGAME'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(43,66): error C2535: 'FrokEngine::SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(44,48): error C2039: 'S_SPAWN': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(44,55): error C2061: 구문 오류: 식별자 'S_SPAWN'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(44,62): error C2535: 'FrokEngine::SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(45,48): error C2039: 'S_DESPAWN': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(45,57): error C2061: 구문 오류: 식별자 'S_DESPAWN'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(45,64): error C2535: 'FrokEngine::SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(46,48): error C2039: 'S_MOVE': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(46,54): error C2061: 구문 오류: 식별자 'S_MOVE'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(46,61): error C2535: 'FrokEngine::SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(47,48): error C2039: 'S_SKILL': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(47,55): error C2061: 구문 오류: 식별자 'S_SKILL'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(47,62): error C2535: 'FrokEngine::SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(48,48): error C2039: 'S_CHANGEHP': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(48,58): error C2061: 구문 오류: 식별자 'S_CHANGEHP'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(48,65): error C2535: 'FrokEngine::SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(49,48): error C2039: 'S_DIE': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(49,53): error C2061: 구문 오류: 식별자 'S_DIE'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(49,60): error C2535: 'FrokEngine::SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(33,119): error C2039: 'C_MOVE': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(33,1): error C2065: 'C_MOVE': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(33,96): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(33,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(53): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(33,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_602895c1dbb987b7ace18d3f475b4a92>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\functional(1119,15): message : 'std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\functional(1094,15): message : 또는       'std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)>::operator =(std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &&) noexcept'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\functional(1078,15): message : 또는       'std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)>::operator =(const std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &)'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(33,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_602895c1dbb987b7ace18d3f475b4a92>)'을(를) 일치시키는 동안
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(34,120): error C2039: 'C_SKILL': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(34,1): error C2065: 'C_SKILL': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(34,97): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(34,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(53): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(34,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_5cbaa21699ccd95864bc39c7f1dc50f8>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\functional(1119,15): message : 'std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\functional(1094,15): message : 또는       'std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)>::operator =(std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &&) noexcept'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\functional(1078,15): message : 또는       'std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)>::operator =(const std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &)'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(34,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_5cbaa21699ccd95864bc39c7f1dc50f8>)'을(를) 일치시키는 동안
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42,90): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(43,90): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(44,86): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(45,88): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(46,85): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(47,86): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(48,89): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(49,84): error C2065: 'pkt': 선언되지 않은 식별자입니다.
   GameSessionManager.cpp
   Player.cpp
-D:\GameProject\CPP_Project\Multigame\GameServer\Player.h(9,12): error C2039: 'PlayerType': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Enum.pb.h(57): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\Player.h(9,23): error C3646: 'type': 알 수 없는 재정의 지정자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Player.h(9,28): error C2059: 구문 오류: '='
-D:\GameProject\CPP_Project\Multigame\GameServer\Player.h(9,40): error C2039: 'PLAYER_TYPE_NONE': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Enum.pb.h(57): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\Player.h(9,56): error C2238: ';' 앞에 예기치 않은 토큰이 있습니다.
-  ClientPacketHandler.cpp
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(23,57): error C2039: 'C_MOVE': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(23,63): error C2061: 구문 오류: 식별자 'C_MOVE'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(24,58): error C2039: 'C_SKILL': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(24,65): error C2061: 구문 오류: 식별자 'C_SKILL'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42,48): error C2039: 'S_ENTERGAME': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42,59): error C2061: 구문 오류: 식별자 'S_ENTERGAME'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(43,48): error C2039: 'S_LEAVEGAME': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(43,59): error C2061: 구문 오류: 식별자 'S_LEAVEGAME'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(43,66): error C2535: 'FrokEngine::SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(44,48): error C2039: 'S_SPAWN': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(44,55): error C2061: 구문 오류: 식별자 'S_SPAWN'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(44,62): error C2535: 'FrokEngine::SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(45,48): error C2039: 'S_DESPAWN': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(45,57): error C2061: 구문 오류: 식별자 'S_DESPAWN'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(45,64): error C2535: 'FrokEngine::SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(46,48): error C2039: 'S_MOVE': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(46,54): error C2061: 구문 오류: 식별자 'S_MOVE'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(46,61): error C2535: 'FrokEngine::SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(47,48): error C2039: 'S_SKILL': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(47,55): error C2061: 구문 오류: 식별자 'S_SKILL'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(47,62): error C2535: 'FrokEngine::SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(48,48): error C2039: 'S_CHANGEHP': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(48,58): error C2061: 구문 오류: 식별자 'S_CHANGEHP'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(48,65): error C2535: 'FrokEngine::SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(49,48): error C2039: 'S_DIE': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(49,53): error C2061: 구문 오류: 식별자 'S_DIE'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(49,60): error C2535: 'FrokEngine::SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(33,119): error C2039: 'C_MOVE': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(33,1): error C2065: 'C_MOVE': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(33,96): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(33,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(53): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(33,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_602895c1dbb987b7ace18d3f475b4a92>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\functional(1119,15): message : 'std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\functional(1094,15): message : 또는       'std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)>::operator =(std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &&) noexcept'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\functional(1078,15): message : 또는       'std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)>::operator =(const std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &)'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(33,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_602895c1dbb987b7ace18d3f475b4a92>)'을(를) 일치시키는 동안
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(34,120): error C2039: 'C_SKILL': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(34,1): error C2065: 'C_SKILL': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(34,97): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(34,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(53): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(34,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_5cbaa21699ccd95864bc39c7f1dc50f8>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\functional(1119,15): message : 'std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\functional(1094,15): message : 또는       'std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)>::operator =(std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &&) noexcept'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\functional(1078,15): message : 또는       'std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)>::operator =(const std::function<bool (FrokEngine::PacketSessionRef &,BYTE *,FrokEngine::int32)> &)'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(34,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_5cbaa21699ccd95864bc39c7f1dc50f8>)'을(를) 일치시키는 동안
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(42,90): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(43,90): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(44,86): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(45,88): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(46,85): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(47,86): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(48,89): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.h(49,84): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Player.h(9,12): error C2039: 'PlayerType': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\Player.h(9,23): error C3646: 'type': 알 수 없는 재정의 지정자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Player.h(9,28): error C2059: 구문 오류: '='
-D:\GameProject\CPP_Project\Multigame\GameServer\Player.h(9,40): error C2039: 'PLAYER_TYPE_NONE': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\Player.h(9,56): error C2238: ';' 앞에 예기치 않은 토큰이 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(18,58): error C2039: 'C_LOGIN': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(18,65): error C2061: 구문 오류: 식별자 'C_LOGIN'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(24,12): error C2039: 'S_LOGIN': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(24,20): error C2065: 'S_LOGIN': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(24,20): error C2146: 구문 오류: ';'이(가) 'loginPkt' 식별자 앞에 없습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(24,20): error C2065: 'loginPkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(25,2): error C2065: 'loginPkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(34,17): error C2065: 'loginPkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(35,9): error C3536: 'player': 초기화되기 전에 사용할 수 없습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(36,36): error C2039: 'PLAYER_TYPE_KNIGHT': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(36,54): error C2065: 'PLAYER_TYPE_KNIGHT': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(41,14): error C2039: 'type': 'Player'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Player.h(3): message : 'Player' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(48,17): error C2065: 'loginPkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(49,9): error C3536: 'player': 초기화되기 전에 사용할 수 없습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(50,36): error C2039: 'PLAYER_TYPE_MAGE': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(50,52): error C2065: 'PLAYER_TYPE_MAGE': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(55,14): error C2039: 'type': 'Player'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Player.h(3): message : 'Player' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(61,56): error C2065: 'loginPkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(62,26): error C3536: 'sendBuffer': 초기화되기 전에 사용할 수 없습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(62,26): error C2664: 'void FrokEngine::Session::Send(FrokEngine::SendBufferRef)': 인수 1을(를) 'int'에서 'FrokEngine::SendBufferRef'(으)로 변환할 수 없습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(62,26): message : 소스 형식을 가져올 수 있는 생성자가 없거나 생성자 오버로드 확인이 모호합니다.
-D:\GameProject\CPP_Project\Multigame\ServerCore\Session.h(32,11): message : 'FrokEngine::Session::Send' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(67,63): error C2039: 'C_ENTER_GAME': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(67,75): error C2061: 구문 오류: 식별자 'C_ENTER_GAME'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(71,17): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(79,12): error C2039: 'S_ENTER_GAME': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(79,25): error C2065: 'S_ENTER_GAME': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(79,25): error C2146: 구문 오류: ';'이(가) 'enterGamePkt' 식별자 앞에 없습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(79,25): error C2065: 'enterGamePkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(80,2): error C2065: 'enterGamePkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(81,56): error C2065: 'enterGamePkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(82,60): error C3536: 'sendBuffer': 초기화되기 전에 사용할 수 없습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(82,60): error C2664: 'void FrokEngine::Session::Send(FrokEngine::SendBufferRef)': 인수 1을(를) 'int'에서 'FrokEngine::SendBufferRef'(으)로 변환할 수 없습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(82,60): message : 소스 형식을 가져올 수 있는 생성자가 없거나 생성자 오버로드 확인이 모호합니다.
-D:\GameProject\CPP_Project\Multigame\ServerCore\Session.h(32,11): message : 'FrokEngine::Session::Send' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(87,57): error C2039: 'C_CHAT': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(87,63): error C2061: 구문 오류: 식별자 'C_CHAT'
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(89,15): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(91,12): error C2039: 'S_CHAT': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.h(102): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(91,19): error C2065: 'S_CHAT': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(91,19): error C2146: 구문 오류: ';'이(가) 'chatPkt' 식별자 앞에 없습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(91,19): error C2065: 'chatPkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(92,2): error C2065: 'chatPkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(92,18): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(93,56): error C2065: 'chatPkt': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(95,45): error C3536: 'sendBuffer': 초기화되기 전에 사용할 수 없습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(95,45): error C2660: 'FrokEngine::JobQueue::DoAsync': 함수는 2개의 인수를 사용하지 않습니다.
-D:\GameProject\CPP_Project\Multigame\ServerCore\JobQueue.h(15,8): message : 'FrokEngine::JobQueue::DoAsync' 선언을 참조하십시오.
   Room.cpp
-D:\GameProject\CPP_Project\Multigame\GameServer\Player.h(9,12): error C2039: 'PlayerType': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Enum.pb.h(57): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\Player.h(9,23): error C3646: 'type': 알 수 없는 재정의 지정자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Player.h(9,28): error C2059: 구문 오류: '='
-D:\GameProject\CPP_Project\Multigame\GameServer\Player.h(9,40): error C2039: 'PLAYER_TYPE_NONE': 'Protocol'의 멤버가 아닙니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Enum.pb.h(57): message : 'Protocol' 선언을 참조하십시오.
-D:\GameProject\CPP_Project\Multigame\GameServer\Player.h(9,56): error C2238: ';' 앞에 예기치 않은 토큰이 있습니다.
+  코드를 생성하고 있습니다.
+  0 of 3653 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  코드를 생성했습니다.
+  GameServer.vcxproj -> D:\GameProject\CPP_Project\Multigame\Binary\Release\GameServer.exe

@@ -14,20 +14,10 @@ bool Handle_INVALID(PacketSessionRef& session, BYTE* buffer, int32 len)
 
 bool Handle_S_ENTERGAME(PacketSessionRef& session, Protocol::S_ENTERGAME& pkt)
 {
-	if (pkt.success() == false)
-		return true;
-
-	if (pkt.players().size() == 0)
-	{
-		// 캐릭터 생성창
-	}
-
 	// 입장 UI 버튼 눌러서 게임 입장
-	Protocol::S_ENTERGAME enterGamePkt;
-	enterGamePkt.set_playerindex(0); // 첫번째 캐릭터로 입장
+	Protocol::C_ENTERGAME enterGamePkt;
 	auto sendBuffer = ServerPacketHandler::MakeSendBuffer(enterGamePkt);
 	session->Send(sendBuffer);
-
 	return true;
 }
 

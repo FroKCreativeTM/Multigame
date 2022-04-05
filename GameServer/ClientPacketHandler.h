@@ -7,21 +7,33 @@ extern PacketHandlerFunc GPacketHandler[UINT16_MAX];
 enum : uint16
 {
 	PKT_S_ENTERGAME = 1000,
-	PKT_S_LEAVEGAME = 1001,
-	PKT_S_SPAWN = 1002,
-	PKT_S_DESPAWN = 1003,
-	PKT_C_MOVE = 1004,
-	PKT_S_MOVE = 1005,
-	PKT_C_SKILL = 1006,
-	PKT_S_SKILL = 1007,
-	PKT_S_CHANGEHP = 1008,
-	PKT_S_DIE = 1009,
+	PKT_C_ENTERGAME = 1001,
+	PKT_S_LEAVEGAME = 1002,
+	PKT_C_LEAVEGAME = 1003,
+	PKT_S_SPAWN = 1004,
+	PKT_C_SPAWN = 1005,
+	PKT_S_DESPAWN = 1006,
+	PKT_C_DESPAWN = 1007,
+	PKT_S_MOVE = 1008,
+	PKT_C_MOVE = 1009,
+	PKT_S_SKILL = 1010,
+	PKT_C_SKILL = 1011,
+	PKT_S_CHANGEHP = 1012,
+	PKT_C_CHANGEHP = 1013,
+	PKT_S_DIE = 1014,
+	PKT_C_DIE = 1015,
 };
 
 // Custom Handlers
 bool Handle_INVALID(PacketSessionRef& session, BYTE* buffer, int32 len);
+bool Handle_C_ENTERGAME(PacketSessionRef& session, Protocol::C_ENTERGAME& pkt);
+bool Handle_C_LEAVEGAME(PacketSessionRef& session, Protocol::C_LEAVEGAME& pkt);
+bool Handle_C_SPAWN(PacketSessionRef& session, Protocol::C_SPAWN& pkt);
+bool Handle_C_DESPAWN(PacketSessionRef& session, Protocol::C_DESPAWN& pkt);
 bool Handle_C_MOVE(PacketSessionRef& session, Protocol::C_MOVE& pkt);
 bool Handle_C_SKILL(PacketSessionRef& session, Protocol::C_SKILL& pkt);
+bool Handle_C_CHANGEHP(PacketSessionRef& session, Protocol::C_CHANGEHP& pkt);
+bool Handle_C_DIE(PacketSessionRef& session, Protocol::C_DIE& pkt);
 
 class ClientPacketHandler
 {
@@ -30,8 +42,14 @@ public:
 	{
 		for (int32 i = 0; i < UINT16_MAX; i++)
 			GPacketHandler[i] = Handle_INVALID;
+		GPacketHandler[PKT_C_ENTERGAME] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_ENTERGAME>(Handle_C_ENTERGAME, session, buffer, len); };
+		GPacketHandler[PKT_C_LEAVEGAME] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_LEAVEGAME>(Handle_C_LEAVEGAME, session, buffer, len); };
+		GPacketHandler[PKT_C_SPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_SPAWN>(Handle_C_SPAWN, session, buffer, len); };
+		GPacketHandler[PKT_C_DESPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_DESPAWN>(Handle_C_DESPAWN, session, buffer, len); };
 		GPacketHandler[PKT_C_MOVE] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_MOVE>(Handle_C_MOVE, session, buffer, len); };
 		GPacketHandler[PKT_C_SKILL] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_SKILL>(Handle_C_SKILL, session, buffer, len); };
+		GPacketHandler[PKT_C_CHANGEHP] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_CHANGEHP>(Handle_C_CHANGEHP, session, buffer, len); };
+		GPacketHandler[PKT_C_DIE] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_DIE>(Handle_C_DIE, session, buffer, len); };
 	}
 
 	static bool HandlePacket(PacketSessionRef& session, BYTE* buffer, int32 len)

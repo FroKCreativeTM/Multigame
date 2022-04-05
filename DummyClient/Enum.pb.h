@@ -58,21 +58,27 @@ namespace Protocol {
 
 enum MsgId : int {
   S_Enter_Game = 0,
-  S_Leave_Game = 1,
-  S_Spawn = 2,
-  S_Despawn = 3,
-  C_Move = 4,
-  S_Move = 5,
-  C_Skill = 6,
-  S_Skill = 7,
-  S_Change_HP = 8,
-  S_Die = 9,
+  C_Enter_Game = 1,
+  S_Leave_Game = 2,
+  C_Leave_Game = 3,
+  S_Spawn = 4,
+  C_Spawn = 5,
+  S_Despawn = 6,
+  C_Despawn = 7,
+  S_Move = 8,
+  C_Move = 9,
+  S_Skill = 10,
+  C_Skill = 11,
+  S_Change_HP = 12,
+  C_Change_HP = 13,
+  S_Die = 14,
+  C_Die = 15,
   MsgId_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   MsgId_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
 bool MsgId_IsValid(int value);
 constexpr MsgId MsgId_MIN = S_Enter_Game;
-constexpr MsgId MsgId_MAX = S_Die;
+constexpr MsgId MsgId_MAX = C_Die;
 constexpr int MsgId_ARRAYSIZE = MsgId_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MsgId_descriptor();

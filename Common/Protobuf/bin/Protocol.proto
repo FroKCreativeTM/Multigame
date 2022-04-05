@@ -6,10 +6,20 @@ import "Struct.proto";
 
 message S_ENTERGAME {
   // 게임 시작 하면서 레벨 정보를 가져온다.
-  LevelInfo player = 1;
+  bool success = 1;
+  LevelInfo player = 2;
+}
+
+message C_ENTERGAME {
+  uint64 playerIndex = 1;
+  LevelInfo player = 2;
 }
 
 message S_LEAVEGAME {
+  
+}
+
+message C_LEAVEGAME {
   
 }
 
@@ -17,12 +27,14 @@ message S_SPAWN {
   repeated ObjectInfo objects = 1;
 }
 
+message C_SPAWN {
+}
+
 message S_DESPAWN {
   repeated int32 objectIds = 1;
 }
 
-message C_MOVE {
-  PositionInfo posInfo = 1;
+message C_DESPAWN {
 }
 
 message S_MOVE {
@@ -30,8 +42,8 @@ message S_MOVE {
   PositionInfo posInfo = 2;
 }
 
-message C_SKILL {
-  SkillInfo info = 1;
+message C_MOVE {
+  PositionInfo posInfo = 1;
 }
 
 message S_SKILL {
@@ -39,12 +51,22 @@ message S_SKILL {
   SkillInfo info = 2;
 }
 
+message C_SKILL {
+  SkillInfo info = 1;
+}
+
 message S_CHANGEHP {
   int32 objectId = 1;
   int32 hp = 2;
 }
 
+message C_CHANGEHP {
+}
+
 message S_DIE {
   int32 objectId = 1;
   int32 attackerId = 2;
+}
+
+message C_DIE {
 }

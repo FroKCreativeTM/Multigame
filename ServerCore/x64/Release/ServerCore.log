@@ -1,2 +1,2 @@
-﻿  DBConnector.cpp
-D:\GameProject\CPP_Project\Multigame\ServerCore\DBConnector.h(19,16): error C2653: 'Protocol': 클래스 또는 네임스페이스 이름이 아닙니다.
+﻿  CoreGlobal.cpp
+  ServerCore.vcxproj -> D:\GameProject\CPP_Project\Multigame\Libraries\Libs\ServerCore\Release\ServerCore.lib
