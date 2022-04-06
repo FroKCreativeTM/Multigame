@@ -8,6 +8,7 @@
 
 #include <windows.h>
 #include <iostream>
+#include <cmath>
 using namespace std;
 
 #include <winsock2.h>
@@ -24,6 +25,14 @@ using namespace std;
 #include "JobQueue.h"
 
 // MySQL
-#include <mysql/jdbc.h>
+#include <MySQL/mysql/jdbc.h>
 
-#pragma comment(lib, "mysqlcppconn.lib")
+#ifdef _DEBUG
+#pragma comment(lib, "MySQL/Debug/libcrypto.lib")
+#pragma comment(lib, "MySQL/Debug/libssl.lib")
+#pragma comment(lib, "MySQL/Debug/mysqlcppconn.lib")
+#else
+#pragma comment(lib, "MySQL/Release/libcrypto.lib")
+#pragma comment(lib, "MySQL/Release/libssl.lib")
+#pragma comment(lib, "MySQL/Release/mysqlcppconn.lib")
+#endif

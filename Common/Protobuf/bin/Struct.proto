@@ -12,8 +12,9 @@ message ObjectInfo {
 
 message PositionInfo {
   CreatureState state = 1;
-  int32 posX = 2;
-  int32 posY = 3;
+  MoveDir moveDir = 2;
+  int32 posX = 3;
+  int32 posY = 4;
 }
 
 message StatInfo {
@@ -21,16 +22,8 @@ message StatInfo {
   int32 hp = 2;
   int32 maxHp = 3;
   int32 attack = 4;
-  float curexp = 5;
-}
-
-message LevelInfo {
-  int32 level = 1;
-  int32 hp = 2;
-  int32 maxHp = 3;
-  int32 attack = 4;
-  float dropexp = 5;
-  float nextexp = 6;
+  float speed = 5;
+  int32 totalExp = 6;
 }
 
 message SkillInfo {

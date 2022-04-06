@@ -5,14 +5,10 @@ import "Enum.proto";
 import "Struct.proto";
 
 message S_ENTERGAME {
-  // 게임 시작 하면서 레벨 정보를 가져온다.
-  bool success = 1;
-  LevelInfo player = 2;
+  ObjectInfo player = 1;
 }
 
 message C_ENTERGAME {
-  uint64 playerIndex = 1;
-  LevelInfo player = 2;
 }
 
 message S_LEAVEGAME {

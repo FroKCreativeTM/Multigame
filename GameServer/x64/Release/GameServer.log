@@ -250,8 +250,8 @@ D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(48,32): 
   Player.cpp
   Room.cpp
   코드를 생성하고 있습니다.
-  0 of 3653 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  19 of 3652 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    16 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   GameServer.vcxproj -> D:\GameProject\CPP_Project\Multigame\Binary\Release\GameServer.exe

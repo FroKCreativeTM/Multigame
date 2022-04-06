@@ -1,2 +1,30 @@
-﻿  CoreGlobal.cpp
+﻿  pch.cpp
+  Allocator.cpp
+  BufferReader.cpp
+  BufferWriter.cpp
+  CoreGlobal.cpp
+  CorePch.cpp
+  CoreTLS.cpp
+  DBConnector.cpp
+  DeadLockProfiler.cpp
+  GlobalQueue.cpp
+  IocpCore.cpp
+  IocpEvent.cpp
+  Job.cpp
+  JobQueue.cpp
+  JobTimer.cpp
+  Listener.cpp
+  Lock.cpp
+  LockQueue.cpp
+  Memory.cpp
+  MemoryPool.cpp
+  NetAddress.cpp
+  컴파일하고 있습니다...
+  RecvBuffer.cpp
+  RefCounting.cpp
+  SendBuffer.cpp
+  Service.cpp
+  Session.cpp
+  SocketUtils.cpp
+  ThreadManager.cpp
   ServerCore.vcxproj -> D:\GameProject\CPP_Project\Multigame\Libraries\Libs\ServerCore\Release\ServerCore.lib

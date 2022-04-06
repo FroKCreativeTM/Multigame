@@ -47,7 +47,7 @@ struct TableStruct_Struct_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[5]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[4]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -55,9 +55,6 @@ struct TableStruct_Struct_2eproto {
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Struct_2eproto;
 namespace Protocol {
-class LevelInfo;
-struct LevelInfoDefaultTypeInternal;
-extern LevelInfoDefaultTypeInternal _LevelInfo_default_instance_;
 class ObjectInfo;
 struct ObjectInfoDefaultTypeInternal;
 extern ObjectInfoDefaultTypeInternal _ObjectInfo_default_instance_;
@@ -72,7 +69,6 @@ struct StatInfoDefaultTypeInternal;
 extern StatInfoDefaultTypeInternal _StatInfo_default_instance_;
 }  // namespace Protocol
 PROTOBUF_NAMESPACE_OPEN
-template<> ::Protocol::LevelInfo* Arena::CreateMaybeMessage<::Protocol::LevelInfo>(Arena*);
 template<> ::Protocol::ObjectInfo* Arena::CreateMaybeMessage<::Protocol::ObjectInfo>(Arena*);
 template<> ::Protocol::PositionInfo* Arena::CreateMaybeMessage<::Protocol::PositionInfo>(Arena*);
 template<> ::Protocol::SkillInfo* Arena::CreateMaybeMessage<::Protocol::SkillInfo>(Arena*);
@@ -379,8 +375,9 @@ class PositionInfo final :
 
   enum : int {
     kStateFieldNumber = 1,
-    kPosXFieldNumber = 2,
-    kPosYFieldNumber = 3,
+    kMoveDirFieldNumber = 2,
+    kPosXFieldNumber = 3,
+    kPosYFieldNumber = 4,
   };
   // .Protocol.CreatureState state = 1;
   void clear_state();
@@ -391,7 +388,16 @@ class PositionInfo final :
   void _internal_set_state(::Protocol::CreatureState value);
   public:
 
-  // int32 posX = 2;
+  // .Protocol.MoveDir moveDir = 2;
+  void clear_movedir();
+  ::Protocol::MoveDir movedir() const;
+  void set_movedir(::Protocol::MoveDir value);
+  private:
+  ::Protocol::MoveDir _internal_movedir() const;
+  void _internal_set_movedir(::Protocol::MoveDir value);
+  public:
+
+  // int32 posX = 3;
   void clear_posx();
   ::PROTOBUF_NAMESPACE_ID::int32 posx() const;
   void set_posx(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -400,7 +406,7 @@ class PositionInfo final :
   void _internal_set_posx(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // int32 posY = 3;
+  // int32 posY = 4;
   void clear_posy();
   ::PROTOBUF_NAMESPACE_ID::int32 posy() const;
   void set_posy(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -417,6 +423,7 @@ class PositionInfo final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   int state_;
+  int movedir_;
   ::PROTOBUF_NAMESPACE_ID::int32 posx_;
   ::PROTOBUF_NAMESPACE_ID::int32 posy_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -536,7 +543,8 @@ class StatInfo final :
     kHpFieldNumber = 2,
     kMaxHpFieldNumber = 3,
     kAttackFieldNumber = 4,
-    kCurexpFieldNumber = 5,
+    kSpeedFieldNumber = 5,
+    kTotalExpFieldNumber = 6,
   };
   // int32 level = 1;
   void clear_level();
@@ -574,13 +582,22 @@ class StatInfo final :
   void _internal_set_attack(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // float curexp = 5;
-  void clear_curexp();
-  float curexp() const;
-  void set_curexp(float value);
+  // float speed = 5;
+  void clear_speed();
+  float speed() const;
+  void set_speed(float value);
   private:
-  float _internal_curexp() const;
-  void _internal_set_curexp(float value);
+  float _internal_speed() const;
+  void _internal_set_speed(float value);
+  public:
+
+  // int32 totalExp = 6;
+  void clear_totalexp();
+  ::PROTOBUF_NAMESPACE_ID::int32 totalexp() const;
+  void set_totalexp(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_totalexp() const;
+  void _internal_set_totalexp(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
   // @@protoc_insertion_point(class_scope:Protocol.StatInfo)
@@ -594,194 +611,8 @@ class StatInfo final :
   ::PROTOBUF_NAMESPACE_ID::int32 hp_;
   ::PROTOBUF_NAMESPACE_ID::int32 maxhp_;
   ::PROTOBUF_NAMESPACE_ID::int32 attack_;
-  float curexp_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  friend struct ::TableStruct_Struct_2eproto;
-};
-// -------------------------------------------------------------------
-
-class LevelInfo final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.LevelInfo) */ {
- public:
-  inline LevelInfo() : LevelInfo(nullptr) {}
-  ~LevelInfo() override;
-  explicit constexpr LevelInfo(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-  LevelInfo(const LevelInfo& from);
-  LevelInfo(LevelInfo&& from) noexcept
-    : LevelInfo() {
-    *this = ::std::move(from);
-  }
-
-  inline LevelInfo& operator=(const LevelInfo& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline LevelInfo& operator=(LevelInfo&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const LevelInfo& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const LevelInfo* internal_default_instance() {
-    return reinterpret_cast<const LevelInfo*>(
-               &_LevelInfo_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    3;
-
-  friend void swap(LevelInfo& a, LevelInfo& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(LevelInfo* other) {
-    if (other == this) return;
-    if (GetOwningArena() == other->GetOwningArena()) {
-      InternalSwap(other);
-    } else {
-      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(LevelInfo* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline LevelInfo* New() const final {
-    return new LevelInfo();
-  }
-
-  LevelInfo* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<LevelInfo>(arena);
-  }
-  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const LevelInfo& from);
-  void MergeFrom(const LevelInfo& from);
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
-      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(LevelInfo* other);
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Protocol.LevelInfo";
-  }
-  protected:
-  explicit LevelInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-  private:
-  static void ArenaDtor(void* object);
-  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-  public:
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kLevelFieldNumber = 1,
-    kHpFieldNumber = 2,
-    kMaxHpFieldNumber = 3,
-    kAttackFieldNumber = 4,
-    kDropexpFieldNumber = 5,
-    kNextexpFieldNumber = 6,
-  };
-  // int32 level = 1;
-  void clear_level();
-  ::PROTOBUF_NAMESPACE_ID::int32 level() const;
-  void set_level(::PROTOBUF_NAMESPACE_ID::int32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_level() const;
-  void _internal_set_level(::PROTOBUF_NAMESPACE_ID::int32 value);
-  public:
-
-  // int32 hp = 2;
-  void clear_hp();
-  ::PROTOBUF_NAMESPACE_ID::int32 hp() const;
-  void set_hp(::PROTOBUF_NAMESPACE_ID::int32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_hp() const;
-  void _internal_set_hp(::PROTOBUF_NAMESPACE_ID::int32 value);
-  public:
-
-  // int32 maxHp = 3;
-  void clear_maxhp();
-  ::PROTOBUF_NAMESPACE_ID::int32 maxhp() const;
-  void set_maxhp(::PROTOBUF_NAMESPACE_ID::int32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_maxhp() const;
-  void _internal_set_maxhp(::PROTOBUF_NAMESPACE_ID::int32 value);
-  public:
-
-  // int32 attack = 4;
-  void clear_attack();
-  ::PROTOBUF_NAMESPACE_ID::int32 attack() const;
-  void set_attack(::PROTOBUF_NAMESPACE_ID::int32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_attack() const;
-  void _internal_set_attack(::PROTOBUF_NAMESPACE_ID::int32 value);
-  public:
-
-  // float dropexp = 5;
-  void clear_dropexp();
-  float dropexp() const;
-  void set_dropexp(float value);
-  private:
-  float _internal_dropexp() const;
-  void _internal_set_dropexp(float value);
-  public:
-
-  // float nextexp = 6;
-  void clear_nextexp();
-  float nextexp() const;
-  void set_nextexp(float value);
-  private:
-  float _internal_nextexp() const;
-  void _internal_set_nextexp(float value);
-  public:
-
-  // @@protoc_insertion_point(class_scope:Protocol.LevelInfo)
- private:
-  class _Internal;
-
-  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::int32 level_;
-  ::PROTOBUF_NAMESPACE_ID::int32 hp_;
-  ::PROTOBUF_NAMESPACE_ID::int32 maxhp_;
-  ::PROTOBUF_NAMESPACE_ID::int32 attack_;
-  float dropexp_;
-  float nextexp_;
+  float speed_;
+  ::PROTOBUF_NAMESPACE_ID::int32 totalexp_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Struct_2eproto;
 };
@@ -831,7 +662,7 @@ class SkillInfo final :
                &_SkillInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    3;
 
   friend void swap(SkillInfo& a, SkillInfo& b) {
     a.Swap(&b);
@@ -1183,7 +1014,27 @@ inline void PositionInfo::set_state(::Protocol::CreatureState value) {
   // @@protoc_insertion_point(field_set:Protocol.PositionInfo.state)
 }
 
-// int32 posX = 2;
+// .Protocol.MoveDir moveDir = 2;
+inline void PositionInfo::clear_movedir() {
+  movedir_ = 0;
+}
+inline ::Protocol::MoveDir PositionInfo::_internal_movedir() const {
+  return static_cast< ::Protocol::MoveDir >(movedir_);
+}
+inline ::Protocol::MoveDir PositionInfo::movedir() const {
+  // @@protoc_insertion_point(field_get:Protocol.PositionInfo.moveDir)
+  return _internal_movedir();
+}
+inline void PositionInfo::_internal_set_movedir(::Protocol::MoveDir value) {
+  
+  movedir_ = value;
+}
+inline void PositionInfo::set_movedir(::Protocol::MoveDir value) {
+  _internal_set_movedir(value);
+  // @@protoc_insertion_point(field_set:Protocol.PositionInfo.moveDir)
+}
+
+// int32 posX = 3;
 inline void PositionInfo::clear_posx() {
   posx_ = 0;
 }
@@ -1203,7 +1054,7 @@ inline void PositionInfo::set_posx(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:Protocol.PositionInfo.posX)
 }
 
-// int32 posY = 3;
+// int32 posY = 4;
 inline void PositionInfo::clear_posy() {
   posy_ = 0;
 }
@@ -1307,148 +1158,44 @@ inline void StatInfo::set_attack(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:Protocol.StatInfo.attack)
 }
 
-// float curexp = 5;
-inline void StatInfo::clear_curexp() {
-  curexp_ = 0;
+// float speed = 5;
+inline void StatInfo::clear_speed() {
+  speed_ = 0;
 }
-inline float StatInfo::_internal_curexp() const {
-  return curexp_;
+inline float StatInfo::_internal_speed() const {
+  return speed_;
 }
-inline float StatInfo::curexp() const {
-  // @@protoc_insertion_point(field_get:Protocol.StatInfo.curexp)
-  return _internal_curexp();
+inline float StatInfo::speed() const {
+  // @@protoc_insertion_point(field_get:Protocol.StatInfo.speed)
+  return _internal_speed();
 }
-inline void StatInfo::_internal_set_curexp(float value) {
+inline void StatInfo::_internal_set_speed(float value) {
   
-  curexp_ = value;
+  speed_ = value;
 }
-inline void StatInfo::set_curexp(float value) {
-  _internal_set_curexp(value);
-  // @@protoc_insertion_point(field_set:Protocol.StatInfo.curexp)
+inline void StatInfo::set_speed(float value) {
+  _internal_set_speed(value);
+  // @@protoc_insertion_point(field_set:Protocol.StatInfo.speed)
 }
 
-// -------------------------------------------------------------------
-
-// LevelInfo
-
-// int32 level = 1;
-inline void LevelInfo::clear_level() {
-  level_ = 0;
+// int32 totalExp = 6;
+inline void StatInfo::clear_totalexp() {
+  totalexp_ = 0;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 LevelInfo::_internal_level() const {
-  return level_;
+inline ::PROTOBUF_NAMESPACE_ID::int32 StatInfo::_internal_totalexp() const {
+  return totalexp_;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 LevelInfo::level() const {
-  // @@protoc_insertion_point(field_get:Protocol.LevelInfo.level)
-  return _internal_level();
+inline ::PROTOBUF_NAMESPACE_ID::int32 StatInfo::totalexp() const {
+  // @@protoc_insertion_point(field_get:Protocol.StatInfo.totalExp)
+  return _internal_totalexp();
 }
-inline void LevelInfo::_internal_set_level(::PROTOBUF_NAMESPACE_ID::int32 value) {
+inline void StatInfo::_internal_set_totalexp(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
-  level_ = value;
+  totalexp_ = value;
 }
-inline void LevelInfo::set_level(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _internal_set_level(value);
-  // @@protoc_insertion_point(field_set:Protocol.LevelInfo.level)
-}
-
-// int32 hp = 2;
-inline void LevelInfo::clear_hp() {
-  hp_ = 0;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 LevelInfo::_internal_hp() const {
-  return hp_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 LevelInfo::hp() const {
-  // @@protoc_insertion_point(field_get:Protocol.LevelInfo.hp)
-  return _internal_hp();
-}
-inline void LevelInfo::_internal_set_hp(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  
-  hp_ = value;
-}
-inline void LevelInfo::set_hp(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _internal_set_hp(value);
-  // @@protoc_insertion_point(field_set:Protocol.LevelInfo.hp)
-}
-
-// int32 maxHp = 3;
-inline void LevelInfo::clear_maxhp() {
-  maxhp_ = 0;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 LevelInfo::_internal_maxhp() const {
-  return maxhp_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 LevelInfo::maxhp() const {
-  // @@protoc_insertion_point(field_get:Protocol.LevelInfo.maxHp)
-  return _internal_maxhp();
-}
-inline void LevelInfo::_internal_set_maxhp(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  
-  maxhp_ = value;
-}
-inline void LevelInfo::set_maxhp(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _internal_set_maxhp(value);
-  // @@protoc_insertion_point(field_set:Protocol.LevelInfo.maxHp)
-}
-
-// int32 attack = 4;
-inline void LevelInfo::clear_attack() {
-  attack_ = 0;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 LevelInfo::_internal_attack() const {
-  return attack_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 LevelInfo::attack() const {
-  // @@protoc_insertion_point(field_get:Protocol.LevelInfo.attack)
-  return _internal_attack();
-}
-inline void LevelInfo::_internal_set_attack(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  
-  attack_ = value;
-}
-inline void LevelInfo::set_attack(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _internal_set_attack(value);
-  // @@protoc_insertion_point(field_set:Protocol.LevelInfo.attack)
-}
-
-// float dropexp = 5;
-inline void LevelInfo::clear_dropexp() {
-  dropexp_ = 0;
-}
-inline float LevelInfo::_internal_dropexp() const {
-  return dropexp_;
-}
-inline float LevelInfo::dropexp() const {
-  // @@protoc_insertion_point(field_get:Protocol.LevelInfo.dropexp)
-  return _internal_dropexp();
-}
-inline void LevelInfo::_internal_set_dropexp(float value) {
-  
-  dropexp_ = value;
-}
-inline void LevelInfo::set_dropexp(float value) {
-  _internal_set_dropexp(value);
-  // @@protoc_insertion_point(field_set:Protocol.LevelInfo.dropexp)
-}
-
-// float nextexp = 6;
-inline void LevelInfo::clear_nextexp() {
-  nextexp_ = 0;
-}
-inline float LevelInfo::_internal_nextexp() const {
-  return nextexp_;
-}
-inline float LevelInfo::nextexp() const {
-  // @@protoc_insertion_point(field_get:Protocol.LevelInfo.nextexp)
-  return _internal_nextexp();
-}
-inline void LevelInfo::_internal_set_nextexp(float value) {
-  
-  nextexp_ = value;
-}
-inline void LevelInfo::set_nextexp(float value) {
-  _internal_set_nextexp(value);
-  // @@protoc_insertion_point(field_set:Protocol.LevelInfo.nextexp)
+inline void StatInfo::set_totalexp(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_totalexp(value);
+  // @@protoc_insertion_point(field_set:Protocol.StatInfo.totalExp)
 }
 
 // -------------------------------------------------------------------
@@ -1478,8 +1225,6 @@ inline void SkillInfo::set_skillid(::PROTOBUF_NAMESPACE_ID::int32 value) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
-// -------------------------------------------------------------------
-
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

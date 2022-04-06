@@ -15,9 +15,14 @@ bool Handle_INVALID(PacketSessionRef& session, BYTE* buffer, int32 len)
 bool Handle_S_ENTERGAME(PacketSessionRef& session, Protocol::S_ENTERGAME& pkt)
 {
 	// 입장 UI 버튼 눌러서 게임 입장
-	Protocol::C_ENTERGAME enterGamePkt;
-	auto sendBuffer = ServerPacketHandler::MakeSendBuffer(enterGamePkt);
-	session->Send(sendBuffer);
+	// 여기다가 넣으면 서버에 무한 루프 걸림
+
+	cout << "level : " << pkt.player().level() << endl;
+	cout << "MaxHP : " << pkt.player().maxhp() << endl;
+	cout << "Attack : " << pkt.player().attack() << endl;
+	cout << "DropExp : " << pkt.player().dropexp() << endl;
+	cout << "NextExp : " << pkt.player().nextexp() << endl;
+
 	return true;
 }
 

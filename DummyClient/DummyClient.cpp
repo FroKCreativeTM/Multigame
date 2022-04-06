@@ -69,10 +69,11 @@ int main()
 
 	while (true)
 	{
-		Protocol::C_ENTERGAME chatPkt;
+		Protocol::C_MOVE chatPkt;
+
 		auto sendBuffer = ServerPacketHandler::MakeSendBuffer(chatPkt);
 		service->Broadcast(sendBuffer);
-		this_thread::sleep_for(10s);
+		this_thread::sleep_for(1s);
 	}
 
 	GThreadManager->Join();

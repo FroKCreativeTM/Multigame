@@ -13,6 +13,12 @@
     <Filter Include="GameContents">
       <UniqueIdentifier>{87ecb0c8-a463-4f2f-8da3-49a7bcdfb77a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameContents\Object">
+      <UniqueIdentifier>{a27bb17d-a1da-488a-afde-83629d04124f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameContents\Room">
+      <UniqueIdentifier>{18700357-848f-48d7-800c-69789336204d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameServer.cpp">
@@ -39,17 +45,20 @@
     <ClCompile Include="Enum.pb.cc">
       <Filter>Protocol</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>GameContents</Filter>
+    <ClCompile Include="GameRoom.cpp">
+      <Filter>GameContents\Room</Filter>
     </ClCompile>
-    <ClCompile Include="Room.cpp">
-      <Filter>GameContents</Filter>
+    <ClCompile Include="MapData.cpp">
+      <Filter>GameContents\Room</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomManager.cpp">
+      <Filter>GameContents\Room</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameContents\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="GameSessionManager.h">
       <Filter>Main</Filter>
     </ClInclude>
@@ -68,11 +77,20 @@
     <ClInclude Include="Enum.pb.h">
       <Filter>Protocol</Filter>
     </ClInclude>
-    <ClInclude Include="Room.h">
-      <Filter>GameContents</Filter>
+    <ClInclude Include="GameRoom.h">
+      <Filter>GameContents\Room</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>GameContents</Filter>
+    <ClInclude Include="MapData.h">
+      <Filter>GameContents\Room</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomManager.h">
+      <Filter>GameContents\Room</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameContents\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
