@@ -11,6 +11,8 @@ namespace FrokEngine
 		GameObject();
 
 	public : 
+
+	public : 
 		Protocol::PositionInfo GetPosInfo() { return _posInfo; }
 		void SetPosInfo(const Protocol::PositionInfo& posInfo) { _posInfo = posInfo; }
 
@@ -87,7 +89,7 @@ namespace FrokEngine
 	public : 
 		virtual void Update();
 
-	private : 
+	protected : 
 		Protocol::ObjectInfo			_objInfo;
 		Protocol::PositionInfo			_posInfo;
 		Protocol::StatInfo				_statInfo;

@@ -19,6 +19,9 @@
     <Filter Include="GameContents\Room">
       <UniqueIdentifier>{18700357-848f-48d7-800c-69789336204d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameContents\Data">
+      <UniqueIdentifier>{1d9d22f5-29a4-495a-8983-383c244d9da7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameServer.cpp">
@@ -57,6 +60,18 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>GameContents\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>GameContents\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>GameContents\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>GameContents\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>GameContents\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSessionManager.h">
@@ -91,6 +106,18 @@
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>GameContents\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>GameContents\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>GameContents\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>GameContents\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -38,14 +38,14 @@ namespace FrokEngine
 		static Vector2Int left() { return Vector2Int(-1, 0); }
 		static Vector2Int right() { return Vector2Int(1, 0); }
 
-		static Vector2Int operator+(Vector2Int a, Vector2Int b)
+		Vector2Int operator+(const Vector2Int& b)
 		{
-			return Vector2Int(a.x + b.x, a.y + b.y);
+			return Vector2Int(x + b.x, y + b.y);
 		}
 
-		static Vector2Int operator -(Vector2Int a, Vector2Int b)
+		Vector2Int operator-(Vector2Int b)
 		{
-			return Vector2Int(a.x - b.x, a.y - b.y);
+			return Vector2Int(x - b.x, y - b.y);
 		}
 
 		float magnitude() { return (float)sqrt(sqrMagnitude()); }

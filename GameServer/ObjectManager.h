@@ -6,6 +6,7 @@ namespace FrokEngine
 {
 	class ObjectManager
 	{
+	public : 
 		static ObjectManager* GetInst()
 		{
 			if (!_inst)
@@ -30,6 +31,45 @@ namespace FrokEngine
 			}
 
 			return gameObject;
+		}
+
+
+		int GenerateId(Protocol::GameObjectType type)
+		{
+			READ_LOCK;
+			return ((int)type << 24) | (_counter++);
+		}
+
+		static Protocol::GameObjectType GetObjectTypeById(int id)
+		{
+			int type = (id >> 24) & 0x7F;
+			return (Protocol::GameObjectType)type;
+		}
+
+		bool Remove(int objectId)
+		{
+			Protocol::GameObjectType objectType = GetObjectTypeById(objectId);
+
+			WRITE_LOCK;
+			if (objectType == Protocol::GameObjectType::PLAYER)
+				return _players.Remove(objectId);
+
+			return false;
+		}
+
+		Player* Find(int objectId)
+		{
+			Protocol::GameObjectType objectType = GetObjectTypeById(objectId);
+
+			READ_LOCK;
+			if (objectType == GameObjectType.Player)
+			{
+				Player* player = nullptr;
+				if (_players.TryGetValue(objectId, out player))
+					return player;
+			}
+
+			return nullptr;
 		}
 
 	private :
