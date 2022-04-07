@@ -22,10 +22,10 @@ namespace FrokEngine
 		void BroadcastMove();
 
 	protected:
-		Player* _target;
+		class Player*	_target;
 		int				_searchCellDist = 10;
 		int				_chaseCellDist = 20;
-		long			_nextSearchTick = 0;
+		uint64			_nextSearchTick = 0;
 		int				_skillRange = 1;
 		long			_nextMoveTick = 0;
 		long			_coolTick = 0;

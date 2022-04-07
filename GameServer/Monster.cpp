@@ -25,13 +25,13 @@ namespace FrokEngine
 		case Protocol::CreatureState::IDLE:
 			UpdateIdle();
 			break;
-		case Protocol::CreatureState::Moving:
+		case Protocol::CreatureState::MOVING:
 			UpdateMoving();
 			break;
-		case Protocol::CreatureState::Skill:
+		case Protocol::CreatureState::SKILL:
 			UpdateSkill();
 			break;
-		case Protocol::CreatureState::Dead:
+		case Protocol::CreatureState::DEAD:
 			UpdateDead();
 			break;
 		}
@@ -39,7 +39,7 @@ namespace FrokEngine
 
 	void Monster::UpdateIdle()
 	{
-		if (_nextSearchTick > Environment.TickCount64)
+		if (_nextSearchTick > GetTickCount64())
 			return;
 		_nextSearchTick = Environment.TickCount64 + 1000;
 

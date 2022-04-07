@@ -248,11 +248,15 @@ namespace FrokEngine
 
 	void GameRoom::Broadcast(SendBufferRef packet)
 	{
+		for(auto p : _players)
+		{
+			p.second->_session->Send(packet);
+		}
 	}
 
 	MapData* GameRoom::GetMapData() const
 	{
-		return nullptr;
+		return _map;
 	}
 
 }

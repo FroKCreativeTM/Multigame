@@ -9,6 +9,7 @@
 #include <windows.h>
 #include <iostream>
 #include <cmath>
+#include <list>
 using namespace std;
 
 #include <winsock2.h>
