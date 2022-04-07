@@ -119,6 +119,15 @@
     <ClInclude Include="ObjectManager.h">
       <Filter>GameContents\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Contents.h">
+      <Filter>GameContents\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="DataManager.h">
+      <Filter>GameContents\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigManager.h">
+      <Filter>GameContents\Data</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Common\Protobuf\bin\Enum.proto">

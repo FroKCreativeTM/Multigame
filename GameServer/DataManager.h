@@ -2,6 +2,7 @@
 
 #include "pch.h"
 #include "Contents.h"
+#include "ConfigManager.h"
 
 namespace FrokEngine
 {

@@ -211,6 +211,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConfigManager.h" />
+    <ClInclude Include="Contents.h" />
+    <ClInclude Include="DataManager.h" />
     <ClInclude Include="Enum.pb.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameRoom.h" />

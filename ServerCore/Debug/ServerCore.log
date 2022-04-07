@@ -1,36 +1,126 @@
-﻿  pch.cpp
-  Allocator.cpp
-C:\Users\user\Desktop\CPP_GameServer\Multigame\ServerCore\Allocator.cpp(29,54): warning C4244: '인수': 'FrokEngine::int64'에서 'SIZE_T'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  BufferReader.cpp
-  BufferWriter.cpp
-  CoreGlobal.cpp
-  CorePch.cpp
-  CoreTLS.cpp
-  DBConnector.cpp
-  DeadLockProfiler.cpp
-  GlobalQueue.cpp
-  IocpCore.cpp
-  IocpEvent.cpp
-  Job.cpp
-  JobTimer.cpp
-  LockQueue.cpp
-  JobQueue.cpp
-  Listener.cpp
-  Lock.cpp
-  Memory.cpp
-C:\Users\user\Desktop\CPP_GameServer\Multigame\ServerCore\Memory.cpp(18,43): warning C4316: 'FrokEngine::MemoryPool': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
-C:\Users\user\Desktop\CPP_GameServer\Multigame\ServerCore\Memory.cpp(30,43): warning C4316: 'FrokEngine::MemoryPool': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
-C:\Users\user\Desktop\CPP_GameServer\Multigame\ServerCore\Memory.cpp(42,43): warning C4316: 'FrokEngine::MemoryPool': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
-  MemoryPool.cpp
-  NetAddress.cpp
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(1098,5): warning MSB8027: 이름이 main.cpp인 둘 이상의 파일이 같은 위치에 출력을 생성합니다. 이로 인해 잘못된 빌드 결과가 나타날 수 있습니다.  관련된 파일은 ..\Libraries\Include\jsoncpp\src\jsontestrunner\main.cpp, ..\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp입니다.
+  json_writer.cpp
+  fuzz.cpp
+  main.cpp
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(168,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(169,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(170,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(171,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(172,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(173,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(174,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(175,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(176,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(177,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(178,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(179,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(180,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(181,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(182,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(189,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(190,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(287,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(288,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(455,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(488,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(489,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(490,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(517,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(518,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(590,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(618,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(650,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(674,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(702,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(730,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(757,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(785,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(813,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(841,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(867,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(893,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(918,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1003,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1029,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1055,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1082,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1106,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1132,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1158,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1182,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1208,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1232,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1255,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1277,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1304,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1332,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1358,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1389,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1418,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1489,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1516,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1517,1): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1519,1): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1524,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1525,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1526,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1527,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1531,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1532,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1533,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1537,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1538,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1539,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1540,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1544,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1545,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1546,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1547,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1548,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1548,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1549,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1550,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1551,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1555,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1556,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1557,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1573,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1574,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1575,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1576,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1577,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1578,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1579,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1580,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1581,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1582,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1598,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1599,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1600,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1601,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1602,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1603,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1604,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1605,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1606,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1618,5): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1619,5): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1620,5): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1621,5): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1622,5): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1623,5): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1624,5): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1630,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1631,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1632,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1633,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1634,3): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1635,1): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1637,1): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1652,5): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1653,5): warning C4838: 'long'에서 'unsigned int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(2354,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(3135,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
   코드를 생성하고 있습니다...
-  컴파일하고 있습니다...
-  RecvBuffer.cpp
-  RefCounting.cpp
-  SendBuffer.cpp
-  Service.cpp
-  Session.cpp
-  SocketUtils.cpp
-  ThreadManager.cpp
-  코드를 생성하고 있습니다...
+Debug\main.obj : warning LNK4042: 개체가 두 번 이상 지정되었습니다. 나머지는 무시됩니다.
   ServerCore.vcxproj -> C:\Users\user\Desktop\CPP_GameServer\Multigame\Libraries\Libs\ServerCore\Debug\ServerCore.lib

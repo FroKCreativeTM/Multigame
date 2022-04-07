@@ -19,8 +19,8 @@
 #include <iomanip>
 #include <iostream>
 #include <iterator>
-#include <json/config.h>
-#include <json/json.h>
+#include <jsoncpp/include/json/config.h>
+#include <jsoncpp/include/json/json.h>
 #include <limits>
 #include <memory>
 #include <sstream>
