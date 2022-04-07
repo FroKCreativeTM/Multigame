@@ -22,6 +22,9 @@
     <Filter Include="DB">
       <UniqueIdentifier>{65db1a31-dea6-431d-a074-76d9204fda46}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Json">
+      <UniqueIdentifier>{175a1dcb-e694-4268-8886-bfdccf3e8844}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CorePch.h">
@@ -123,6 +126,45 @@
     <ClInclude Include="DBConnector.h">
       <Filter>DB</Filter>
     </ClInclude>
+    <ClInclude Include="..\Libraries\Include\jsoncpp\include\json\allocator.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Libraries\Include\jsoncpp\include\json\assertions.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Libraries\Include\jsoncpp\include\json\config.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Libraries\Include\jsoncpp\include\json\forwards.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Libraries\Include\jsoncpp\include\json\json.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Libraries\Include\jsoncpp\include\json\json_features.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Libraries\Include\jsoncpp\include\json\reader.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Libraries\Include\jsoncpp\include\json\value.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Libraries\Include\jsoncpp\include\json\version.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Libraries\Include\jsoncpp\include\json\writer.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Libraries\Include\jsoncpp\src\lib_json\json_tool.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Libraries\Include\jsoncpp\src\test_lib_json\fuzz.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Libraries\Include\jsoncpp\src\test_lib_json\jsontest.h">
+      <Filter>Json</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CorePch.cpp">
@@ -209,5 +251,31 @@
     <ClCompile Include="DBConnector.cpp">
       <Filter>DB</Filter>
     </ClCompile>
+    <ClCompile Include="..\Libraries\Include\jsoncpp\src\jsontestrunner\main.cpp">
+      <Filter>Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Libraries\Include\jsoncpp\src\lib_json\json_reader.cpp">
+      <Filter>Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Libraries\Include\jsoncpp\src\lib_json\json_value.cpp">
+      <Filter>Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Libraries\Include\jsoncpp\src\lib_json\json_writer.cpp">
+      <Filter>Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Libraries\Include\jsoncpp\src\test_lib_json\fuzz.cpp">
+      <Filter>Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Libraries\Include\jsoncpp\src\test_lib_json\jsontest.cpp">
+      <Filter>Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp">
+      <Filter>Json</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Libraries\Include\jsoncpp\src\lib_json\json_valueiterator.inl">
+      <Filter>Json</Filter>
+    </None>
   </ItemGroup>
 </Project>

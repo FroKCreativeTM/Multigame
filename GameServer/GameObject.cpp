@@ -9,7 +9,8 @@
 
 namespace FrokEngine
 {
-	GameObject::GameObject() 
+	GameObject::GameObject() : 
+		_cellPos(Vector2Int(0,0))
 	{
 		auto posinfo = _objInfo.mutable_posinfo();
 		posinfo = &_posInfo;
@@ -59,7 +60,7 @@ namespace FrokEngine
 
 		// ¸¸µéÀÚ!
 		GameRoom* room = _room;
-		room->LeaveGame(_objInfo.objectid());
+		room->LeaveGame(session, _objInfo.objectid());
 
 		_statInfo.set_hp(_statInfo.maxhp());
 		_posInfo.set_state(Protocol::CreatureState::IDLE);
@@ -67,7 +68,7 @@ namespace FrokEngine
 		_posInfo.set_posx(0);
 		_posInfo.set_posy(0);
 
-		room->EnterGame(this);
+		room->EnterGame(session, this);
 	}
 
 	void GameObject::Update()

@@ -9,6 +9,7 @@
 #include <windows.h>
 #include <iostream>
 #include <cmath>
+#include <list>
 using namespace std;
 
 #include <winsock2.h>
@@ -36,3 +37,7 @@ using namespace std;
 #pragma comment(lib, "MySQL/Release/libssl.lib")
 #pragma comment(lib, "MySQL/Release/mysqlcppconn.lib")
 #endif
+
+// JsonCPP
+#include <jsoncpp/include/json/json.h>
+#include <fstream>

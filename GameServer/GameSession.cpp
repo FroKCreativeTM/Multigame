@@ -2,7 +2,7 @@
 #include "GameSession.h"
 #include "GameSessionManager.h"
 #include "ClientPacketHandler.h"
-#include "Room.h"
+#include "GameRoom.h"
 
 void GameSession::OnConnected()
 {
@@ -15,8 +15,8 @@ void GameSession::OnDisconnected()
 
 	if (_currentPlayer)
 	{
-		if (auto room = _room.lock())
-			room->DoAsync(&Room::Leave, _currentPlayer);
+		// if (auto room = _room.lock())
+			// room ->DoAsync(&Room::Leave, _currentPlayer);
 	}
 
 	_currentPlayer = nullptr;
