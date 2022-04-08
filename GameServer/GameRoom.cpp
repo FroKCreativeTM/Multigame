@@ -4,22 +4,24 @@
 #include "ClientPacketHandler.h"
 
 #include "MapData.h"
+#include "DataManager.h"
 
 #include "Player.h"
 #include "Monster.h"
 #include "ObjectManager.h"
 #include "Projectile.h"
+#include "Arrow.h"
 
 namespace FrokEngine
 {
-	void GameRoom::Init(PacketSessionRef& session, int mapId)
+	void GameRoom::Init(int mapId)
 	{
 		_map->LoadMap(mapId);
 
 		// TEMP
-		Monster monster = ObjectManager::GetInst()->Add<Monster>();
-		monster.SetCellPos(5, 5);
-		EnterGame(session, &monster);
+		MonsterRef monster = ObjectManager::GetInst()->Add<MonsterRef>();
+		monster->SetCellPos(5, 5);
+		EnterGame(static_pointer_cast<GameObject>(monster));
 	}
 
 	void GameRoom::Update()
@@ -34,10 +36,10 @@ namespace FrokEngine
 			projectile.second->Update();
 		}
 
-		// Flush(); // job
+		// Flush(); // job 이걸 어떻게 처리할까 고민중
 	}
 
-	void GameRoom::EnterGame(PacketSessionRef& session, GameObject* gameObject)
+	void GameRoom::EnterGame(GameObjectRef gameObject)
 	{
 		if (gameObject == nullptr)
 			return;
@@ -46,9 +48,10 @@ namespace FrokEngine
 
 		if (type == Protocol::GameObjectType::PLAYER)
 		{
-			Player* player = (Player*)gameObject;
+			PlayerRef player = static_pointer_cast<Player>(gameObject);
 			_players.insert(make_pair(gameObject->GetId(), player));
-			player->SetGameRoom(this);
+
+			player->SetGameRoom(GRoom);
 
 			_map->ApplyMove(player, Vector2Int(player->GetCellPos().x, player->GetCellPos().y));
 
@@ -80,17 +83,17 @@ namespace FrokEngine
 		}
 		else if (type == Protocol::GameObjectType::MONSTER)
 		{
-			Monster* monster = (Monster*)gameObject;
+			MonsterRef monster = static_pointer_cast<Monster>(gameObject);
 			_monsters.insert(make_pair(gameObject->GetId(), monster));
-			monster->SetGameRoom(this);
+			monster->SetGameRoom(GRoom);
 
 			_map->ApplyMove(monster, Vector2Int(monster->GetCellPos().x, monster->GetCellPos().y));
 		}
 		else if (type == Protocol::GameObjectType::PROJECTILE)
 		{
-			Projectile* projectile = (Projectile*)gameObject;
+			ProjectileRef projectile = static_pointer_cast<Projectile>(gameObject);
 			_projectiles.insert(make_pair(gameObject->GetId(), projectile));
-			projectile->SetGameRoom(this);
+			projectile->SetGameRoom(GRoom);
 		}
 
 		// 타인한테 정보 전송
@@ -108,14 +111,13 @@ namespace FrokEngine
 		}
 	}
 
-	void GameRoom::LeaveGame(PacketSessionRef& session, int32 id)
+	void GameRoom::LeaveGame(int32 id)
 	{
-
 		Protocol::GameObjectType type = ObjectManager::GetInst()->GetObjectTypeById(id);
 
 		if (type == Protocol::GameObjectType::PLAYER)
 		{
-			Player* player = nullptr;
+			PlayerRef player = nullptr;
 			if (_players.erase(id) == false)
 				return;
 
@@ -131,7 +133,7 @@ namespace FrokEngine
 		}
 		else if (type == Protocol::GameObjectType::MONSTER)
 		{
-			Monster* monster = nullptr;
+			MonsterRef monster = nullptr;
 			if (_monsters.erase(id) == false)
 				return;
 
@@ -162,7 +164,7 @@ namespace FrokEngine
 		}
 	}
 
-	void GameRoom::HandleMove(PacketSessionRef& session, Player* player, Protocol::C_MOVE movePacket)
+	void GameRoom::HandleMove(PlayerRef player, Protocol::C_MOVE movePacket)
 	{
 		if (player == nullptr)
 			return;
@@ -194,7 +196,7 @@ namespace FrokEngine
 		Broadcast(pkt);
 	}
 
-	void GameRoom::HandleSkill(PacketSessionRef& session, Player* player, Protocol::C_SKILL skillPacket)
+	void GameRoom::HandleSkill(PlayerRef player, Protocol::C_SKILL skillPacket)
 	{
 		if (player == nullptr)
 			return;
@@ -211,39 +213,47 @@ namespace FrokEngine
 		auto pkt = ClientPacketHandler::MakeSendBuffer(skill);
 		Broadcast(pkt);
 
-		// Data.Skill skillData = null;
-		// if (DataManager.SkillDict.TryGetValue(skillPacket.Info.SkillId, out skillData) == false)
-		// 	return;
+		shared_ptr<Data::Skill> skillData = nullptr;
+		if (DataManager::GetSkillMap().find(skillPacket.info().skillid()) == DataManager::GetSkillMap().end())
+			return;
+		else
+			skillData = DataManager::GetSkillMap()[skillPacket.info().skillid()];
 
-		// switch (skillData.skillType)
-		// {
-		// case SkillType.SkillAuto:
-		// {
-		// 	Vector2Int skillPos = player.GetFrontCellPos(info.PosInfo.MoveDir);
-		// 	GameObject target = Map.Find(skillPos);
-		// 	if (target != null)
-		// 	{
-		// 		Console.WriteLine("Hit GameObject !");
-		// 	}
-		// }
-		// break;
-		// case SkillType.SkillProjectile:
-		// {
-		// 	Arrow arrow = ObjectManager.Instance.Add<Arrow>();
-		// 	if (arrow == null)
-		// 		return;
-		// 
-		// 	arrow.Owner = player;
-		// 	arrow.Data = skillData;
-		// 	arrow.PosInfo.State = CreatureState.Moving;
-		// 	arrow.PosInfo.MoveDir = player.PosInfo.MoveDir;
-		// 	arrow.PosInfo.PosX = player.PosInfo.PosX;
-		// 	arrow.PosInfo.PosY = player.PosInfo.PosY;
-		// 	arrow.Speed = skillData.projectile.speed;
-		// 	Push(EnterGame, arrow);
-		// }
-		// break;
-		// }
+		switch (skillData->skillType)
+		{
+		case Protocol::SkillType::SKILL_AUTO :
+		{
+			Vector2Int skillPos = player->GetFrontCellPos(info.posinfo().movedir());
+			GameObjectRef target = _map->Find(skillPos);
+			if (target != nullptr)
+			{
+				cout << "Hit GameObject !" << endl;
+			}
+		}
+		break;
+		case Protocol::SkillType::SKILL_PROJECTILE:
+		{
+			ArrowRef arrow = ObjectManager::GetInst()->Add<ArrowRef>();
+			if (arrow == nullptr)
+				return;
+		
+			arrow->SetOwner(player);
+			arrow->_data = skillData;
+
+			Protocol::PositionInfo posInfo;
+			posInfo.set_state(Protocol::CreatureState::MOVING);
+			posInfo.set_posx(player->GetPosInfo().posx());
+			posInfo.set_posy(player->GetPosInfo().posy());
+			posInfo.set_movedir(player->GetPosInfo().movedir());
+			arrow->SetPosInfo(posInfo);
+
+			arrow->SetSpeed(skillData->projectile->speed);
+
+			// Job에 넣을 것
+			// Push(EnterGame, arrow);
+		}
+		break;
+		}
 	}
 
 	void GameRoom::Broadcast(SendBufferRef packet)
@@ -252,6 +262,11 @@ namespace FrokEngine
 		{
 			p.second->_session->Send(packet);
 		}
+	}
+
+	PlayerRef GameRoom::FindPlayer(function<int(GameObjectRef, bool b)>& func)
+	{
+		// return fun->;
 	}
 
 	MapData* GameRoom::GetMapData() const

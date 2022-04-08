@@ -219,36 +219,83 @@
   1개 파일이 복사되었습니다.
   계속하려면 아무 키나 누르십시오 . . . 
   pch.cpp
-  Enum.pb.cc
-  Protocol.pb.cc
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(1616,82): warning C4244: '인수': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(1997,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(2452,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(2890,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(2897,64): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(3273,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(3280,72): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Struct.pb.cc
-D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(297,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(591,66): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(598,66): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(832,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(839,64): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(846,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(853,68): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(1124,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(1131,64): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(1138,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(1145,68): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(1430,69): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  코드를 생성하고 있습니다...
-  ClientPacketHandler.cpp
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(47,32): warning C4244: '인수': 'int32_t'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(48,32): warning C4244: '인수': 'int32_t'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Arrow.cpp
+D:\GameProject\CPP_Project\Multigame\GameServer\Arrow.cpp(19,36): warning C4244: '=': 'ULONGLONG'에서 'long'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\xutility(149,56): error C2664: 'FrokEngine::GameObject::GameObject(const FrokEngine::GameObject &)': 인수 1을(를) '_Ty'에서 'const FrokEngine::GameObject &'(으)로 변환할 수 없습니다.
+          with
+          [
+              _Ty=FrokEngine::Arrow *
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\xutility(142,1): message : 원인: '_Ty'에서 'const FrokEngine::GameObject'(으)로 변환할 수 없습니다.
+          with
+          [
+              _Ty=FrokEngine::Arrow *
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\xutility(142,1): message : 소스 형식을 가져올 수 있는 생성자가 없거나 생성자 오버로드 확인이 모호합니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\GameObject.h(106,2): message : 'FrokEngine::GameObject::GameObject' 선언을 참조하십시오.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\memory(2006): message : 컴파일되는 함수 템플릿 인스턴스화 'void std::_Construct_in_place<_Ty,FrokEngine::Arrow*>(_Ty &,FrokEngine::Arrow *&&) noexcept(false)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=FrokEngine::GameObject
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\memory(2725): message : 컴파일되는 함수 템플릿 인스턴스화 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<FrokEngine::Arrow*>(FrokEngine::Arrow *&&)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=FrokEngine::GameObject
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\memory(2726): message : 컴파일되는 함수 템플릿 인스턴스화 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<FrokEngine::Arrow*>(FrokEngine::Arrow *&&)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=FrokEngine::GameObject
+          ]
+D:\GameProject\CPP_Project\Multigame\GameServer\Arrow.cpp(45): message : 컴파일되는 함수 템플릿 인스턴스화 'std::shared_ptr<FrokEngine::GameObject> std::make_shared<FrokEngine::GameObject,FrokEngine::Arrow*>(FrokEngine::Arrow *&&)'에 대한 참조를 확인하세요.
+  GameObject.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\xutility(149,56): error C2664: 'FrokEngine::GameObject::GameObject(const FrokEngine::GameObject &)': 인수 1을(를) '_Ty'에서 'const FrokEngine::GameObject &'(으)로 변환할 수 없습니다.
+          with
+          [
+              _Ty=FrokEngine::GameObject *
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\xutility(142,1): message : 원인: '_Ty'에서 'const FrokEngine::GameObject'(으)로 변환할 수 없습니다.
+          with
+          [
+              _Ty=FrokEngine::GameObject *
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\xutility(142,1): message : 소스 형식을 가져올 수 있는 생성자가 없거나 생성자 오버로드 확인이 모호합니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\GameObject.h(106,2): message : 'FrokEngine::GameObject::GameObject' 선언을 참조하십시오.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\memory(2006): message : 컴파일되는 함수 템플릿 인스턴스화 'void std::_Construct_in_place<_Ty,FrokEngine::GameObject*>(_Ty &,FrokEngine::GameObject *&&) noexcept(false)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=FrokEngine::GameObject
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\memory(2725): message : 컴파일되는 함수 템플릿 인스턴스화 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<FrokEngine::GameObject*>(FrokEngine::GameObject *&&)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=FrokEngine::GameObject
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\memory(2726): message : 컴파일되는 함수 템플릿 인스턴스화 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<FrokEngine::GameObject*>(FrokEngine::GameObject *&&)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=FrokEngine::GameObject
+          ]
+D:\GameProject\CPP_Project\Multigame\GameServer\GameObject.cpp(71): message : 컴파일되는 함수 템플릿 인스턴스화 'std::shared_ptr<FrokEngine::GameObject> std::make_shared<FrokEngine::GameObject,FrokEngine::GameObject*>(FrokEngine::GameObject *&&)'에 대한 참조를 확인하세요.
+  GameRoom.cpp
+D:\GameProject\CPP_Project\Multigame\GameServer\ObjectManager.h(34,15): error C2039: 'Add': 'std::map<int,FrokEngine::Player *,std::less<int>,std::allocator<std::pair<const int,FrokEngine::Player *>>>'의 멤버가 아닙니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\ObjectManager.h(83): message : 'std::map<int,FrokEngine::Player *,std::less<int>,std::allocator<std::pair<const int,FrokEngine::Player *>>>' 선언을 참조하십시오.
+D:\GameProject\CPP_Project\Multigame\GameServer\ObjectManager.h(23,5): message : 이 진단은 컴파일러 생성 함수 'T FrokEngine::ObjectManager::Add(void)'에서 수행되었습니다.
   GameServer.cpp
   GameSession.cpp
   GameSessionManager.cpp
+  MapData.cpp
+  Monster.cpp
+D:\GameProject\CPP_Project\Multigame\GameServer\Monster.cpp(53,27): error C2664: 'FrokEngine::PlayerRef FrokEngine::GameRoom::FindPlayer(std::function<int (FrokEngine::GameObjectRef,bool)> &)': 인수 1을(를) 'FrokEngine::Monster::UpdateIdle::<lambda_508ec2823fc267d51ac04e674509a4ad>'에서 'std::function<int (FrokEngine::GameObjectRef,bool)> &'(으)로 변환할 수 없습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\GameRoom.h(20,13): message : 'FrokEngine::GameRoom::FindPlayer' 선언을 참조하십시오.
+D:\GameProject\CPP_Project\Multigame\GameServer\Monster.cpp(70,36): warning C4244: '=': 'ULONGLONG'에서 'long'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Monster.cpp(167,33): warning C4244: '=': 'ULONGLONG'에서 'long'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Player.cpp
-  Room.cpp
+  Projectile.cpp
+  ClientPacketHandler.cpp
+  RoomManager.cpp
+D:\GameProject\CPP_Project\Multigame\GameServer\RoomManager.cpp(11,2): error C2280: 'FrokEngine::GameRoom::GameRoom(const FrokEngine::GameRoom &)': 삭제된 함수를 참조하려고 합니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\GameRoom.h(36): message : 컴파일러에서 여기에 'FrokEngine::GameRoom::GameRoom'을(를) 생성했습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\GameRoom.h(36,2): message : 'FrokEngine::GameRoom::GameRoom(const FrokEngine::GameRoom &)': 기본 클래스이(가) 삭제되거나 액세스할 수 없는 'FrokEngine::JobQueue::JobQueue(const FrokEngine::JobQueue &)' 함수를 호출하므로 함수가 암시적으로 삭제되었습니다.
   코드를 생성하고 있습니다...
-  GameServer.vcxproj -> D:\GameProject\CPP_Project\Multigame\Binary\Debug\GameServer.exe

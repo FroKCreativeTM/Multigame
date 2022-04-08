@@ -7,12 +7,16 @@ namespace FrokEngine
 {
 	class GameObject
 	{
-	public : 
+	public :
 		GameObject();
+		~GameObject();
 
 	public : 
 
 	public : 
+		Protocol::StatInfo GetStat() { return _statInfo; }
+		void SetStat(const Protocol::StatInfo& stat) { _statInfo = stat; }
+
 		Protocol::PositionInfo GetPosInfo() { return _posInfo; }
 		void SetPosInfo(const Protocol::PositionInfo& posInfo) { _posInfo = posInfo; }
 
@@ -25,8 +29,8 @@ namespace FrokEngine
 		void SetId(int id) { _objInfo.set_objectid(id); }
 		int32 GetId() const { return _objInfo.objectid(); }
 		
-		class GameRoom* GetGameRoom() const;
-		void SetGameRoom(class GameRoom* room);
+		shared_ptr<class GameRoom> GetGameRoom() const;
+		void SetGameRoom(shared_ptr<class GameRoom> room);
 
 		float GetSpeed() const { return _speed; }
 		void SetSpeed(float speed) { _speed = speed; }
@@ -83,8 +87,8 @@ namespace FrokEngine
 				return Protocol::MoveDir::DOWN;
 		}
 
-		virtual void OnDamaged(PacketSessionRef& session, class GameObject* attacker, int damage);
-		virtual void OnDead(PacketSessionRef& session, class GameObject* attacker);
+		virtual void OnDamaged(GameObjectRef attacker, int damage);
+		virtual void OnDead(GameObjectRef attacker);
 
 	public : 
 		virtual void Update();
@@ -94,7 +98,7 @@ namespace FrokEngine
 		Protocol::PositionInfo			_posInfo;
 		Protocol::StatInfo				_statInfo;
 		Protocol::GameObjectType		_objectType;
-		class GameRoom*					_room;
+		shared_ptr<GameRoom>			_room;
 		float							_speed;
 		int32							_hp;
 		Protocol::MoveDir				_dir;

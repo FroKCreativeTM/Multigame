@@ -59,7 +59,7 @@ namespace FrokEngine
 		}
 	};
 
-	class MapData
+	class MapData : enable_shared_from_this<MapData>
 	{
 	public : 
 		int MinX;
@@ -71,15 +71,39 @@ namespace FrokEngine
 		int GetSizeY() const { return MaxY - MinY + 1; }
 
 		bool CanGo(Vector2Int cellPos, bool checkObjects = true);
-		class GameObject* Find(Vector2Int cellPos);
-		bool ApplyLeave(GameObject* gameObject);
-		bool ApplyMove(GameObject* gameObject, Vector2Int dest);
+		GameObjectRef Find(Vector2Int cellPos);
+		bool ApplyLeave(GameObjectRef gameObject);
+		bool ApplyMove(GameObjectRef gameObject, Vector2Int dest);
 		void LoadMap(int mapId, string pathPrefix = "../../../../../Common/MapData");
 
 		// A 스타 만들꺼임
+		list<Vector2Int> FindPath(Vector2Int startCellPos, Vector2Int destCellPos, bool checkObjects = true)
+		{
+			list<Pos> path;
+
+			// 점수 매기기
+			// F = G + H
+			// F = 최종 점수 (작을 수록 좋으며, 경로에 따라 달라진다.)
+			// G = 시작점에서 해당 좌표까지 이동하는데 드는 비용(이것도 작을수록 좋음)
+			// H = 목적지에서 얼마나 가까운지 (암튼 작을 수록 좋고, 고정된 값이다.)
+
+			bool** closed = new bool*[GetSizeY()];
+			for (int y = 0; y < GetSizeY(); ++y)
+			{
+				closed[y] = new bool[GetSizeX()];
+			}
+
+
+
+		}
+
+	private : 
+		const int _deltaY[4] = { 1, -1, 0, 0 };
+		const int _deltaX[4] = { 0, 0, -1, 1 };
+		const int _cost[4] = { 10, 10, 10, 10 };
 
 	private : 
 		bool** _collision;
-		class GameObject*** _objects;
+		GameObjectRef** _objects;
 	};
 }

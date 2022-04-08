@@ -2,6 +2,10 @@
 
 #include "CorePch.h"
 
+#include "Enum.pb.h"
+#include "Struct.pb.h"
+#include "Protocol.pb.h"
+
 namespace FrokEngine
 {
 	class ObjectManager
@@ -14,6 +18,7 @@ namespace FrokEngine
 			return _inst;
 		}
 
+		// 이거 고쳐야됨
 		template <typename T>
 		T Add()
 		{
@@ -24,9 +29,9 @@ namespace FrokEngine
 			{
 				gameObject.set_id(GenerateId(gameObject.ObjectType));
 
-				if (gameObject.ObjectType == GameObjectType.Player)
+				if (gameObject->GetGameObjectType() == Protocol::GameObjectType::PLAYER)
 				{
-					_players.Add(gameObject.Id, gameObject as Player);
+					_players.Add(gameObject->GetId(), (Player*)gameObject);
 				}
 			}
 
@@ -52,7 +57,7 @@ namespace FrokEngine
 
 			WRITE_LOCK;
 			if (objectType == Protocol::GameObjectType::PLAYER)
-				return _players.Remove(objectId);
+				return _players.erase(objectId);
 
 			return false;
 		}
@@ -62,11 +67,10 @@ namespace FrokEngine
 			Protocol::GameObjectType objectType = GetObjectTypeById(objectId);
 
 			READ_LOCK;
-			if (objectType == GameObjectType.Player)
+			if (objectType == Protocol::GameObjectType::PLAYER)
 			{
-				Player* player = nullptr;
-				if (_players.TryGetValue(objectId, out player))
-					return player;
+				if (_players.find(objectId) != _players.end())
+					return _players.find(objectId)->second;
 			}
 
 			return nullptr;
@@ -76,7 +80,7 @@ namespace FrokEngine
 		USE_LOCK;	// 락 쓸꺼임
 		static ObjectManager* _inst;
 		int _counter = 0;
-		map<int, class Player> _players;
+		map<int, class Player*> _players;
 	};
 }
 

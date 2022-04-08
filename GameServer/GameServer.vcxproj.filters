@@ -69,7 +69,7 @@
     <ClCompile Include="Projectile.cpp">
       <Filter>GameContents\Object</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectManager.cpp">
+    <ClCompile Include="Arrow.cpp">
       <Filter>GameContents\Object</Filter>
     </ClCompile>
   </ItemGroup>
@@ -127,6 +127,9 @@
     </ClInclude>
     <ClInclude Include="ConfigManager.h">
       <Filter>GameContents\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Arrow.h">
+      <Filter>GameContents\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

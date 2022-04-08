@@ -9,7 +9,7 @@
 #include <tchar.h>
 #include "Protocol.pb.h"
 #include "Job.h"
-#include "Room.h"
+#include "GameRoom.h"
 #include "Player.h"
 
 enum

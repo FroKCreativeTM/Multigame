@@ -10,6 +10,7 @@
 #include <iostream>
 #include <cmath>
 #include <list>
+#include <functional>
 using namespace std;
 
 #include <winsock2.h>

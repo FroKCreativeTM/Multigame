@@ -1,19 +1,23 @@
 #pragma once
 
-class GameSession;
-
-using GameSessionRef = shared_ptr<GameSession>;
-
-class GameSessionManager
+namespace FrokEngine
 {
-public:
-	void Add(GameSessionRef session);
-	void Remove(GameSessionRef session);
-	void Broadcast(SendBufferRef sendBuffer);
+	class GameSession;
 
-private:
-	USE_LOCK;
-	Set<GameSessionRef> _sessions;
-};
+	using GameSessionRef = shared_ptr<GameSession>;
 
-extern GameSessionManager GSessionManager;
+	class GameSessionManager
+	{
+	public:
+		void Add(GameSessionRef session);
+		void Remove(GameSessionRef session);
+		void Broadcast(SendBufferRef sendBuffer);
+
+	private:
+		USE_LOCK;
+		Set<GameSessionRef> _sessions;
+	};
+
+	extern GameSessionManager GSessionManager;
+
+}

@@ -16,14 +16,8 @@ namespace FrokEngine
 			_objectType = Protocol::GameObjectType::PLAYER;
 		}
 
-		void OnDamaged(PacketSessionRef& session, GameObject* attacker, int damage) override
-		{
-			GameObject::OnDamaged(_session, attacker, damage);
-		}
-		void OnDead(PacketSessionRef& session, GameObject* attacker) override
-		{
-			GameObject::OnDead(_session, attacker);
-		}
+		void OnDamaged(GameObjectRef attacker, int damage) override;
+		void OnDead(GameObjectRef attacker) override;
 	};
 }
 

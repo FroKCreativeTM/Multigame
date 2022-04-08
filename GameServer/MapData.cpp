@@ -21,7 +21,7 @@ namespace FrokEngine
 		return !_collision[y][x] && (!checkObjects || _objects[y][x] == nullptr);
 	}
 
-	GameObject* MapData::Find(Vector2Int cellPos)
+	GameObjectRef MapData::Find(Vector2Int cellPos)
 	{
 		if (cellPos.x < MinX || cellPos.x > MaxX)
 			return nullptr;
@@ -33,7 +33,7 @@ namespace FrokEngine
 		return _objects[y][x];
 	}
 
-	bool MapData::ApplyLeave(GameObject* gameObject)
+	bool MapData::ApplyLeave(GameObjectRef gameObject)
 	{
 		if (gameObject->GetGameRoom() == nullptr)
 			return false;
@@ -56,7 +56,7 @@ namespace FrokEngine
 		return true;
 	}
 
-	bool MapData::ApplyMove(GameObject* gameObject, Vector2Int dest)
+	bool MapData::ApplyMove(GameObjectRef gameObject, Vector2Int dest)
 	{
 		ApplyLeave(gameObject);
 

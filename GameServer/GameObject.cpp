@@ -18,17 +18,21 @@ namespace FrokEngine
 		statInfo = &_statInfo;
 	}
 
-	GameRoom* GameObject::GetGameRoom() const
+	GameObject::~GameObject()
 	{
-		return nullptr;
 	}
 
-	void GameObject::SetGameRoom(GameRoom* room)
+	shared_ptr<GameRoom> GameObject::GetGameRoom() const
 	{
-
+		return _room;
 	}
 
-	void GameObject::OnDamaged(PacketSessionRef& session, GameObject* attacker, int damage)
+	void GameObject::SetGameRoom(shared_ptr<GameRoom> room)
+	{
+		_room = room;
+	}
+
+	void GameObject::OnDamaged(GameObjectRef attacker, int damage)
 	{
 		if (_room == nullptr)
 			return;
@@ -39,15 +43,15 @@ namespace FrokEngine
 		changePacket.set_objectid(_objInfo.objectid());
 		changePacket.set_hp(_statInfo.hp());
 		auto sendBuffer = ClientPacketHandler::MakeSendBuffer(changePacket);
-		session->Send(sendBuffer);
+		_room->Broadcast(sendBuffer);
 
 		if (_statInfo.hp() <= 0)
 		{
-			OnDead(session, attacker);
+			OnDead(attacker);
 		}
 	}
 
-	void GameObject::OnDead(PacketSessionRef& session, GameObject* attacker)
+	void GameObject::OnDead(GameObjectRef attacker)
 	{
 		if (_room == nullptr)
 			return;
@@ -56,11 +60,11 @@ namespace FrokEngine
 		diePacket.set_objectid(_objInfo.objectid());
 		diePacket.set_attackerid(attacker->GetObjectInfo().objectid());
 		auto sendBuffer = ClientPacketHandler::MakeSendBuffer(diePacket);
-		session->Send(sendBuffer);
+		_room->Broadcast(sendBuffer);
 
 		// ¸¸µéÀÚ!
-		GameRoom* room = _room;
-		room->LeaveGame(session, _objInfo.objectid());
+		shared_ptr<GameRoom> room = _room;
+		room->LeaveGame(_objInfo.objectid());
 
 		_statInfo.set_hp(_statInfo.maxhp());
 		_posInfo.set_state(Protocol::CreatureState::IDLE);
@@ -68,7 +72,7 @@ namespace FrokEngine
 		_posInfo.set_posx(0);
 		_posInfo.set_posy(0);
 
-		room->EnterGame(session, this);
+		room->EnterGame(make_shared<GameObject>(this));
 	}
 
 	void GameObject::Update()

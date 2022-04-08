@@ -4,6 +4,7 @@
 namespace FrokEngine
 {
 	using CallbackType = std::function<void()>;
+	using CallbackType2 = std::function<void(int)>;
 
 	/*---------
 		Job
@@ -12,6 +13,10 @@ namespace FrokEngine
 	{
 	public:
 		Job(CallbackType&& callback) : _callback(std::move(callback))
+		{
+		}
+
+		Job(CallbackType2&& callback) : _callback2(std::move(callback))
 		{
 		}
 
@@ -31,6 +36,7 @@ namespace FrokEngine
 
 	private:
 		CallbackType _callback;
+		CallbackType2 _callback2;
 	};
 }
 

@@ -11,20 +11,16 @@ namespace FrokEngine
 	public:
 		static void LoadData()
 		{
-			_statDict = LoadJson<int, Protocol::StatInfo>("StatData").MakeDict();
-			_skillDict = LoadJson<int, Data::Skill>("SkillData").MakeDict();
+			_statMap = Data::StatData::MakeDict(ConfigManager::GetServerConfig().dataPath + "\\StatData.json");
+			_skillMap = Data::SkillData::MakeDict(ConfigManager::GetServerConfig().dataPath + "\\SkillData.json");
 		}
 
-		template <typename Key, typename Value>
-		static map<Key, Value> LoadJson(string path)
-		{
-			string text = File.ReadAllText($"{ConfigManager.Config.dataPath}/{path}.json");
-			return Newtonsoft.Json.JsonConvert.DeserializeObject<Loader>(text);
-		}
+		static map<int32, shared_ptr<Protocol::StatInfo>> GetStatMap() { return _statMap; }
+		static map<int32, shared_ptr<Data::Skill>> GetSkillMap() { return _skillMap; }
 
 	private : 
-		static map<int32, Protocol::StatInfo> _statDict;
-		static map<int32, Data::Skill> _skillDict;
+		static map<int32, shared_ptr<Protocol::StatInfo>> _statMap;
+		static map<int32, shared_ptr<Data::Skill>> _skillMap;
 	};
 }
 

@@ -30,7 +30,7 @@ namespace FrokEngine
 			_config.dataPath = root["dataPath"].asString();
 		}
 
-		ServerConfig GetServerConfig() const { return _config; }
+		static ServerConfig GetServerConfig() { return _config; }
 	private:
 		static ServerConfig _config;
 	};

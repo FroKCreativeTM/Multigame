@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "DataManager.h"
 
 namespace FrokEngine
 {
@@ -7,7 +8,7 @@ namespace FrokEngine
 		public GameObject
 	{
 	public:
-		Data::Skill Data;
+		shared_ptr<Data::Skill> _data;
 
 		Projectile()
 		{

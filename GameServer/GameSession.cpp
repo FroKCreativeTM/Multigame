@@ -4,34 +4,37 @@
 #include "ClientPacketHandler.h"
 #include "GameRoom.h"
 
-void GameSession::OnConnected()
+namespace FrokEngine
 {
-	GSessionManager.Add(static_pointer_cast<GameSession>(shared_from_this()));
-}
-
-void GameSession::OnDisconnected()
-{
-	GSessionManager.Remove(static_pointer_cast<GameSession>(shared_from_this()));
-
-	if (_currentPlayer)
+	void GameSession::OnConnected()
 	{
-		// if (auto room = _room.lock())
-			// room ->DoAsync(&Room::Leave, _currentPlayer);
+		GSessionManager.Add(static_pointer_cast<GameSession>(shared_from_this()));
 	}
 
-	_currentPlayer = nullptr;
-	_players.clear();
-}
+	void GameSession::OnDisconnected()
+	{
+		GSessionManager.Remove(static_pointer_cast<GameSession>(shared_from_this()));
 
-void GameSession::OnRecvPacket(BYTE* buffer, int32 len)
-{
-	PacketSessionRef session = GetPacketSessionRef();
-	PacketHeader* header = reinterpret_cast<PacketHeader*>(buffer);
+		if (_currentPlayer)
+		{
+			// if (auto room = _room.lock())
+				// room ->DoAsync(&Room::Leave, _currentPlayer);
+		}
 
-	// TODO : packetId 措开 眉农
-	ClientPacketHandler::HandlePacket(session, buffer, len);
-}
+		_currentPlayer = nullptr;
+		_players.clear();
+	}
 
-void GameSession::OnSend(int32 len)
-{
+	void GameSession::OnRecvPacket(BYTE* buffer, int32 len)
+	{
+		PacketSessionRef session = GetPacketSessionRef();
+		PacketHeader* header = reinterpret_cast<PacketHeader*>(buffer);
+
+		// TODO : packetId 措开 眉农
+		ClientPacketHandler::HandlePacket(session, buffer, len);
+	}
+
+	void GameSession::OnSend(int32 len)
+	{
+	}
 }
