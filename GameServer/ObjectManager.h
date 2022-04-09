@@ -31,7 +31,7 @@ namespace FrokEngine
 
 				if (gameObject->GetGameObjectType() == Protocol::GameObjectType::PLAYER)
 				{
-					_players.Add(gameObject->GetId(), (Player*)gameObject);
+					_players.insert(gameObject->GetId(), static_pointer_cast<Player>(gameObject));
 				}
 			}
 
@@ -80,7 +80,7 @@ namespace FrokEngine
 		USE_LOCK;	// ∂Ù æµ≤®¿”
 		static ObjectManager* _inst;
 		int _counter = 0;
-		map<int, class Player*> _players;
+		map<int, PlayerRef> _players;
 	};
 }
 

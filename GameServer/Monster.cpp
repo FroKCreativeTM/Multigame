@@ -50,10 +50,11 @@ namespace FrokEngine
 		_nextSearchTick = GetTickCount64() + 1000;
 
 		// 이 망할 람다를 어떻게 넘길 것인가
-		PlayerRef target = _room->FindPlayer([=](Player* p, bool b) mutable -> int {
-			Vector2Int dir = p->GetCellPos() - GetCellPos();
+		function<bool(GameObjectRef)> ref = [=](GameObjectRef p) {
+			Vector2Int dir = static_pointer_cast<Player>(p)->GetCellPos() - GetCellPos();
 			return dir.cellDistFromZero() <= _searchCellDist;
-		});
+		};
+		PlayerRef target = _room->FindPlayer(ref);
 
 		if (target == nullptr)
 			return;
@@ -110,8 +111,7 @@ namespace FrokEngine
 		// 이동
 		_dir = GetDirFromVec(*iter - _cellPos);
 
-		auto tmp = make_shared<Monster>(this);
-		_room->GetMapData()->ApplyMove(static_pointer_cast<GameObject>(tmp), *iter);
+		_room->GetMapData()->ApplyMove((MonsterRef)this, *iter);
 		BroadcastMove();
 	}
 
@@ -150,8 +150,7 @@ namespace FrokEngine
 			auto skillData = DataManager::GetSkillMap().find(1);
 
 			// 데미지 판정
-			auto tmp = make_shared<Monster>(this);
-			_target->OnDamaged(static_pointer_cast<GameObject>(tmp), skillData->second->damage + _statInfo.attack());
+			_target->OnDamaged((GameObjectRef)this, skillData->second->damage + _statInfo.attack());
 
 			// 스킬 사용 Broadcast
 			Protocol::S_SKILL skill;

@@ -6,11 +6,11 @@ namespace FrokEngine
 	shared_ptr<GameRoom> RoomManager::Add(int mapId)
 	{
 		shared_ptr<GameRoom> gameRoom = make_shared<GameRoom>();
-		gameRoom->Push(gameRoom->Init, true);
+		// gameRoom->Push(gameRoom->Init, true);
 
 		WRITE_LOCK;
 		gameRoom->SetRoomId(_roomId);
-		_rooms.insert(gameRoom->GetRoomId(), gameRoom);
+		_rooms[gameRoom->GetRoomId()] = gameRoom;
 		_roomId++;
 
 		return gameRoom;

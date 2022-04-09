@@ -72,7 +72,7 @@ namespace FrokEngine
 		_posInfo.set_posx(0);
 		_posInfo.set_posy(0);
 
-		room->EnterGame(make_shared<GameObject>(this));
+		room->EnterGame((GameObjectRef)this);
 	}
 
 	void GameObject::Update()

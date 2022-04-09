@@ -43,7 +43,7 @@ namespace FrokEngine
 			return Vector2Int(x + b.x, y + b.y);
 		}
 
-		Vector2Int operator-(Vector2Int b)
+		Vector2Int operator-(const Vector2Int& b)
 		{
 			return Vector2Int(x - b.x, y - b.y);
 		}
@@ -56,6 +56,8 @@ namespace FrokEngine
 		{
 			x += pos.x;
 			y += pos.y;
+
+			return *this;
 		}
 	};
 
@@ -93,8 +95,7 @@ namespace FrokEngine
 				closed[y] = new bool[GetSizeX()];
 			}
 
-
-
+			
 		}
 
 	private : 

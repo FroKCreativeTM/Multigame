@@ -42,8 +42,7 @@ namespace FrokEngine
 			if (target != nullptr)
 			{
 				//Stat.Attack
-				auto tmp = make_shared<GameObject>(this);
-				target->OnDamaged(tmp, _data->damage + _owner->GetStat().attack());
+				target->OnDamaged((GameObjectRef)this, _data->damage + _owner->GetStat().attack());
 			}
 
 			// ¼Ò¸ê

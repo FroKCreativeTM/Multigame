@@ -17,7 +17,7 @@ namespace FrokEngine
 		void HandleSkill(PlayerRef player, Protocol::C_SKILL skillPacket);
 		void Broadcast(SendBufferRef packet); // 게임 세션 매니저의 Broadcast를 이용하자
 
-		PlayerRef FindPlayer(function<int(GameObjectRef, bool b)>& func);
+		PlayerRef FindPlayer(function<bool(GameObjectRef)>& func);
 
 		class MapData* GetMapData() const;
 

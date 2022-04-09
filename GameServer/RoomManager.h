@@ -7,11 +7,11 @@ namespace FrokEngine
 	class RoomManager
 	{
 	public:
-		static RoomManager* GetInst()
+		static shared_ptr<RoomManager> GetInst()
 		{
 			if (!_inst)
 			{
-				_inst = new RoomManager();
+				_inst = make_shared<RoomManager>();
 			}
 			return _inst;
 		}
@@ -21,7 +21,7 @@ namespace FrokEngine
 		shared_ptr<GameRoom> Find(int roomId);
 	private:
 		USE_LOCK;
-		static RoomManager* _inst;
+		static shared_ptr<RoomManager> _inst;
 		std::map<int, shared_ptr<GameRoom>> _rooms;
 		int _roomId = 1;
 	};

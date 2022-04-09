@@ -250,7 +250,7 @@ namespace FrokEngine
 			arrow->SetSpeed(skillData->projectile->speed);
 
 			// Job에 넣을 것
-			// Push(EnterGame, arrow);
+			DoAsync(EnterGame, arrow);
 		}
 		break;
 		}
@@ -264,9 +264,17 @@ namespace FrokEngine
 		}
 	}
 
-	PlayerRef GameRoom::FindPlayer(function<int(GameObjectRef, bool b)>& func)
+	PlayerRef GameRoom::FindPlayer(function<bool(GameObjectRef)>& func)
 	{
-		// return fun->;
+		for (auto player : _players)
+		{
+			PlayerRef p = player.second;
+			if (func(p))
+			{
+				return p;
+			}
+		}
+		return nullptr;
 	}
 
 	MapData* GameRoom::GetMapData() const
