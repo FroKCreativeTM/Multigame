@@ -38,11 +38,11 @@ namespace FrokEngine
 		}
 		else
 		{
-			GameObjectRef target = _room->GetMapData()->Find(destPos);
+			GameObjectPtr target = _room->GetMapData()->Find(destPos);
 			if (target != nullptr)
 			{
 				//Stat.Attack
-				target->OnDamaged((GameObjectRef)this, _data->damage + _owner->GetStat().attack());
+				target->OnDamaged((GameObjectPtr)this, _data->damage + _owner->GetStat().attack());
 			}
 
 			// ¼Ò¸ê

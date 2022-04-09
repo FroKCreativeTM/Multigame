@@ -87,8 +87,8 @@ namespace FrokEngine
 				return Protocol::MoveDir::DOWN;
 		}
 
-		virtual void OnDamaged(GameObjectRef attacker, int damage);
-		virtual void OnDead(GameObjectRef attacker);
+		virtual void OnDamaged(GameObjectPtr attacker, int damage);
+		virtual void OnDead(GameObjectPtr attacker);
 
 	public : 
 		virtual void Update();

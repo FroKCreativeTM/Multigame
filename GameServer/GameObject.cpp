@@ -32,7 +32,7 @@ namespace FrokEngine
 		_room = room;
 	}
 
-	void GameObject::OnDamaged(GameObjectRef attacker, int damage)
+	void GameObject::OnDamaged(GameObjectPtr attacker, int damage)
 	{
 		if (_room == nullptr)
 			return;
@@ -51,7 +51,7 @@ namespace FrokEngine
 		}
 	}
 
-	void GameObject::OnDead(GameObjectRef attacker)
+	void GameObject::OnDead(GameObjectPtr attacker)
 	{
 		if (_room == nullptr)
 			return;
@@ -72,7 +72,7 @@ namespace FrokEngine
 		_posInfo.set_posx(0);
 		_posInfo.set_posy(0);
 
-		room->EnterGame((GameObjectRef)this);
+		room->EnterGame((GameObjectPtr)this);
 	}
 
 	void GameObject::Update()

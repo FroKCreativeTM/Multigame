@@ -11,6 +11,7 @@
 #include <cmath>
 #include <list>
 #include <functional>
+#include <queue>
 using namespace std;
 
 #include <winsock2.h>

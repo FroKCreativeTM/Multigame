@@ -22,20 +22,20 @@ namespace FrokEngine
 		template <typename T>
 		T Add()
 		{
-			T gameObject = new T();
+			GameObjectPtr gameObject = new GameObject();
 
 			// 락 걸고
 			WRITE_LOCK;
 			{
-				gameObject.set_id(GenerateId(gameObject.ObjectType));
+				gameObject->SetId(GenerateId(gameObject->GetGameObjectType()));
 
 				if (gameObject->GetGameObjectType() == Protocol::GameObjectType::PLAYER)
 				{
-					_players.insert(gameObject->GetId(), static_pointer_cast<Player>(gameObject));
+					_players[gameObject->GetId()] = dynamic_cast<PlayerPtr>(gameObject);
 				}
 			}
 
-			return gameObject;
+			return dynamic_cast<T>(gameObject);
 		}
 
 
@@ -62,7 +62,7 @@ namespace FrokEngine
 			return false;
 		}
 
-		Player* Find(int objectId)
+		PlayerPtr Find(int objectId)
 		{
 			Protocol::GameObjectType objectType = GetObjectTypeById(objectId);
 
@@ -80,7 +80,7 @@ namespace FrokEngine
 		USE_LOCK;	// 락 쓸꺼임
 		static ObjectManager* _inst;
 		int _counter = 0;
-		map<int, PlayerRef> _players;
+		map<int, PlayerPtr> _players;
 	};
 }
 

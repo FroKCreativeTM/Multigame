@@ -19,9 +19,9 @@ using namespace FrokEngine;
 namespace FrokEngine
 {
 	using GameSessionRef = shared_ptr<class GameSession>;
-	using GameObjectRef = shared_ptr<class GameObject>;
-	using ProjectileRef = shared_ptr<class Projectile>;
-	using PlayerRef = shared_ptr<class Player>;
-	using MonsterRef = shared_ptr<class Monster>;
-	using ArrowRef = shared_ptr<class Arrow>;
+	using GameObjectPtr = class GameObject*;
+	using ProjectilePtr = class Projectile*;
+	using PlayerPtr = class Player*;
+	using MonsterPtr = class Monster*;
+	using ArrowPtr = class Arrow*;
 }

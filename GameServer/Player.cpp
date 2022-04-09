@@ -3,12 +3,12 @@
 
 namespace FrokEngine
 {
-	void Player::OnDamaged(GameObjectRef attacker, int damage)
+	void Player::OnDamaged(GameObjectPtr attacker, int damage)
 	{
 		GameObject::OnDamaged(attacker, damage);
 	}
 
-	void Player::OnDead(GameObjectRef attacker)
+	void Player::OnDead(GameObjectPtr attacker)
 	{
 		GameObject::OnDead(attacker);
 	}

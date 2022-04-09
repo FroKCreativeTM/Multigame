@@ -17,9 +17,9 @@ namespace FrokEngine
 		virtual void OnSend(int32 len) override;
 
 	public:
-		Vector<PlayerRef> _players;
+		Vector<PlayerPtr> _players;
 
-		PlayerRef _currentPlayer;
+		PlayerPtr _currentPlayer;
 		weak_ptr<class Room> _room;
 	};
 }
