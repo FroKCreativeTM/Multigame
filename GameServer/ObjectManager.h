@@ -20,24 +20,21 @@ namespace FrokEngine
 
 		// 이거 고쳐야됨
 		template <typename T>
-		T Add()
+		T* Add()
 		{
-			GameObjectPtr gameObject = new GameObject();
+			GameObjectPtr gameObject = new T;
 
 			// 락 걸고
 			WRITE_LOCK;
-			{
-				gameObject->SetId(GenerateId(gameObject->GetGameObjectType()));
+			gameObject->SetId(GenerateId(gameObject->GetGameObjectType()));
 
-				if (gameObject->GetGameObjectType() == Protocol::GameObjectType::PLAYER)
-				{
-					_players[gameObject->GetId()] = dynamic_cast<PlayerPtr>(gameObject);
-				}
+			if (gameObject->GetGameObjectType() == Protocol::GameObjectType::PLAYER)
+			{
+				_players[gameObject->GetId()] = dynamic_cast<PlayerPtr>(gameObject);
 			}
 
-			return dynamic_cast<T>(gameObject);
+			return dynamic_cast<T*>(gameObject);
 		}
-
 
 		int GenerateId(Protocol::GameObjectType type)
 		{

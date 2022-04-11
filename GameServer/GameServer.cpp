@@ -9,8 +9,12 @@
 #include <tchar.h>
 #include "Protocol.pb.h"
 #include "Job.h"
+#include "RoomManager.h"
 #include "GameRoom.h"
 #include "Player.h"
+
+#include "ConfigManager.h"
+#include "DataManager.h"
 
 enum
 {
@@ -34,9 +38,26 @@ void DoWorkerJob(ServerServiceRef& service)
 	}
 }
 
+uint64 lastTick = 0;
+
+void TickRoom(GameRoom* room, int tick = 100)
+{
+	if (lastTick == 0) lastTick = GetTickCount64();
+
+	if (lastTick - GetTickCount64() >= tick)
+	{
+		room->Update();
+		lastTick = GetTickCount64();
+	}
+}
+
 int main()
 {
 	ClientPacketHandler::Init();
+	ConfigManager::GetInst()->LoadConfig();
+	DataManager::GetInst()->LoadData();
+
+	GRoom = RoomManager::GetInst()->Add(1);
 
 	ServerServiceRef service = MakeShared<ServerService>(
 		NetAddress(L"127.0.0.1", 7777),

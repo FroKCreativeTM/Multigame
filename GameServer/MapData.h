@@ -74,7 +74,7 @@ namespace FrokEngine
 		}
 	};
 
-	class MapData : enable_shared_from_this<MapData>
+	class MapData
 	{
 	public : 
 		int MinX;
@@ -89,7 +89,7 @@ namespace FrokEngine
 		GameObjectPtr Find(Vector2Int cellPos);
 		bool ApplyLeave(GameObjectPtr gameObject);
 		bool ApplyMove(GameObjectPtr gameObject, Vector2Int dest);
-		void LoadMap(int mapId, string pathPrefix = "../../../../../Common/MapData");
+		void LoadMap(int mapId, string pathPrefix = "../../Common/MapData/");
 
 		// A 스타 만들꺼임
 		list<Vector2Int> FindPath(Vector2Int startCellPos, Vector2Int destCellPos, bool checkObjects = true)

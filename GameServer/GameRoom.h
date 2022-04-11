@@ -1,8 +1,6 @@
 #pragma once
 
-#include "Protocol.pb.h"
-#include "Enum.pb.h"
-#include "Struct.pb.h"
+#include "MapData.h"
 
 namespace FrokEngine
 {
@@ -19,7 +17,7 @@ namespace FrokEngine
 
 		PlayerPtr FindPlayer(function<bool(GameObjectPtr)>& func);
 
-		class MapData* GetMapData() const;
+		MapData* GetMapData() const;
 
 	public : 
 		void SetRoomId(int32 id) { _roomId = id; }
@@ -28,12 +26,12 @@ namespace FrokEngine
 	private:
 		int32 _roomId;
 
-		class MapData* _map;
+		MapData* _map = new MapData();
 
 		std::map<int32, PlayerPtr> _players;
 		std::map<int32, MonsterPtr> _monsters;
 		std::map<int32, ProjectilePtr> _projectiles;
 	};
-}
 
-// extern shared_ptr<GameRoom> GRoom;
+	extern shared_ptr<GameRoom> GRoom;
+}

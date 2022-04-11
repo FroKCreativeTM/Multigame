@@ -8,7 +8,6 @@ namespace FrokEngine
 	{
 	public:
 		void Update() override;
-
 		void SetOwner(GameObjectPtr gameObject) { _owner = gameObject; }
 
 	private:

@@ -8,19 +8,39 @@ namespace FrokEngine
 {
 	class DataManager
 	{
-	public:
-		static void LoadData()
+	public : 
+		static DataManager* GetInst()
 		{
-			_statMap = Data::StatData::MakeDict(ConfigManager::GetServerConfig().dataPath + "\\StatData.json");
-			_skillMap = Data::SkillData::MakeDict(ConfigManager::GetServerConfig().dataPath + "\\SkillData.json");
+			if (!_inst)
+			{
+				_inst = new DataManager();
+			}
+			return _inst;
 		}
 
-		static map<int32, shared_ptr<Protocol::StatInfo>> GetStatMap() { return _statMap; }
-		static map<int32, shared_ptr<Data::Skill>> GetSkillMap() { return _skillMap; }
+		~DataManager()
+		{
+			if (_inst)
+			{
+				delete _inst;
+			}
+			_inst = nullptr;
+		}
+
+	public:
+		void LoadData()
+		{
+			_statMap = StatData::GetInst()->MakeDict(ConfigManager::GetInst()->GetServerConfig().dataPath + "\\StatData.json");
+			_skillMap = SkillData::GetInst()->MakeDict(ConfigManager::GetInst()->GetServerConfig().dataPath + "\\SkillData.json");
+		}
+
+		map<int32, Protocol::StatInfo*> GetStatMap() { return _statMap; }
+		map<int32, Skill*> GetSkillMap() { return _skillMap; }
 
 	private : 
-		static map<int32, shared_ptr<Protocol::StatInfo>> _statMap;
-		static map<int32, shared_ptr<Data::Skill>> _skillMap;
+		static DataManager* _inst;
+		map<int32, Protocol::StatInfo*> _statMap;
+		map<int32, Skill*> _skillMap;
 	};
 }
 

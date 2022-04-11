@@ -1,21 +1,21 @@
 #include "pch.h"
 #include "Arrow.h"
-
 #include "ClientPacketHandler.h"
-
 #include "GameRoom.h"
+
+#include "DataManager.h"
 
 namespace FrokEngine
 {
 	void Arrow::Update()
 	{
-		if (_data == nullptr || _data->projectile == nullptr || _owner == nullptr || _room == nullptr)
+		if (GetData() == nullptr || GetData()->projectile.name == "" || _owner == nullptr || _room == nullptr)
 			return;
 
 		if (_nextMoveTick >= GetTickCount64())
 			return;
 
-		uint64 tick = (uint64)(1000 / _data->projectile->speed);
+		uint64 tick = (uint64)(1000 / GetData()->projectile.speed);
 		_nextMoveTick = GetTickCount64() + tick;
 
 		Vector2Int destPos = GetFrontCellPos();
@@ -42,11 +42,11 @@ namespace FrokEngine
 			if (target != nullptr)
 			{
 				//Stat.Attack
-				target->OnDamaged((GameObjectPtr)this, _data->damage + _owner->GetStat().attack());
+				target->OnDamaged((GameObjectPtr)this, GetData()->damage + _owner->GetStat().attack());
 			}
 
 			// ¼Ò¸ê
-			// GRoom->DoAsync(_room->LeaveGame, Id);
+			_room->DoAsync(&GameRoom::LeaveGame, GetId());
 		}
 	}
 

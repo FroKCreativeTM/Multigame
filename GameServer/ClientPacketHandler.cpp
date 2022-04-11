@@ -19,50 +19,6 @@ bool Handle_C_ENTERGAME(PacketSessionRef& session, Protocol::C_ENTERGAME& pkt)
 {
 	GameSessionRef gameSession = static_pointer_cast<GameSession>(session);
 
-	// TODO : Validation 체크
-
-	// 참고용
-	//Protocol::S_ENTERGAME loginPkt;
-	//loginPkt.set_success(true);
-
-	//// DB에서 플레이 정보를 긁어온다
-	//// GameSession에 플레이 정보를 저장 (메모리)
-
-	//// ID 발급 (DB 아이디가 아니고, 인게임 아이디)
-	//static Atomic<uint64> idGenerator = 1;
-
-	//auto stmt = GDBConnector->GetStatement();
-	//string query = "SELECT * FROM playerleveltable p WHERE p.level = 1";
-
-	//auto ret = stmt->executeQuery(query.c_str());
-
-	//Protocol::LevelInfo level;
-
-	//while (ret->next())
-	//{
-	//	level.set_level(ret->getInt("Level"));
-	//	level.set_maxhp(ret->getInt("MaxHP"));
-	//	level.set_attack(ret->getInt("Attack"));
-	//	level.set_dropexp(ret->getInt("DropExp"));
-	//	level.set_nextexp(ret->getInt("NextExp"));
-	//}
-
-	//auto player = loginPkt.mutable_player();
-	//player->set_level(level.level());
-	//player->set_maxhp(level.maxhp());
-	//player->set_attack(level.attack());
-	//player->set_dropexp(level.dropexp());
-	//player->set_nextexp(level.nextexp());
-
-	//PlayerRef playerRef = MakeShared<Player>();
-	//playerRef->playerId = idGenerator++;
-	//playerRef->levelinfo = level;
-	//playerRef->ownerSession = gameSession;
-
-	//gameSession->_players.push_back(playerRef);
-
-	//auto sendBuffer = ClientPacketHandler::MakeSendBuffer(loginPkt);
-	//session->Send(sendBuffer);
 
 	return true;
 }
@@ -84,53 +40,48 @@ bool Handle_C_DESPAWN(PacketSessionRef& session, Protocol::C_DESPAWN& pkt)
 
 bool Handle_C_MOVE(PacketSessionRef& session, Protocol::C_MOVE& pkt)
 {
+	//	C_Move movePacket = packet as C_Move;
+	//	ClientSession clientSession = session as ClientSession;
+	//
+	//	//Console.WriteLine($"C_Move ({movePacket.PosInfo.PosX}, {movePacket.PosInfo.PosY})");
+	//
+	//	Player player = clientSession.MyPlayer;
+	//	if (player == null)
+	//		return;
+	//
+	//	GameRoom room = player.Room;
+	//	if (room == null)
+	//		return;
+	//
+	//	room.Push(room.HandleMove, player, movePacket);
+
 	return true;
 }
 
 bool Handle_C_SKILL(PacketSessionRef& session, Protocol::C_SKILL& pkt)
 {
-	return false;
+//	C_Skill skillPacket = packet as C_Skill;
+//	ClientSession clientSession = session as ClientSession;
+//
+//	Player player = clientSession.MyPlayer;
+//	if (player == null)
+//		return;
+//
+//	GameRoom room = player.Room;
+//	if (room == null)
+//		return;
+//
+//	room.Push(room.HandleSkill, player, skillPacket);
+
+	return true;
 }
 
 bool Handle_C_CHANGEHP(PacketSessionRef& session, Protocol::C_CHANGEHP& pkt)
 {
-	return false;
+	return true;
 }
 
 bool Handle_C_DIE(PacketSessionRef& session, Protocol::C_DIE& pkt)
 {
-	return false;
+	return true;
 }
-//
-//bool Handle_C_ENTER_GAME(PacketSessionRef& session, Protocol::C_ENTER_GAME& pkt)
-//{
-//	GameSessionRef gameSession = static_pointer_cast<GameSession>(session);
-//
-//	uint64 index = pkt.playerindex();
-//	// TODO : Validation
-//
-//	gameSession->_currentPlayer = gameSession->_players[index]; // READ_ONLY?
-//	gameSession->_room = GRoom;
-//
-//	GRoom->DoAsync(&Room::Enter, gameSession->_currentPlayer);
-//
-//	Protocol::S_ENTERGAME enterGamePkt;
-//	enterGamePkt.set_success(true);
-//	auto sendBuffer = ClientPacketHandler::MakeSendBuffer(enterGamePkt);
-//	gameSession->_currentPlayer->ownerSession->Send(sendBuffer);
-//
-//	return true;
-//}
-//
-//bool Handle_C_CHAT(PacketSessionRef& session, Protocol::C_CHAT& pkt)
-//{
-//	std::cout << pkt.msg() << endl;
-//
-//	Protocol::S_CHAT chatPkt;
-//	chatPkt.set_msg(pkt.msg());
-//	auto sendBuffer = ClientPacketHandler::MakeSendBuffer(chatPkt);
-//
-//	GRoom->DoAsync(&Room::Broadcast, sendBuffer);
-//
-//	return true;
-//}

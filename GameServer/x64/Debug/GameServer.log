@@ -222,11 +222,11 @@
   Arrow.cpp
 D:\GameProject\CPP_Project\Multigame\GameServer\Arrow.cpp(19,36): warning C4244: '=': 'ULONGLONG'에서 'long'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   ClientPacketHandler.cpp
+  ConfigManager.cpp
+  Contents.cpp
+  DataManager.cpp
   GameObject.cpp
   GameRoom.cpp
-D:\GameProject\CPP_Project\Multigame\GameServer\GameRoom.cpp(54,24): error C2065: 'GRoom': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\GameRoom.cpp(88,25): error C2065: 'GRoom': 선언되지 않은 식별자입니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\GameRoom.cpp(96,28): error C2065: 'GRoom': 선언되지 않은 식별자입니다.
   GameServer.cpp
   GameSession.cpp
   GameSessionManager.cpp
@@ -234,7 +234,29 @@ D:\GameProject\CPP_Project\Multigame\GameServer\GameRoom.cpp(96,28): error C2065
   Monster.cpp
 D:\GameProject\CPP_Project\Multigame\GameServer\Monster.cpp(71,36): warning C4244: '=': 'ULONGLONG'에서 'long'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\GameProject\CPP_Project\Multigame\GameServer\Monster.cpp(166,33): warning C4244: '=': 'ULONGLONG'에서 'long'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  ObjectManager.cpp
   Player.cpp
   Projectile.cpp
   RoomManager.cpp
   코드를 생성하고 있습니다...
+  Enum.pb.cc
+  Protocol.pb.cc
+D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(1491,82): warning C4244: '인수': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(1872,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(2327,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(2765,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(2772,64): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(3148,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(3155,72): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Struct.pb.cc
+D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(271,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(573,66): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(580,66): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(830,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(837,64): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(844,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(851,68): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(865,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(1138,69): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+  GameServer.vcxproj -> D:\GameProject\CPP_Project\Multigame\Binary\Debug\GameServer.exe

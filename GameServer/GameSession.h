@@ -20,6 +20,6 @@ namespace FrokEngine
 		Vector<PlayerPtr> _players;
 
 		PlayerPtr _currentPlayer;
-		weak_ptr<class Room> _room;
+		weak_ptr<class GameRoom> _room;
 	};
 }

@@ -14,12 +14,13 @@
 
 namespace FrokEngine
 {
+	shared_ptr<GameRoom> GRoom = make_shared<GameRoom>();
 	void GameRoom::Init(int mapId)
 	{
 		_map->LoadMap(mapId);
 
 		// TEMP
-		MonsterPtr monster = ObjectManager::GetInst()->Add<MonsterPtr>();
+		MonsterPtr monster = ObjectManager::GetInst()->Add<Monster>();
 		monster->SetCellPos(5, 5);
 		EnterGame(dynamic_cast<GameObjectPtr>(monster));
 	}
@@ -213,11 +214,11 @@ namespace FrokEngine
 		auto pkt = ClientPacketHandler::MakeSendBuffer(skill);
 		Broadcast(pkt);
 
-		shared_ptr<Data::Skill> skillData = nullptr;
-		if (DataManager::GetSkillMap().find(skillPacket.info().skillid()) == DataManager::GetSkillMap().end())
+		Skill* skillData = nullptr;
+		if (DataManager::GetInst()->GetSkillMap().find(skillPacket.info().skillid()) == DataManager::GetInst()->GetSkillMap().end())
 			return;
 		else
-			skillData = DataManager::GetSkillMap()[skillPacket.info().skillid()];
+			skillData = DataManager::GetInst()->GetSkillMap()[skillPacket.info().skillid()];
 
 		switch (skillData->skillType)
 		{
@@ -233,12 +234,12 @@ namespace FrokEngine
 		break;
 		case Protocol::SkillType::SKILL_PROJECTILE:
 		{
-			ArrowPtr arrow = ObjectManager::GetInst()->Add<ArrowPtr>();
+			ArrowPtr arrow = ObjectManager::GetInst()->Add<Arrow>();
 			if (arrow == nullptr)
 				return;
 		
 			arrow->SetOwner(player);
-			arrow->_data = skillData;
+			arrow->SetSkill(skillData);
 
 			Protocol::PositionInfo posInfo;
 			posInfo.set_state(Protocol::CreatureState::MOVING);
@@ -247,10 +248,10 @@ namespace FrokEngine
 			posInfo.set_movedir(player->GetPosInfo().movedir());
 			arrow->SetPosInfo(posInfo);
 
-			arrow->SetSpeed(skillData->projectile->speed);
+			arrow->SetSpeed(skillData->projectile.speed);
 
 			// Job에 넣을 것
-			// DoAsync(EnterGame, arrow);
+			DoAsync(&GameRoom::EnterGame, dynamic_cast<GameObjectPtr>(arrow));
 		}
 		break;
 		}

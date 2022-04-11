@@ -3,11 +3,41 @@
 #include "GameSessionManager.h"
 #include "ClientPacketHandler.h"
 #include "GameRoom.h"
+#include "ObjectManager.h"
+#include "Player.h"
+#include "DataManager.h"
+#include "RoomManager.h"
 
 namespace FrokEngine
 {
 	void GameSession::OnConnected()
 	{
+		cout << "OnConnected : {endPoint}" << endl;
+
+		_currentPlayer = ObjectManager::GetInst()->Add<Player>();
+		Protocol::ObjectInfo objInfo;
+		objInfo.set_name(u8"Player_" + to_string(_currentPlayer->GetObjectInfo().objectid()));
+		auto curObjInfo = _currentPlayer->GetObjectInfo();
+		auto posInfo = curObjInfo.mutable_posinfo();
+		posInfo->set_state(Protocol::CreatureState::IDLE);
+		posInfo->set_movedir(Protocol::MoveDir::DOWN);
+		posInfo->set_posx(0);
+		posInfo->set_posx(0);
+
+		Protocol::StatInfo stat;
+		auto statdata = DataManager::GetInst()->GetStatMap();
+		if (statdata.find(1) != statdata.end())
+			stat = *statdata[1];
+		_currentPlayer->SetStat(stat);
+
+		_currentPlayer->_session = dynamic_cast<PacketSession*>(this);
+
+		if (_currentPlayer)
+		{
+			if (auto room = _room.lock())
+				room->DoAsync(&GameRoom::EnterGame, dynamic_cast<GameObjectPtr>(_currentPlayer));
+		}
+
 		GSessionManager.Add(static_pointer_cast<GameSession>(shared_from_this()));
 	}
 
@@ -17,8 +47,8 @@ namespace FrokEngine
 
 		if (_currentPlayer)
 		{
-			// if (auto room = _room.lock())
-				// room ->DoAsync(&Room::Leave, _currentPlayer);
+			if (auto room = _room.lock())
+				room ->DoAsync(&GameRoom::LeaveGame, _currentPlayer->GetId());
 		}
 
 		_currentPlayer = nullptr;

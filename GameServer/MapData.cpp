@@ -83,33 +83,50 @@ namespace FrokEngine
 
 	void MapData::LoadMap(int mapId, string pathPrefix)
 	{
+		auto new_str = std::string(3 - min(3, to_string(mapId).length()), '0') + to_string(mapId);
+		string mapName = "Map_" + new_str + ".txt";
+		string fullName = pathPrefix + mapName;
 
-		string mapName = "Map_" + to_string(mapId);
-
-		// text 파일 readline 보니까 fstream으로 바꾸면 될 듯
-		// https://www.delftstack.com/ko/howto/cpp/how-to-read-a-file-line-by-line-cpp/
-		// Collision 관련 파일
-		/*string text = File.ReadAllText($"{pathPrefix}/{mapName}.txt");
-		StringReader reader = new StringReader(text);
-
-		MinX = int.Parse(reader.ReadLine());
-		MaxX = int.Parse(reader.ReadLine());
-		MinY = int.Parse(reader.ReadLine());
-		MaxY = int.Parse(reader.ReadLine());
-
-		int xCount = MaxX - MinX + 1;
-		int yCount = MaxY - MinY + 1;
-		_collision = new bool[yCount][xCount];
-		_objects = new GameObject[yCount][xCount];
-
-		for (int y = 0; y < yCount; y++)
+		ifstream ifs(fullName);
+		if (ifs)
 		{
-			string line = reader.ReadLine();
-			for (int x = 0; x < xCount; x++)
+			string tmp;
+			std::getline(ifs, tmp);
+			MinX = stoi(tmp);
+			std::getline(ifs, tmp);
+			MaxX = stoi(tmp);
+			std::getline(ifs, tmp);
+			MinY = stoi(tmp);
+			std::getline(ifs, tmp);
+			MaxY = stoi(tmp);
+
+			int xCount = MaxX - MinX + 1;
+			int yCount = MaxY - MinY + 1;
+			_collision = new bool* [yCount];
+
+			for (size_t y = 0; y < yCount; y++)
 			{
-				_collision[y, x] = (line[x] == '1' ? true : false);
+				_collision[y] = new bool[xCount];
 			}
-		}*/
+
+			_objects = new GameObject * *[yCount];
+
+			for (size_t y = 0; y < yCount; y++)
+			{
+				_objects[y] = new GameObject * [xCount];
+			}
+
+			for (int y = 0; y < yCount; y++)
+			{
+				string line;
+				std::getline(ifs, line);
+
+				for (int x = 0; x < xCount; x++)
+				{
+					_collision[y][x] = (line[x] == '1' ? true : false);
+				}
+			}
+		}
 	}
 
 }

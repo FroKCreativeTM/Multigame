@@ -1,14 +1,16 @@
 #pragma once
 #include "GameObject.h"
-#include "DataManager.h"
 
 namespace FrokEngine
 {
+	class Skill;
+
 	class Projectile :
 		public GameObject
 	{
 	public:
-		shared_ptr<Data::Skill> _data;
+		Skill* GetData();
+		void SetSkill(const Skill* skill);
 
 		Projectile()
 		{
@@ -18,6 +20,9 @@ namespace FrokEngine
 		virtual void Update()
 		{
 		}
+
+	private : 
+		Skill* _data;
 	};
 }
 

@@ -218,31 +218,16 @@
   D:ServerPacketHandler.h
   1개 파일이 복사되었습니다.
   계속하려면 아무 키나 누르십시오 . . . 
-  DummyClient.cpp
   ServerPacketHandler.cpp
+D:\GameProject\CPP_Project\Multigame\DummyClient\ServerPacketHandler.cpp(20,37): error C2039: 'level': 'Protocol::ObjectInfo'의 멤버가 아닙니다.
+D:\GameProject\CPP_Project\Multigame\DummyClient\Struct.pb.h(81): message : 'Protocol::ObjectInfo' 선언을 참조하십시오.
+D:\GameProject\CPP_Project\Multigame\DummyClient\ServerPacketHandler.cpp(21,37): error C2039: 'maxhp': 'Protocol::ObjectInfo'의 멤버가 아닙니다.
+D:\GameProject\CPP_Project\Multigame\DummyClient\Struct.pb.h(81): message : 'Protocol::ObjectInfo' 선언을 참조하십시오.
+D:\GameProject\CPP_Project\Multigame\DummyClient\ServerPacketHandler.cpp(22,38): error C2039: 'attack': 'Protocol::ObjectInfo'의 멤버가 아닙니다.
+D:\GameProject\CPP_Project\Multigame\DummyClient\Struct.pb.h(81): message : 'Protocol::ObjectInfo' 선언을 참조하십시오.
+D:\GameProject\CPP_Project\Multigame\DummyClient\ServerPacketHandler.cpp(23,39): error C2039: 'dropexp': 'Protocol::ObjectInfo'의 멤버가 아닙니다.
+D:\GameProject\CPP_Project\Multigame\DummyClient\Struct.pb.h(81): message : 'Protocol::ObjectInfo' 선언을 참조하십시오.
+D:\GameProject\CPP_Project\Multigame\DummyClient\ServerPacketHandler.cpp(24,39): error C2039: 'nextexp': 'Protocol::ObjectInfo'의 멤버가 아닙니다.
+D:\GameProject\CPP_Project\Multigame\DummyClient\Struct.pb.h(81): message : 'Protocol::ObjectInfo' 선언을 참조하십시오.
+  DummyClient.cpp
   코드를 생성하고 있습니다...
-  Enum.pb.cc
-  Protocol.pb.cc
-D:\GameProject\CPP_Project\Multigame\DummyClient\Protocol.pb.cc(1616,82): warning C4244: '인수': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Protocol.pb.cc(1997,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Protocol.pb.cc(2452,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Protocol.pb.cc(2890,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Protocol.pb.cc(2897,64): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Protocol.pb.cc(3273,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Protocol.pb.cc(3280,72): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Struct.pb.cc
-D:\GameProject\CPP_Project\Multigame\DummyClient\Struct.pb.cc(297,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Struct.pb.cc(591,66): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Struct.pb.cc(598,66): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Struct.pb.cc(832,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Struct.pb.cc(839,64): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Struct.pb.cc(846,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Struct.pb.cc(853,68): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Struct.pb.cc(1124,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Struct.pb.cc(1131,64): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Struct.pb.cc(1138,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Struct.pb.cc(1145,68): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\DummyClient\Struct.pb.cc(1430,69): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  코드를 생성하고 있습니다...
-LINK : warning LNK4098: 'MSVCRT' defaultlib가 다른 라이브러리와 충돌합니다. /NODEFAULTLIB:library를 사용하십시오.
-  DummyClient.vcxproj -> D:\GameProject\CPP_Project\Multigame\Binary\Debug\DummyClient.exe

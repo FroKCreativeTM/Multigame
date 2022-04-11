@@ -8,10 +8,9 @@ namespace FrokEngine
 		public GameObject
 	{
 	public :
-		PacketSessionRef& _session;
+		PacketSession* _session = nullptr;
 
-		Player(PacketSessionRef& session) : 
-			_session(session)
+		Player() 
 		{
 			_objectType = Protocol::GameObjectType::PLAYER;
 		}

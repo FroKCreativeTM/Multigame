@@ -1,6 +1,6 @@
 #pragma once
 
-#include "pch.h"
+#include "CorePch.h"
 
 namespace FrokEngine
 {
@@ -12,8 +12,27 @@ namespace FrokEngine
 
 	class ConfigManager
 	{
+	public : 
+		static ConfigManager* GetInst()
+		{
+			if (!_inst)
+			{
+				_inst = new ConfigManager;
+			}
+			return _inst;
+		}
+
+		~ConfigManager()
+		{
+			if (_inst)
+			{
+				delete _inst;
+			}
+			_inst = nullptr;
+		}
+
 	public:
-		static void LoadConfig()
+		void LoadConfig()
 		{
 			std::ifstream fin;
 			fin.open("config.json", std::ios::in);
@@ -28,10 +47,13 @@ namespace FrokEngine
 			}
 
 			_config.dataPath = root["dataPath"].asString();
+
+			fin.close();
 		}
 
-		static ServerConfig GetServerConfig() { return _config; }
+		ServerConfig GetServerConfig() { return _config; }
 	private:
-		static ServerConfig _config;
+		static ConfigManager* _inst;
+		ServerConfig _config;
 	};
 }

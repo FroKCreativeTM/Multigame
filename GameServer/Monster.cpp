@@ -147,7 +147,7 @@ namespace FrokEngine
 				BroadcastMove();
 			}
 
-			auto skillData = DataManager::GetSkillMap().find(1);
+			auto skillData = DataManager::GetInst()->GetSkillMap().find(1);
 
 			// 데미지 판정
 			_target->OnDamaged((GameObjectPtr)this, skillData->second->damage + _statInfo.attack());
