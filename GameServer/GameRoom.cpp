@@ -50,7 +50,7 @@ namespace FrokEngine
 		if (type == Protocol::GameObjectType::PLAYER)
 		{
 			PlayerPtr player = dynamic_cast<PlayerPtr>(gameObject);
-			_players.insert(make_pair(gameObject->GetId(), player));
+			_players[gameObject->GetId()] = player;
 
 			player->SetGameRoom(GRoom);
 
@@ -85,7 +85,7 @@ namespace FrokEngine
 		else if (type == Protocol::GameObjectType::MONSTER)
 		{
 			MonsterPtr monster = dynamic_cast<MonsterPtr>(gameObject);
-			_monsters.insert(make_pair(gameObject->GetId(), monster));
+			_monsters[gameObject->GetId()] = monster;
 			monster->SetGameRoom(GRoom);
 
 			_map->ApplyMove(monster, Vector2Int(monster->GetCellPos().x, monster->GetCellPos().y));
@@ -93,7 +93,7 @@ namespace FrokEngine
 		else if (type == Protocol::GameObjectType::PROJECTILE)
 		{
 			ProjectilePtr projectile = dynamic_cast<Projectile*>(gameObject);
-			_projectiles.insert(make_pair(gameObject->GetId(), projectile));
+			_projectiles[gameObject->GetId()] = projectile;
 			projectile->SetGameRoom(GRoom);
 		}
 

@@ -98,7 +98,7 @@ namespace FrokEngine
 
 			map<int, Skill*> m;
 			for (auto skill : _skills)
-				m.insert(make_pair(skill->id, skill));
+				m[skill->id] = skill;
 			return m;
 		}
 
@@ -161,7 +161,7 @@ namespace FrokEngine
 			for (auto stat : _stats)
 			{
 				stat->set_hp(stat->maxhp());
-				m.insert(make_pair(stat->level(), stat));
+				m[stat->level()] = stat;
 			}
 			return m;
 		}
