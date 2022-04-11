@@ -35,9 +35,9 @@ namespace FrokEngine
 
 	bool MapData::ApplyLeave(GameObjectPtr gameObject)
 	{
-		if (gameObject->GetGameRoom() == nullptr)
+		if (gameObject->Room == nullptr)
 			return false;
-		if (gameObject->GetGameRoom()->GetMapData() != this)
+		if (gameObject->Room->GetMapData() != this)
 			return false;
 
 		Protocol::PositionInfo posInfo = gameObject->GetPosInfo();
@@ -60,9 +60,9 @@ namespace FrokEngine
 	{
 		ApplyLeave(gameObject);
 
-		if (gameObject->GetGameRoom() == nullptr)
+		if (gameObject->Room == nullptr)
 			return false;
-		if (gameObject->GetGameRoom()->GetMapData() != this)
+		if (gameObject->Room->GetMapData() != this)
 			return false;
 
 		Protocol::PositionInfo posInfo = gameObject->GetPosInfo();

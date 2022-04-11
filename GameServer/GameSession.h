@@ -1,5 +1,6 @@
 #pragma once
 #include "Session.h"
+#include "Player.h"
 
 namespace FrokEngine
 {
@@ -17,6 +18,7 @@ namespace FrokEngine
 		virtual void OnSend(int32 len) override;
 
 		// void Send(google::protobuf::Message& packet);
+		PlayerPtr GetPlayer() { return _currentPlayer; }
 
 	public:
 		Vector<PlayerPtr> _players;

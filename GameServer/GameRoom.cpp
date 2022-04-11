@@ -52,7 +52,7 @@ namespace FrokEngine
 			PlayerPtr player = dynamic_cast<PlayerPtr>(gameObject);
 			_players[gameObject->GetId()] = player;
 
-			player->SetGameRoom(GRoom);
+			player->Room = this;
 
 			_map->ApplyMove(player, Vector2Int(player->GetCellPos().x, player->GetCellPos().y));
 
@@ -86,7 +86,7 @@ namespace FrokEngine
 		{
 			MonsterPtr monster = dynamic_cast<MonsterPtr>(gameObject);
 			_monsters[gameObject->GetId()] = monster;
-			monster->SetGameRoom(GRoom);
+			monster->Room = this;
 
 			_map->ApplyMove(monster, Vector2Int(monster->GetCellPos().x, monster->GetCellPos().y));
 		}
@@ -94,7 +94,7 @@ namespace FrokEngine
 		{
 			ProjectilePtr projectile = dynamic_cast<Projectile*>(gameObject);
 			_projectiles[gameObject->GetId()] = projectile;
-			projectile->SetGameRoom(GRoom);
+			projectile->Room = this;
 		}
 
 		// 타인한테 정보 전송
@@ -123,7 +123,7 @@ namespace FrokEngine
 				return;
 
 			_map->ApplyLeave(player);
-			player->SetGameRoom(nullptr);
+			player->Room = nullptr;
 
 			// 본인한테 정보 전송
 			{
@@ -139,7 +139,7 @@ namespace FrokEngine
 				return;
 
 			_map->ApplyLeave(monster);
-			monster->SetGameRoom(nullptr);
+			monster->Room = nullptr;
 		}
 		else if (type == Protocol::GameObjectType::PROJECTILE)
 		{
@@ -147,7 +147,7 @@ namespace FrokEngine
 			if (_projectiles.erase(id) == false)
 				return;
 
-			projectile->SetGameRoom(nullptr);
+			projectile->Room = nullptr;
 		}
 
 		// 타인한테 정보 전송

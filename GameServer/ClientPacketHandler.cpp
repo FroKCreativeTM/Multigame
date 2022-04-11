@@ -4,6 +4,9 @@
 
 #include "DBConnector.h"
 
+#include "Player.h"
+#include "GameRoom.h"
+
 PacketHandlerFunc GPacketHandler[UINT16_MAX];
 
 // Á÷Á¢ ÄÁÅÙÃ÷ ÀÛ¾÷ÀÚ
@@ -40,38 +43,37 @@ bool Handle_C_DESPAWN(PacketSessionRef& session, Protocol::C_DESPAWN& pkt)
 
 bool Handle_C_MOVE(PacketSessionRef& session, Protocol::C_MOVE& pkt)
 {
-	//	C_Move movePacket = packet as C_Move;
-	//	ClientSession clientSession = session as ClientSession;
-	//
-	//	//Console.WriteLine($"C_Move ({movePacket.PosInfo.PosX}, {movePacket.PosInfo.PosY})");
-	//
-	//	Player player = clientSession.MyPlayer;
-	//	if (player == null)
-	//		return;
-	//
-	//	GameRoom room = player.Room;
-	//	if (room == null)
-	//		return;
-	//
-	//	room.Push(room.HandleMove, player, movePacket);
+	Protocol::C_MOVE movePacket = pkt;
+	//Console.WriteLine($"C_Move ({movePacket.PosInfo.PosX}, {movePacket.PosInfo.PosY})");
+	GameSession* game = dynamic_cast<GameSession*>(session.get());
+
+	Player* player = game->GetPlayer();
+	if (player == nullptr)
+		return false;
+	
+	GameRoom* room = player->Room;
+	if (room == nullptr)
+		return false;
+	
+	room->DoAsync(&GameRoom::HandleMove, player, movePacket);
 
 	return true;
 }
 
 bool Handle_C_SKILL(PacketSessionRef& session, Protocol::C_SKILL& pkt)
 {
-//	C_Skill skillPacket = packet as C_Skill;
-//	ClientSession clientSession = session as ClientSession;
-//
-//	Player player = clientSession.MyPlayer;
-//	if (player == null)
-//		return;
-//
-//	GameRoom room = player.Room;
-//	if (room == null)
-//		return;
-//
-//	room.Push(room.HandleSkill, player, skillPacket);
+	Protocol::C_SKILL skillPacket = pkt;
+	GameSession* game = dynamic_cast<GameSession*>(session.get());
+	
+	Player* player = game->GetPlayer();
+	if (player == nullptr)
+		return false;
+	
+	GameRoom* room = player->Room;
+	if (room == nullptr)
+		return false;
+
+	room->DoAsync(&GameRoom::HandleSkill, player, skillPacket);
 
 	return true;
 }

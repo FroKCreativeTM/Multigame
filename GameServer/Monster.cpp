@@ -54,7 +54,7 @@ namespace FrokEngine
 			Vector2Int dir = dynamic_cast<Player*>(p)->GetCellPos() - GetCellPos();
 			return dir.cellDistFromZero() <= _searchCellDist;
 		};
-		PlayerPtr target = GRoom->FindPlayer(ref);
+		PlayerPtr target = Room->FindPlayer(ref);
 
 		if (target == nullptr)
 			return;
@@ -70,7 +70,7 @@ namespace FrokEngine
 		int moveTick = (int)(1000 / _speed);
 		_nextMoveTick = GetTickCount64() + moveTick;
 
-		if (_target == nullptr || _target->GetGameRoom() != GRoom)
+		if (_target == nullptr || _target->Room != Room)
 		{
 			_target = nullptr;
 			_state = Protocol::CreatureState::IDLE;
@@ -88,7 +88,7 @@ namespace FrokEngine
 			return;
 		}
 
-		list<Vector2Int> path = GRoom->GetMapData()->FindPath(_cellPos, _target->GetCellPos(), false);
+		list<Vector2Int> path = Room->GetMapData()->FindPath(_cellPos, _target->GetCellPos(), false);
 		if (path.size() < 2 || path.size() > _chaseCellDist)
 		{
 			_target = nullptr;
@@ -111,7 +111,7 @@ namespace FrokEngine
 		// 이동
 		_dir = GetDirFromVec(*iter - _cellPos);
 
-		GRoom->GetMapData()->ApplyMove((MonsterPtr)this, *iter);
+		Room->GetMapData()->ApplyMove((MonsterPtr)this, *iter);
 		BroadcastMove();
 	}
 
@@ -120,7 +120,7 @@ namespace FrokEngine
 		if (_coolTick == 0)
 		{
 			// 유효한 타겟인지
-			if (_target == nullptr || _target->GetGameRoom() != GRoom || _target->GetHP() == 0)
+			if (_target == nullptr || _target->Room != Room || _target->GetHP() == 0)
 			{
 				_target = nullptr;
 				_state = Protocol::CreatureState::MOVING;
@@ -159,7 +159,7 @@ namespace FrokEngine
 			info->set_skillid(skillData->first);
 
 			auto pkt = ClientPacketHandler::MakeSendBuffer(skill);
-			GRoom->Broadcast(pkt);
+			Room->Broadcast(pkt);
 
 			// 스킬 쿨타임 적용
 			int coolTick = (int)(1000 * skillData->second->cooldown);
@@ -188,7 +188,7 @@ namespace FrokEngine
 		posinfo->set_movedir(_posInfo.movedir());
 
 		auto pkt = ClientPacketHandler::MakeSendBuffer(movePacket);
-		GRoom->Broadcast(pkt);
+		Room->Broadcast(pkt);
 	}
 
 }

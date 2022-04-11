@@ -12,7 +12,7 @@ namespace FrokEngine
 {
 	void GameSession::OnConnected()
 	{
-		cout << "OnConnected : {endPoint}" << endl;
+		cout << "OnConnected" << endl;
 
 		_currentPlayer = ObjectManager::GetInst()->Add<Player>();
 		Protocol::ObjectInfo objInfo;
@@ -52,8 +52,7 @@ namespace FrokEngine
 				room->DoAsync(&GameRoom::LeaveGame, _currentPlayer->GetId());
 		}
 
-		_currentPlayer = nullptr;
-		_players.clear();
+		cout << "OnDisConnected" << endl;
 	}
 
 	void GameSession::OnRecvPacket(BYTE* buffer, int32 len)

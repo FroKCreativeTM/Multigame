@@ -9,7 +9,7 @@ namespace FrokEngine
 {
 	void Arrow::Update()
 	{
-		if (GetData() == nullptr || GetData()->projectile.name == "" || _owner == nullptr || GRoom == nullptr)
+		if (GetData() == nullptr || GetData()->projectile.name == "" || _owner == nullptr || Room == nullptr)
 			return;
 
 		if (_nextMoveTick >= GetTickCount64())
@@ -19,7 +19,7 @@ namespace FrokEngine
 		_nextMoveTick = GetTickCount64() + tick;
 
 		Vector2Int destPos = GetFrontCellPos();
-		if (GRoom->GetMapData()->CanGo(destPos))
+		if (Room->GetMapData()->CanGo(destPos))
 		{
 			_cellPos = destPos;
 
@@ -32,13 +32,13 @@ namespace FrokEngine
 			pos->set_movedir(_posInfo.movedir());
 
 			auto pkt = ClientPacketHandler::MakeSendBuffer(movePacket);
-			GRoom->Broadcast(pkt);
+			Room->Broadcast(pkt);
 
 			cout << "Move Arrow" << endl;
 		}
 		else
 		{
-			GameObjectPtr target = GRoom->GetMapData()->Find(destPos);
+			GameObjectPtr target = Room->GetMapData()->Find(destPos);
 			if (target != nullptr)
 			{
 				//Stat.Attack
@@ -46,7 +46,7 @@ namespace FrokEngine
 			}
 
 			// ¼Ò¸ê
-			GRoom->DoAsync(&GameRoom::LeaveGame, GetId());
+			Room->DoAsync(&GameRoom::LeaveGame, GetId());
 		}
 	}
 

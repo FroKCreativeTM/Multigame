@@ -2,6 +2,7 @@
 
 #include "Struct.pb.h"
 #include "MapData.h"
+#include "GameRoom.h"
 
 namespace FrokEngine
 {
@@ -10,8 +11,6 @@ namespace FrokEngine
 	public :
 		GameObject();
 		~GameObject();
-
-	public : 
 
 	public : 
 		Protocol::StatInfo GetStat() { return _statInfo; }
@@ -28,9 +27,8 @@ namespace FrokEngine
 
 		void SetId(int id) { _objInfo.set_objectid(id); }
 		int32 GetId() const { return _objInfo.objectid(); }
-		
-		shared_ptr<class GameRoom> GetGameRoom() const;
-		void SetGameRoom(shared_ptr<class GameRoom> room);
+
+		GameRoom*			Room;
 
 		float GetSpeed() const { return _speed; }
 		void SetSpeed(float speed) { _speed = speed; }
@@ -98,7 +96,6 @@ namespace FrokEngine
 		Protocol::PositionInfo			_posInfo;
 		Protocol::StatInfo				_statInfo;
 		Protocol::GameObjectType		_objectType;
-		shared_ptr<GameRoom>			GRoom;
 		float							_speed;
 		int32							_hp;
 		Protocol::MoveDir				_dir;
