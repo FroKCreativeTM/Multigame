@@ -16,6 +16,7 @@ namespace FrokEngine
 	private:
 		USE_LOCK;
 		Set<GameSessionRef> _sessions;
+		int32 _sessionId = 0;
 	};
 
 	extern GameSessionManager GSessionManager;

@@ -11,9 +11,9 @@ namespace FrokEngine
 
 		WRITE_LOCK;
 		gameRoom->Init(mapId);
-		gameRoom->SetRoomId(_roomId);
-		_rooms[gameRoom->GetRoomId()] = gameRoom;
-		_roomId++;
+		gameRoom->SetRoomId(GRoomId);
+		GRooms[gameRoom->GetRoomId()] = gameRoom;
+		GRoomId++;
 
 		return gameRoom;
 	}
@@ -21,9 +21,9 @@ namespace FrokEngine
 	bool RoomManager::Remove(int roomId)
 	{
 		WRITE_LOCK;
-		if (_rooms.find(roomId) != _rooms.end())
+		if (GRooms.find(roomId) != GRooms.end())
 		{
-			_rooms.erase(roomId);
+			GRooms.erase(roomId);
 			return true;
 		}
 		return false;
@@ -32,8 +32,8 @@ namespace FrokEngine
 	shared_ptr<GameRoom> RoomManager::Find(int roomId)
 	{
 		READ_LOCK;
-		if (_rooms.find(roomId) == _rooms.end())
-			return _rooms.find(roomId)->second;
+		if (GRooms.find(roomId) == GRooms.end())
+			return GRooms.find(roomId)->second;
 		return nullptr;
 	}
 

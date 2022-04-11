@@ -259,4 +259,5 @@ D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(851,68): warning C4
 D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(865,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(1138,69): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다...
+LINK : warning LNK4098: 'MSVCRT' defaultlib가 다른 라이브러리와 충돌합니다. /NODEFAULTLIB:library를 사용하십시오.
   GameServer.vcxproj -> D:\GameProject\CPP_Project\Multigame\Binary\Debug\GameServer.exe

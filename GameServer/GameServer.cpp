@@ -27,6 +27,8 @@ void DoWorkerJob(ServerServiceRef& service)
 	{
 		LEndTickCount = ::GetTickCount64() + WORKER_TICK;
 
+		GRoom->DoTimer(50, &GameRoom::Update);
+
 		// 네트워크 입출력 처리 -> 인게임 로직까지 (패킷 핸들러에 의해)
 		service->GetIocpCore()->Dispatch(10);
 
@@ -39,17 +41,6 @@ void DoWorkerJob(ServerServiceRef& service)
 }
 
 uint64 lastTick = 0;
-
-void TickRoom(GameRoom* room, int tick = 100)
-{
-	if (lastTick == 0) lastTick = GetTickCount64();
-
-	if (lastTick - GetTickCount64() >= tick)
-	{
-		room->Update();
-		lastTick = GetTickCount64();
-	}
-}
 
 int main()
 {

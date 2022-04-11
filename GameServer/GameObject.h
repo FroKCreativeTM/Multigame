@@ -98,7 +98,7 @@ namespace FrokEngine
 		Protocol::PositionInfo			_posInfo;
 		Protocol::StatInfo				_statInfo;
 		Protocol::GameObjectType		_objectType;
-		shared_ptr<GameRoom>			_room;
+		shared_ptr<GameRoom>			GRoom;
 		float							_speed;
 		int32							_hp;
 		Protocol::MoveDir				_dir;

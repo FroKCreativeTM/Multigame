@@ -20,11 +20,11 @@ namespace FrokEngine
 		MapData* GetMapData() const;
 
 	public : 
-		void SetRoomId(int32 id) { _roomId = id; }
-		int32 GetRoomId() const { return _roomId; }
+		void SetRoomId(int32 id) { GRoomId = id; }
+		int32 GetRoomId() const { return GRoomId; }
 
 	private:
-		int32 _roomId;
+		int32 GRoomId;
 
 		MapData* _map = new MapData();
 

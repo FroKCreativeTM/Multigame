@@ -24,17 +24,17 @@ namespace FrokEngine
 
 	shared_ptr<GameRoom> GameObject::GetGameRoom() const
 	{
-		return _room;
+		return GRoom;
 	}
 
 	void GameObject::SetGameRoom(shared_ptr<GameRoom> room)
 	{
-		_room = room;
+		GRoom = room;
 	}
 
 	void GameObject::OnDamaged(GameObjectPtr attacker, int damage)
 	{
-		if (_room == nullptr)
+		if (GRoom == nullptr)
 			return;
 
 		_statInfo.set_hp(max(_statInfo.hp() - damage, 0));
@@ -43,7 +43,7 @@ namespace FrokEngine
 		changePacket.set_objectid(_objInfo.objectid());
 		changePacket.set_hp(_statInfo.hp());
 		auto sendBuffer = ClientPacketHandler::MakeSendBuffer(changePacket);
-		_room->Broadcast(sendBuffer);
+		GRoom->Broadcast(sendBuffer);
 
 		if (_statInfo.hp() <= 0)
 		{
@@ -53,17 +53,17 @@ namespace FrokEngine
 
 	void GameObject::OnDead(GameObjectPtr attacker)
 	{
-		if (_room == nullptr)
+		if (GRoom == nullptr)
 			return;
 
 		Protocol::S_DIE diePacket;
 		diePacket.set_objectid(_objInfo.objectid());
 		diePacket.set_attackerid(attacker->GetObjectInfo().objectid());
 		auto sendBuffer = ClientPacketHandler::MakeSendBuffer(diePacket);
-		_room->Broadcast(sendBuffer);
+		GRoom->Broadcast(sendBuffer);
 
 		// ¸¸µéÀÚ!
-		shared_ptr<GameRoom> room = _room;
+		shared_ptr<GameRoom> room = GRoom;
 		room->LeaveGame(_objInfo.objectid());
 
 		_statInfo.set_hp(_statInfo.maxhp());

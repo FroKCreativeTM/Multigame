@@ -29,8 +29,8 @@ namespace FrokEngine
 	private:
 		USE_LOCK;
 		static RoomManager* _inst;
-		std::map<int, shared_ptr<GameRoom>> _rooms;
-		int _roomId = 1;
+		std::map<int, shared_ptr<GameRoom>> GRooms;
+		int GRoomId = 1;
 	};
 
 }

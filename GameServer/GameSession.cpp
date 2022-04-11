@@ -34,7 +34,7 @@ namespace FrokEngine
 
 		if (_currentPlayer)
 		{
-			if (auto room = _room.lock())
+			if (auto room = GRoom.lock())
 				room->DoAsync(&GameRoom::EnterGame, dynamic_cast<GameObjectPtr>(_currentPlayer));
 		}
 
@@ -47,7 +47,7 @@ namespace FrokEngine
 
 		if (_currentPlayer)
 		{
-			if (auto room = _room.lock())
+			if (auto room = GRoom.lock())
 				room ->DoAsync(&GameRoom::LeaveGame, _currentPlayer->GetId());
 		}
 
@@ -66,5 +66,21 @@ namespace FrokEngine
 
 	void GameSession::OnSend(int32 len)
 	{
+	}
+
+	void GameSession::Send(google::protobuf::Message& packet)
+	{
+		auto msgName = packet.GetDescriptor()->name();
+		msgName.replace(msgName.find('_'), msgName.length(), "");
+
+
+
+		// Protocol::MsgId msgId = (Protocol::MsgId)Enum.Parse(typeof(MsgId), msgName);
+		// ushort size = (ushort)packet.CalculateSize();
+		// byte[] sendBuffer = new byte[size + 4];
+		// Array.Copy(BitConverter.GetBytes((ushort)(size + 4)), 0, sendBuffer, 0, sizeof(ushort));
+		// Array.Copy(BitConverter.GetBytes((ushort)msgId), 0, sendBuffer, 2, sizeof(ushort));
+		// Array.Copy(packet.ToByteArray(), 0, sendBuffer, 4, size);
+		// ClientPacketHandler::MakeSendBuffer(packet);
 	}
 }

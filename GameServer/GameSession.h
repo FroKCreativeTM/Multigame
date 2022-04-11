@@ -16,10 +16,12 @@ namespace FrokEngine
 		virtual void OnRecvPacket(BYTE* buffer, int32 len) override;
 		virtual void OnSend(int32 len) override;
 
+		void Send(google::protobuf::Message& packet);
+
 	public:
 		Vector<PlayerPtr> _players;
 
 		PlayerPtr _currentPlayer;
-		weak_ptr<class GameRoom> _room;
+		weak_ptr<class GameRoom> GRoom;
 	};
 }
