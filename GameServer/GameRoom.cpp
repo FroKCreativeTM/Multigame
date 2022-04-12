@@ -59,9 +59,45 @@ namespace FrokEngine
 			// 본인한테 정보 전송
 			{
 				Protocol::S_ENTERGAME enterPacket;
+
+				auto p = enterPacket.mutable_player();
+				p->set_name("Player_" + to_string(player->GetObjectInfo().objectid()));
+				p->set_objectid(player->GetObjectInfo().objectid());
+
+				auto pos = p->mutable_posinfo();
+				pos->set_posx(player->GetPosInfo().posx());
+				pos->set_posy(player->GetPosInfo().posy());
+				pos->set_state(player->GetPosInfo().state());
+				pos->set_movedir(player->GetPosInfo().movedir());
+
+				auto stat = p->mutable_statinfo();
+				stat->set_attack(player->GetStat().attack());
+				stat->set_hp(player->GetStat().hp());
+				stat->set_level(player->GetStat().level());
+				stat->set_maxhp(player->GetStat().maxhp());
+				stat->set_speed(player->GetStat().speed());
+				stat->set_totalexp(player->GetStat().totalexp());
+
 				auto info = enterPacket.mutable_player();
 				info->set_objectid(player->GetObjectInfo().objectid());
-				info->set_name(player->GetObjectInfo().name());
+				info->set_name("Player_" + to_string(player->GetObjectInfo().objectid()));
+
+				pos = info->mutable_posinfo();
+				pos->set_posx(player->GetPosInfo().posx());
+				pos->set_posy(player->GetPosInfo().posy());
+				pos->set_state(player->GetPosInfo().state());
+				pos->set_movedir(player->GetPosInfo().movedir());
+
+				stat = info->mutable_statinfo();
+				stat->set_attack(player->GetStat().attack());
+				stat->set_hp(player->GetStat().hp());
+				stat->set_level(player->GetStat().level());
+				stat->set_maxhp(player->GetStat().maxhp());
+				stat->set_speed(player->GetStat().speed());
+				stat->set_totalexp(player->GetStat().totalexp());
+
+				cout << p->name() << endl;
+
 				auto sendBuffer = ClientPacketHandler::MakeSendBuffer(enterPacket);
 				player->_session->Send(sendBuffer);
 
@@ -119,11 +155,13 @@ namespace FrokEngine
 		if (type == Protocol::GameObjectType::PLAYER)
 		{
 			PlayerPtr player = nullptr;
-			if (_players.erase(id) == false)
-				return;
+			player = _players[id];
 
 			_map->ApplyLeave(player);
 			player->Room = nullptr;
+
+			if (_players.erase(id) == false)
+				return;
 
 			// 본인한테 정보 전송
 			{

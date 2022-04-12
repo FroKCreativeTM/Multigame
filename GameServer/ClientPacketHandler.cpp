@@ -23,6 +23,7 @@ bool Handle_C_ENTERGAME(PacketSessionRef& session, Protocol::C_ENTERGAME& pkt)
 	GameSessionRef gameSession = static_pointer_cast<GameSession>(session);
 
 
+
 	return true;
 }
 
@@ -44,7 +45,6 @@ bool Handle_C_DESPAWN(PacketSessionRef& session, Protocol::C_DESPAWN& pkt)
 bool Handle_C_MOVE(PacketSessionRef& session, Protocol::C_MOVE& pkt)
 {
 	Protocol::C_MOVE movePacket = pkt;
-	//Console.WriteLine($"C_Move ({movePacket.PosInfo.PosX}, {movePacket.PosInfo.PosY})");
 	GameSession* game = dynamic_cast<GameSession*>(session.get());
 
 	Player* player = game->GetPlayer();

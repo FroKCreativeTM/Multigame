@@ -218,6 +218,7 @@
   D:ServerPacketHandler.h
   1개 파일이 복사되었습니다.
   계속하려면 아무 키나 누르십시오 . . . 
+  pch.cpp
   ServerPacketHandler.cpp
 D:\GameProject\CPP_Project\Multigame\DummyClient\ServerPacketHandler.cpp(20,37): error C2039: 'level': 'Protocol::ObjectInfo'의 멤버가 아닙니다.
 D:\GameProject\CPP_Project\Multigame\DummyClient\Struct.pb.h(81): message : 'Protocol::ObjectInfo' 선언을 참조하십시오.
