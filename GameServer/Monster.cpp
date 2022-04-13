@@ -180,6 +180,7 @@ namespace FrokEngine
 	{
 		// 다른 플레이어한테도 알려준다
 		Protocol::S_MOVE movePacket;
+
 		movePacket.set_objectid(GetId());
 		auto posinfo = movePacket.mutable_posinfo();
 		posinfo->set_posx(_posInfo.posx());

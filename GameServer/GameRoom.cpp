@@ -173,19 +173,29 @@ namespace FrokEngine
 		else if (type == Protocol::GameObjectType::MONSTER)
 		{
 			MonsterPtr monster = nullptr;
-			if (_monsters.erase(id) == false)
+
+			if (_monsters.find(id) == _monsters.end())
 				return;
+
+			monster = _monsters[id];
 
 			_map->ApplyLeave(monster);
 			monster->Room = nullptr;
+
+			_monsters.erase(id);
 		}
 		else if (type == Protocol::GameObjectType::PROJECTILE)
 		{
-			Projectile* projectile = nullptr;
-			if (_projectiles.erase(id) == false)
+			ProjectilePtr projectile = nullptr;
+
+			if (_projectiles.find(id) == _projectiles.end())
 				return;
 
+			projectile = _projectiles[id];
 			projectile->Room = nullptr;
+
+			if (_projectiles.erase(id) == false)
+				return;
 		}
 
 		// 타인한테 정보 전송
@@ -253,10 +263,11 @@ namespace FrokEngine
 		Broadcast(pkt);
 
 		Skill* skillData = nullptr;
-		if (DataManager::GetInst()->GetSkillMap().find(skillPacket.info().skillid()) == DataManager::GetInst()->GetSkillMap().end())
+		auto skillMap = DataManager::GetInst()->GetSkillMap();
+		if (skillMap.find(skillPacket.info().skillid()) == skillMap.end())
 			return;
 		else
-			skillData = DataManager::GetInst()->GetSkillMap()[skillPacket.info().skillid()];
+			skillData = skillMap[skillPacket.info().skillid()];
 
 		switch (skillData->skillType)
 		{

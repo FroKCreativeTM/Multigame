@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "Contents.h"
 
 namespace FrokEngine
 {
@@ -14,7 +15,17 @@ namespace FrokEngine
 
 		Projectile()
 		{
+			_data = new Skill();
 			_objectType = Protocol::GameObjectType::PROJECTILE;
+		}
+
+		~Projectile()
+		{
+			if (_data)
+			{
+				delete _data;
+			}
+			_data = nullptr;
 		}
 
 		virtual void Update()
