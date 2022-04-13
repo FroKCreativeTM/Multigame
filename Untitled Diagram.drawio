@@ -1,0 +1,22 @@
+<mxfile host="app.diagrams.net" modified="2022-04-13T15:00:22.737Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36 Edg/100.0.1185.39" etag="OgZUiDF6xKQ9mtkr10lS" version="17.4.3" type="github">
+  <diagram id="72bYlmWgFw9_eZI35Zrp" name="Page-1">
+    <mxGraphModel dx="1422" dy="786" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="easTb7LNRQq_HfqnGG1j-1" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="100" width="600" height="600" as="geometry" />
+        </mxCell>
+        <mxCell id="easTb7LNRQq_HfqnGG1j-2" value="&lt;font style=&quot;font-size: 26px&quot;&gt;ServerCore&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="345" y="420" width="150" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="easTb7LNRQq_HfqnGG1j-4" value="" style="rounded=1;whiteSpace=wrap;html=1;fontSize=26;" vertex="1" parent="1">
+          <mxGeometry x="200" y="450" width="440" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="easTb7LNRQq_HfqnGG1j-5" value="&lt;font style=&quot;font-size: 26px&quot;&gt;Game Server&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="329" y="120" width="170" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
