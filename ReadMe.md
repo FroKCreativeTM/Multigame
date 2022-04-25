@@ -4,9 +4,9 @@ Frok Game Server Engine은 범용적인 게임 서버를 만들어보기 위해서 만들어진 프로젝
 
 ## 특징
 - 게임과 서버와 통신을 위해 필요한 모듈이 담긴 Core 라이브러리를 제공합니다.
-- Packet를 좀 더 편하게 개발하기 
-- 예제를 위한 Game Server 프로젝트
-- 서버의 패킷 송수신의 테스트를 할 수 있게 만든 Dummy Client 프로젝트
+- ProtoBuf를 이용해서 Packet를 좀 더 편하게 개발할 수 있습니다.
+- 활용 예제를 위한 Game Server가 프로젝트가 존재합니다.
+- 서버의 패킷 송수신의 테스트를 할 수 있게 만든 Dummy Client 프로젝트가 프로젝트가 존재합니다.
  
 - [적용 영상](https://youtu.be/K531u_vMDbk)
 
