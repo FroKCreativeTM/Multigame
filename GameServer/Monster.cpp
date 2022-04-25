@@ -49,7 +49,6 @@ namespace FrokEngine
 			return;
 		_nextSearchTick = GetTickCount64() + 1000;
 
-		// 이 망할 람다를 어떻게 넘길 것인가
 		function<bool(GameObjectPtr)> ref = [=](GameObjectPtr p) {
 			Vector2Int dir = dynamic_cast<Player*>(p)->GetCellPos() - GetCellPos();
 			return dir.cellDistFromZero() <= _searchCellDist;
