@@ -7,7 +7,6 @@ namespace FrokEngine
 	extern class SendBufferManager* GSendBufferManager;
 	extern class GlobalQueue* GGlobalQueue;
 	extern class JobTimer* GJobTimer;
-	extern class DBConnector* GDBConnector;
 
 	extern class DeadLockProfiler* GDeadLockProfiler;
 }

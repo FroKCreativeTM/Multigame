@@ -4,13 +4,18 @@
 
 #ifdef _DEBUG
 #pragma comment(lib, "ServerCore\\Debug\\ServerCore.lib")
+#pragma comment(lib, "ServerCore\\Debug\\DBCore.lib")
 #pragma comment(lib, "Protobuf\\Debug\\libprotobufd.lib")
 #else
 #pragma comment(lib, "ServerCore\\Release\\ServerCore.lib")
+#pragma comment(lib, "ServerCore\\Release\\DBCore.lib")
 #pragma comment(lib, "Protobuf\\Release\\libprotobuf.lib")
 #endif
 
 #include "CorePch.h"
+
+#include <DBConnection.h>
+#include <DBConnectionPool.h>	// DB의 연결을 총괄하는 Pool 매니저 클래스
 
 #include "Protocol.pb.h"
 #include "Enum.pb.h"
@@ -26,4 +31,6 @@ namespace FrokEngine
 	using PlayerPtr = class Player*;
 	using MonsterPtr = class Monster*;
 	using ArrowPtr = class Arrow*;
+
+	
 }

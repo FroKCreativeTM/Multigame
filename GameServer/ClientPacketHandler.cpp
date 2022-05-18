@@ -2,15 +2,12 @@
 #include "ClientPacketHandler.h"
 #include "GameSession.h"
 
-#include "DBConnector.h"
-
 #include "Player.h"
 #include "GameRoom.h"
 
 PacketHandlerFunc GPacketHandler[UINT16_MAX];
 
 // Á÷Á¢ ÄÁÅÙÃ÷ ÀÛ¾÷ÀÚ
-
 bool Handle_INVALID(PacketSessionRef& session, BYTE* buffer, int32 len)
 {
 	PacketHeader* header = reinterpret_cast<PacketHeader*>(buffer);
@@ -21,7 +18,6 @@ bool Handle_INVALID(PacketSessionRef& session, BYTE* buffer, int32 len)
 bool Handle_C_ENTERGAME(PacketSessionRef& session, Protocol::C_ENTERGAME& pkt)
 {
 	GameSessionRef gameSession = static_pointer_cast<GameSession>(session);
-
 
 
 	return true;

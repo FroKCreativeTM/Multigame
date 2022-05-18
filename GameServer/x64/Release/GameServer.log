@@ -219,39 +219,23 @@
   1개 파일이 복사되었습니다.
   계속하려면 아무 키나 누르십시오 . . . 
   pch.cpp
-  Enum.pb.cc
-  Protocol.pb.cc
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(1616,82): warning C4244: '인수': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(1997,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(2452,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(2890,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(2897,64): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(3273,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Protocol.pb.cc(3280,72): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Struct.pb.cc
-D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(297,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(591,66): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(598,66): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(832,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(839,64): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(846,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(853,68): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(1124,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(1131,64): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(1138,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(1145,68): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\Struct.pb.cc(1430,69): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  ClientPacketHandler.cpp
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(47,32): warning C4244: '인수': 'int32_t'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(48,32): warning C4244: '인수': 'int32_t'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Arrow.cpp
+D:\GameProject\CPP_Project\Multigame\GameServer\Arrow.cpp(19,36): warning C4244: '=': 'ULONGLONG'에서 'long'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  ConfigManager.cpp
+  Contents.cpp
+  DataManager.cpp
+  GameObject.cpp
+  GameRoom.cpp
   GameServer.cpp
   GameSession.cpp
   GameSessionManager.cpp
+  MapData.cpp
+  Monster.cpp
+D:\GameProject\CPP_Project\Multigame\GameServer\Monster.cpp(70,36): warning C4244: '=': 'ULONGLONG'에서 'long'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GameProject\CPP_Project\Multigame\GameServer\Monster.cpp(165,33): warning C4244: '=': 'ULONGLONG'에서 'long'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  ObjectManager.cpp
   Player.cpp
-  Room.cpp
-  코드를 생성하고 있습니다.
-  19 of 3652 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    16 functions had inline decision re-evaluated but remain unchanged
-  코드를 생성했습니다.
-  GameServer.vcxproj -> D:\GameProject\CPP_Project\Multigame\Binary\Release\GameServer.exe
+  Projectile.cpp
+  ClientPacketHandler.cpp
+D:\GameProject\CPP_Project\Multigame\GameServer\ClientPacketHandler.cpp(5,10): fatal error C1083: 포함 파일을 열 수 없습니다. 'DBConnector.h': No such file or directory
+  RoomManager.cpp

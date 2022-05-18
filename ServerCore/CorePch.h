@@ -27,8 +27,6 @@ using namespace std;
 #include "Session.h"
 #include "JobQueue.h"
 
-// MySQL
-#include <MySQL/mysql/jdbc.h>
 
 #ifdef _DEBUG
 #pragma comment(lib, "MySQL/Debug/libcrypto.lib")
