@@ -31,6 +31,4 @@ namespace FrokEngine
 	using PlayerPtr = class Player*;
 	using MonsterPtr = class Monster*;
 	using ArrowPtr = class Arrow*;
-
-	
 }

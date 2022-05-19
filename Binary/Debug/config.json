@@ -1,3 +1,4 @@
 {
-  "dataPath": "../../../../../Client/Assets/Resources/Data"
+  "dataPath": "../../../../../Client/Assets/Resources/Data",
+  "DbConnectionString": "DRIVER={MySQL ODBC 8.0 Unicode Driver}; SERVER=localhost; DATABASE=gamedb; USER=root; PASSWORD=keAarwrm76*; OPTION=3;"
 }

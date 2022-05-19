@@ -8,6 +8,7 @@ namespace FrokEngine
 	{
 	public:
 		string dataPath;
+		wstring dbConnectionString;
 	};
 
 	class ConfigManager
@@ -47,6 +48,8 @@ namespace FrokEngine
 			}
 
 			_config.dataPath = root["dataPath"].asString();
+			string tmp = root["DbConnectionString"].asString();
+			_config.dbConnectionString.assign(tmp.begin(), tmp.end());
 
 			fin.close();
 		}
