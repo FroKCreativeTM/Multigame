@@ -6,6 +6,12 @@
 
 namespace FrokEngine
 {
+	enum
+	{
+		WVARCHAR_MAX = 4000,
+		BINARY_MAX = 8000
+	};
+
 	class DBConnection
 	{
 	public:
@@ -18,6 +24,29 @@ namespace FrokEngine
 		void Unbind();
 
 	public : 
+		bool		BindParam(int32 paramIndex, bool* value, SQLLEN* index);
+		bool		BindParam(int32 paramIndex, int8* value, SQLLEN* index);
+		bool		BindParam(int32 paramIndex, int16* value, SQLLEN* index);
+		bool		BindParam(int32 paramIndex, int32* value, SQLLEN* index);
+		bool		BindParam(int32 paramIndex, int64* value, SQLLEN* index);
+		bool		BindParam(int32 paramIndex, float* value, SQLLEN* index);
+		bool		BindParam(int32 paramIndex, double* value, SQLLEN* index);
+		bool		BindParam(int32 paramIndex, TIMESTAMP_STRUCT* value, SQLLEN* index);
+		bool		BindParam(int32 paramIndex, const WCHAR* str, SQLLEN* index);
+		bool		BindParam(int32 paramIndex, const BYTE* bin, int32 size, SQLLEN* index);
+
+		bool		BindCol(int32 columnIndex, bool* value, SQLLEN* index);
+		bool		BindCol(int32 columnIndex, int8* value, SQLLEN* index);
+		bool		BindCol(int32 columnIndex, int16* value, SQLLEN* index);
+		bool		BindCol(int32 columnIndex, int32* value, SQLLEN* index);
+		bool		BindCol(int32 columnIndex, int64* value, SQLLEN* index);
+		bool		BindCol(int32 columnIndex, float* value, SQLLEN* index);
+		bool		BindCol(int32 columnIndex, double* value, SQLLEN* index);
+		bool		BindCol(int32 columnIndex, TIMESTAMP_STRUCT* value, SQLLEN* index);
+		bool		BindCol(int32 columnIndex, WCHAR* str, int32 size, SQLLEN* index);
+		bool		BindCol(int32 columnIndex, BYTE* bin, int32 size, SQLLEN* index);
+
+	private : 
 		// 인자들을 쿼리에 넘겨줄 경우가 많이 생길텐데
 		// 그런 부분들을 처리하는 함수이다.
 		// 실행할때 인자

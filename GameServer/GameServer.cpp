@@ -16,6 +16,8 @@
 #include "ConfigManager.h"
 #include "DataManager.h"
 
+#include <DBBind.h>
+
 enum
 {
 	WORKER_TICK = 64
@@ -69,6 +71,8 @@ int main()
 		auto query = L"CREATE TABLE `Gold` (					\
 						`id` INT NOT NULL AUTO_INCREMENT,		\
 						`gold` INT NULL,						\
+						`name` VARCHAR(200) NULL,				\
+						`createData` DATETIME NULL,				\
 						PRIMARY KEY(`id`));";
 
 		DBConnection* dbConn = GDBConnectionPool->Pop();
@@ -81,18 +85,44 @@ int main()
 	{
 		DBConnection* dbConn = GDBConnectionPool->Pop();
 
+		/*
 		// 기존에 바인딩된 인자들을 날린다.
 		dbConn->Unbind();
 
 		// 넘길 인자들
 		int32 gold = 100;
 		SQLLEN len = 0;
+
+		WCHAR name[100] = L"Frok";
+		SQLLEN nameLen = 0;
+
+		TIMESTAMP_STRUCT ts = {};
+		ts.year = 2022;
+		ts.month = 5;
+		ts.day = 19;
+		SQLLEN tsLen = 0;
 		
 		// 인자들을 인덱스에 바인딩한다.
-		dbConn->BindParam(1, SQL_C_LONG, SQL_INTEGER, sizeof(gold), &gold, &len);
+		ASSERT_CRASH(dbConn->BindParam(1, &gold, &len));
+		ASSERT_CRASH(dbConn->BindParam(2, name, &nameLen));
+		ASSERT_CRASH(dbConn->BindParam(3, &ts, &tsLen));
 
 		// SQL을 실행한다.
-		ASSERT_CRASH(dbConn->Execute(L"INSERT INTO `Gold`(`gold`) VALUES(?)"));
+		ASSERT_CRASH(dbConn->Execute(L"INSERT INTO `Gold`(`gold`, `name`, `createData`) VALUES(?, ?, ?)"));
+		*/
+
+		// Input 3개 Output 0개
+		DBBind<3, 0> dbBind(*dbConn, L"INSERT INTO `Gold`(`gold`, `name`, `createData`) VALUES(?, ?, ?)");
+
+		int32 gold = 100;
+		dbBind.BindParam(0, gold);
+		WCHAR name[100] = L"테스트";
+		dbBind.BindParam(1, name);
+		TIMESTAMP_STRUCT ts = { 2022, 5, 19 };
+		dbBind.BindParam(2, ts);
+
+		ASSERT_CRASH(dbBind.Execute());
+
 		GDBConnectionPool->Push(dbConn);
 	}
 
@@ -100,6 +130,7 @@ int main()
 	{
 		DBConnection* dbConn = GDBConnectionPool->Pop();
 
+		/*
 		// 기존에 바인딩된 인자들을 날린다.
 		dbConn->Unbind();
 
@@ -107,23 +138,51 @@ int main()
 		SQLLEN len = 0;
 
 		// 인자들을 인덱스에 바인딩한다.
-		ASSERT_CRASH(dbConn->BindParam(1, SQL_C_LONG, SQL_INTEGER, sizeof(gold), &gold, &len));
+		ASSERT_CRASH(dbConn->BindParam(1, &gold, &len));
 
 		int32 outId = 0;
 		SQLLEN outIdLen = 0;
-		ASSERT_CRASH(dbConn->BindCol(1, SQL_C_LONG, sizeof(outId), &outId, &outIdLen));
+		ASSERT_CRASH(dbConn->BindCol(1, &outId, &outIdLen));
 
 		int32 outGold = 0;
 		SQLLEN outGoldLen = 0;
-		ASSERT_CRASH(dbConn->BindCol(2, SQL_C_LONG, sizeof(outGold), &outGold, &outGoldLen));
+		ASSERT_CRASH(dbConn->BindCol(2, &outGold, &outGoldLen));
+
+		WCHAR outName[100];
+		SQLLEN outNameLen = 0;
+		ASSERT_CRASH(dbConn->BindCol(3, outName, len32(outName), &outNameLen));
+
+		TIMESTAMP_STRUCT outTs = {};
+		SQLLEN outTsLen = 0;
+		ASSERT_CRASH(dbConn->BindCol(4, &outTs, &outTsLen));
 
 		// SQL을 실행한다.
-		ASSERT_CRASH(dbConn->Execute(L"SELECT id, gold FROM `Gold` WHERE `gold` = (?)"));
+		ASSERT_CRASH(dbConn->Execute(L"SELECT id, gold, name, createData FROM `Gold` WHERE `gold` = (?)"));
+		*/
+
+		// Input 1개 Output 4개
+		DBBind<1, 4> dbBind(*dbConn, L"SELECT id, gold, name, createData FROM `Gold` WHERE `gold` = (?)");
+
+		int32 gold = 100;
+		dbBind.BindParam(0, gold);
+
+		int32 outId = 0;
+		int32 outGold = 0;
+		WCHAR outName[100];
+		TIMESTAMP_STRUCT outTs;
+		dbBind.BindCol(0, outId);
+		dbBind.BindCol(1, outGold);
+		dbBind.BindCol(2, outName);
+		dbBind.BindCol(3, outTs);
+
+		ASSERT_CRASH(dbBind.Execute());
 
 		// 데이터가 있는 동안 반복적으로 가져온다.
+		wcout.imbue(locale("kor"));
 		while (dbConn->Fetch())
 		{
-			cout << "Id : " << outId << " Gold : " << outGold << endl;
+			wcout << "Id : " << outId << " Gold : " << outGold << " name : " << outName << endl;
+			cout << "Date : " << outTs.year << "/" << outTs.month << "/" << outTs.day << endl;
 		}
 
 		GDBConnectionPool->Push(dbConn);
